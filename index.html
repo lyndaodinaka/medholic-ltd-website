@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Medholic Pharmacy</title>
+    <meta name="description" content="Medholic Pharmacy helps pharmacies track medicines, barcode or stock-code capture, inventory, sales, suppliers, expiry alerts, reports, and security audit activity.">
+    <meta name="theme-color" content="#0878dc">
+    <meta name="application-name" content="Medholic Pharmacy">
+    <meta property="og:site_name" content="Medholic Pharmacy">
+    <meta property="og:title" content="Medholic Pharmacy">
+    <meta property="og:description" content="Pharmacy inventory, sales, supplier, expiry, report, and security tracking.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="assets/medholic-og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Medholic Pharmacy">
+    <meta name="twitter:description" content="Track pharmacy stock, sales, suppliers, expiry dates, and accountability reports.">
+    <meta name="twitter:image" content="assets/medholic-og-image.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <section class="login-screen" id="loginScreen">
+      <form class="login-card" id="loginForm">
+        <img src="assets/medholic-pharmacy-logo-transparent.png" alt="Medholic Pharmacy logo" class="login-logo">
+        <h1>Sign in</h1>
+        <label>
+          Username
+          <input id="loginUsername" autocomplete="username" required>
+        </label>
+        <label>
+          Password
+          <span class="password-wrap">
+            <input id="loginPassword" type="password" autocomplete="current-password" required>
+            <button class="password-toggle" id="showPassword" type="button" aria-label="Show password" title="Show password">
+              <span class="eye-icon" aria-hidden="true"></span>
+            </button>
+          </span>
+        </label>
+        <button class="primary-button wide" type="submit">Log in</button>
+        <button class="text-button wide" id="forgotPassword" type="button">Forgot password?</button>
+        <p class="login-help" id="loginHelp">Manager login: nwaekpelynda1994@gmail.com</p>
+      </form>
+      <form class="access-card hidden" id="accessRequestForm">
+        <h2>Request access</h2>
+        <p class="login-help">For buyers or investors who want Medholic Pharmacy.</p>
+        <label>
+          Full name
+          <input id="accessName" autocomplete="name" required>
+        </label>
+        <label>
+          Email
+          <input id="accessEmail" type="email" autocomplete="email" required>
+        </label>
+        <label>
+          I am a
+          <select id="accessType" required>
+            <option>Buyer</option>
+            <option>Investor</option>
+          </select>
+        </label>
+        <label>
+          Message
+          <textarea id="accessMessage" rows="2" placeholder="Tell us what you are interested in"></textarea>
+        </label>
+        <button class="primary-button wide" type="submit">Send request</button>
+        <button class="text-button wide" id="cancelAccessRequest" type="button">Back to sign in</button>
+        <p class="login-help" id="accessHelp">You will be contacted by Medholic Pharmacy.</p>
+      </form>
+      <button class="access-toggle" id="showAccessRequest" type="button">Request access as buyer or investor</button>
+    </section>
+
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Main navigation">
+        <div class="brand">
+          <img src="assets/medholic-pharmacy-logo-transparent.png" alt="Medholic Pharmacy logo" class="brand-logo">
+          <div>
+            <strong>Medholic Pharmacy</strong>
+            <small>Inventory and sales</small>
+          </div>
+          <button class="brand-signout" id="signOut" type="button" aria-label="Sign out" title="Sign out">
+            <span aria-hidden="true"></span>
+          </button>
+        </div>
+        <nav class="nav-list">
+          <button class="nav-item active" data-view="dashboard" type="button">Dashboard</button>
+          <button class="nav-item" data-view="capture" type="button">Capture</button>
+          <button class="nav-item" data-view="inventory" type="button">Inventory</button>
+          <button class="nav-item" data-view="sales" type="button">Sales</button>
+          <button class="nav-item" data-view="roster" type="button">Roster</button>
+          <button class="nav-item" data-view="reports" type="button">Reports</button>
+          <button class="nav-item" data-view="security" type="button">Security</button>
+          <button class="nav-item" data-view="help" type="button">Help</button>
+        </nav>
+      </aside>
+
+      <main>
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Pharmacy operations</p>
+            <h1>Medication inventory, sales, sellers, gains, and alerts</h1>
+          </div>
+          <div class="header-actions">
+            <span class="sync-pill local" id="syncStatus">Local browser only</span>
+            <span class="user-pill" id="currentUserLabel">Signed out</span>
+            <button class="ghost-button" id="exportCsv" type="button">Download Inventory Report</button>
+            <button class="ghost-button" id="downloadSampleData" type="button">Download Sample Data</button>
+            <button class="ghost-button" id="resetDemo" type="button">Add Sample Data</button>
+          </div>
+        </header>
+
+        <section class="view active" id="dashboard">
+          <div class="metric-grid">
+            <article class="metric">
+              <span>Inventory value</span>
+              <strong id="metricValue">$0.00</strong>
+            </article>
+            <article class="metric">
+              <span>Units received</span>
+              <strong id="metricReceived">0</strong>
+            </article>
+            <article class="metric">
+              <span>Units left</span>
+              <strong id="metricUnits">0</strong>
+            </article>
+            <article class="metric">
+              <span>Gross gains</span>
+              <strong id="metricGain">$0.00</strong>
+            </article>
+            <article class="metric warning">
+              <span>Low stock</span>
+              <strong id="metricLowStock">0</strong>
+            </article>
+            <article class="metric danger">
+              <span>Expiring soon</span>
+              <strong id="metricExpiring">0</strong>
+            </article>
+            <article class="metric danger">
+              <span>Security alerts</span>
+              <strong id="metricSecurity">0</strong>
+            </article>
+          </div>
+
+          <section class="alert-stack" id="alertStack"></section>
+
+          <div class="split-layout">
+            <section class="panel">
+              <div class="panel-header">
+                <h2>Low stock watch</h2>
+                <button class="text-button" data-view-jump="inventory" type="button">View all</button>
+              </div>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr><th>Medication</th><th>Barcode</th><th>Left</th><th>Seller</th></tr>
+                  </thead>
+                  <tbody id="lowStockRows"></tbody>
+                </table>
+              </div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-header">
+                <h2>Today activity</h2>
+                <button class="text-button" data-view-jump="sales" type="button">Open sales</button>
+              </div>
+              <div class="activity-list" id="activityList"></div>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" id="capture">
+          <div class="capture-grid">
+            <section class="panel scanner-panel">
+              <div class="panel-header">
+                <h2>Scan barcode</h2>
+                <button class="primary-button" id="scanToggle" type="button">Start camera</button>
+              </div>
+              <div class="scanner-frame">
+                <video id="scannerVideo" playsinline muted></video>
+                <div class="scan-line" aria-hidden="true"></div>
+                <p id="scannerStatus">Use a phone camera, laptop webcam, desktop webcam, USB barcode scanner, or Generate Stock Code if there is no barcode.</p>
+              </div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-header">
+                <h2>Medication capture</h2>
+                <span class="status-pill" id="formMode">New item</span>
+              </div>
+              <form id="medicineForm" class="form-grid">
+                <label class="wide">
+                  Select medication
+                  <select id="medicineSelect" required></select>
+                </label>
+                <label id="customNameLabel">
+                  Medication name
+                  <input id="medicineName" name="name" autocomplete="off">
+                </label>
+                <label>
+                  Barcode or stock code
+                  <input id="barcode" name="barcode" autocomplete="off" placeholder="Scan, type, or auto-generate">
+                </label>
+                <button class="ghost-button code-button" id="generateStockCode" type="button">Generate Stock Code</button>
+                <label>
+                  Batch number
+                  <input id="batch" name="batch" autocomplete="off">
+                </label>
+                <label>
+                  Expiry date
+                  <input id="expiry" name="expiry" type="date">
+                </label>
+                <label class="wide clinical-field hidden">
+                  Function
+                  <textarea id="medicineFunction" rows="3" required></textarea>
+                </label>
+                <label class="wide clinical-field hidden">
+                  Recommended dose
+                  <textarea id="dose" rows="2" required></textarea>
+                </label>
+                <label class="wide clinical-field hidden">
+                  Side effects
+                  <textarea id="sideEffects" rows="3" required></textarea>
+                </label>
+                <label class="wide">
+                  Other notes
+                  <textarea id="otherNotes" rows="2" placeholder="Storage, dosage form, shelf position, supplier note"></textarea>
+                </label>
+                <label>
+                  Company / supplier
+                  <input id="seller" name="seller" list="supplierList" autocomplete="off" required>
+                  <datalist id="supplierList"></datalist>
+                </label>
+                <label>
+                  Supplier email
+                  <input id="supplierEmail" name="supplierEmail" type="email" autocomplete="off" placeholder="orders@example.com">
+                </label>
+                <label>
+                  Supplier phone
+                  <input id="supplierPhone" name="supplierPhone" type="tel" autocomplete="off" placeholder="+44...">
+                </label>
+                <label>
+                  Quantity received
+                  <input id="quantity" name="quantity" type="number" min="0" step="1" required>
+                </label>
+                <label>
+                  Cost per unit
+                  <input id="cost" name="cost" type="number" min="0" step="0.01" required>
+                </label>
+                <label>
+                  Selling price
+                  <input id="price" name="price" type="number" min="0" step="0.01" required>
+                </label>
+                <label>
+                  Reorder level
+                  <input id="reorder" name="reorder" type="number" min="0" step="1" value="10">
+                </label>
+                <button class="primary-button wide" type="submit">Save medication</button>
+              </form>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" id="inventory">
+          <section class="panel">
+            <div class="panel-header table-tools">
+              <h2>Inventory</h2>
+              <input id="inventorySearch" aria-label="Search inventory" placeholder="Search medicine, barcode, seller, function, recommended dose">
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Name</th><th>Function</th><th>Recommended dose</th><th>Barcode</th><th>Seller</th><th>Received</th><th>Sold</th><th>Left</th><th>Expiry</th><th>Alarm</th><th></th>
+                  </tr>
+                </thead>
+                <tbody id="inventoryRows"></tbody>
+              </table>
+            </div>
+          </section>
+          <section class="panel detail-panel" id="medicineDetail">
+            <div class="panel-header">
+              <h2>Medicine details</h2>
+              <span class="status-pill">Click a row</span>
+            </div>
+            <div id="medicineDetailBody" class="detail-body"></div>
+          </section>
+        </section>
+
+        <section class="view" id="sales">
+          <div class="split-layout sales-layout">
+            <section class="panel">
+              <div class="panel-header"><h2>Record sale</h2></div>
+              <form id="saleForm" class="form-grid compact">
+                <label>
+                  Medication
+                  <select id="saleMedicineSelect"></select>
+                </label>
+                <label>
+                  Barcode or stock code
+                  <input id="saleBarcode" list="barcodeList" autocomplete="off" required>
+                  <datalist id="barcodeList"></datalist>
+                </label>
+                <label>
+                  Quantity sold
+                  <input id="saleQuantity" type="number" min="1" step="1" value="1" required>
+                </label>
+                <label>
+                  Payment method
+                  <select id="paymentMethod">
+                    <option>Cash</option>
+                    <option>Card</option>
+                    <option>Transfer</option>
+                    <option>Credit</option>
+                  </select>
+                </label>
+                <label class="hidden" id="doctorReportLabel">
+                  Doctor report / prescription reference
+                  <input id="doctorReport" autocomplete="off" placeholder="Required for controlled medicines">
+                </label>
+                <label>
+                  Seller employee
+                  <select id="saleEmployee" required></select>
+                </label>
+                <button class="primary-button wide" type="submit">Add sale</button>
+              </form>
+              <div class="sale-preview" id="salePreview"></div>
+            </section>
+            <section class="panel">
+              <div class="panel-header"><h2>Sales log</h2></div>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr><th>Time</th><th>Medicine</th><th>Qty</th><th>Seller</th><th>Total</th><th>Gain</th></tr>
+                  </thead>
+                  <tbody id="salesRows"></tbody>
+                </table>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" id="roster">
+          <div class="split-layout roster-layout">
+            <section class="panel">
+              <div class="panel-header"><h2>Employee roster</h2></div>
+              <form id="employeeForm" class="form-grid compact">
+                <label>
+                  Employee name
+                  <input id="employeeName" autocomplete="off" required>
+                </label>
+                <label>
+                  Role
+                  <select id="employeeRole">
+                    <option>Pharmacist</option>
+                    <option>Cashier</option>
+                    <option>Inventory clerk</option>
+                    <option>Manager</option>
+                  </select>
+                </label>
+                <label>
+                  Shift
+                  <input id="employeeShift" autocomplete="off" placeholder="Mon-Fri, 08:00-16:00" required>
+                </label>
+                <button class="primary-button wide" type="submit">Add employee</button>
+              </form>
+            </section>
+            <section class="panel">
+              <div class="panel-header"><h2>Roster list</h2></div>
+              <div class="employee-list" id="employeeRows"></div>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" id="reports">
+          <div class="report-grid">
+            <section class="panel">
+              <div class="panel-header"><h2>Gain by seller</h2></div>
+              <div class="bar-chart" id="sellerChart"></div>
+            </section>
+            <section class="panel">
+              <div class="panel-header"><h2>Inventory health</h2></div>
+              <div class="report-list" id="reportList"></div>
+            </section>
+          </div>
+          <section class="panel">
+            <div class="panel-header">
+              <h2>Reorder list</h2>
+              <div class="header-actions compact-actions">
+                <button class="ghost-button" id="downloadPurchaseOrder" type="button">Download Purchase Order</button>
+                <button class="ghost-button" id="downloadReorderReport" type="button">Download Reorder Report</button>
+              </div>
+            </div>
+            <div class="reorder-list" id="reorderList"></div>
+          </section>
+        </section>
+
+        <section class="view" id="help">
+          <section class="panel help-hero">
+            <img src="assets/medholic-pharmacy-logo-transparent.png" alt="Medholic Pharmacy logo" class="help-logo">
+            <div>
+              <p class="eyebrow">Help and launch</p>
+              <h2>Medholic Pharmacy</h2>
+              <p class="muted">Quick links for setup, marketing, backups, reports, and live deployment checks.</p>
+            </div>
+          </section>
+
+          <div class="help-grid">
+            <a class="help-card" href="marketing/index.html" target="_blank" rel="noreferrer">
+              <strong>Marketing page</strong>
+              <span>Open the public brand page with the Medholic Pharmacy logo.</span>
+            </a>
+            <a class="help-card" href="marketing/flyer.html" target="_blank" rel="noreferrer">
+              <strong>Printable flyer</strong>
+              <span>Open the flyer page for printing or sharing.</span>
+            </a>
+            <a class="help-card" href="docs/production-readiness-checklist.md" target="_blank" rel="noreferrer">
+              <strong>Production checklist</strong>
+              <span>Check the steps before entering real stock and sales.</span>
+            </a>
+            <a class="help-card" href="docs/railway-github-deployment.md" target="_blank" rel="noreferrer">
+              <strong>Railway and GitHub guide</strong>
+              <span>Follow the live deployment steps for your domain.</span>
+            </a>
+            <a class="help-card" href="docs/backup-and-restore-guide.md" target="_blank" rel="noreferrer">
+              <strong>Backup and restore</strong>
+              <span>Learn when to download or restore pharmacy records.</span>
+            </a>
+            <a class="help-card" href="docs/login-design-guide.md" target="_blank" rel="noreferrer">
+              <strong>Login design guide</strong>
+              <span>See the code and design notes behind the login screen.</span>
+            </a>
+            <a class="help-card" href="docs/barcode-scanning-guide.md" target="_blank" rel="noreferrer">
+              <strong>Barcode scanning guide</strong>
+              <span>Learn how to use phone cameras, laptop webcams, USB scanners, or generated stock codes.</span>
+            </a>
+          </div>
+
+          <section class="panel">
+            <div class="panel-header"><h2>Live sync badge meaning</h2></div>
+            <div class="sync-guide">
+              <div><span class="sync-pill live">Postgres live sync</span><p>Best live mode. Railway Postgres is connected.</p></div>
+              <div><span class="sync-pill warning">Server file storage</span><p>The server is running, but Postgres is not connected yet.</p></div>
+              <div><span class="sync-pill local">Local browser only</span><p>You opened the app as a file, so records stay in this browser only.</p></div>
+              <div><span class="sync-pill offline">Live sync offline</span><p>The app cannot reach the server right now.</p></div>
+            </div>
+          </section>
+        </section>
+
+        <section class="view" id="security">
+          <div class="security-grid">
+            <section class="panel">
+              <div class="panel-header"><h2>Cash drawer check</h2></div>
+              <form id="cashCheckForm" class="form-grid compact">
+                <label>
+                  Counted cash
+                  <input id="countedCash" type="number" min="0" step="0.01" required>
+                </label>
+                <label>
+                  Checked by
+                  <select id="cashEmployee"></select>
+                </label>
+                <label>
+                  Note
+                  <textarea id="cashNote" rows="2" placeholder="End of shift, missing cash, correction"></textarea>
+                </label>
+                <button class="primary-button wide" type="submit">Save cash check</button>
+              </form>
+              <div class="sale-preview" id="cashPreview"></div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-header"><h2>Stock count adjustment</h2></div>
+              <form id="stockAuditForm" class="form-grid compact">
+                <label>
+                  Medication
+                  <select id="auditMedicineSelect"></select>
+                </label>
+                <label>
+                  Counted quantity on shelf
+                  <input id="countedStock" type="number" min="0" step="1" required>
+                </label>
+                <label>
+                  Reason
+                  <select id="stockReason">
+                    <option>Routine stock count</option>
+                    <option>Damaged product</option>
+                    <option>Expired removed</option>
+                    <option>Missing product</option>
+                    <option>Correction</option>
+                  </select>
+                </label>
+                <label>
+                  Note
+                  <textarea id="stockNote" rows="2" placeholder="Explain the variance"></textarea>
+                </label>
+                <button class="primary-button wide" type="submit">Save stock check</button>
+              </form>
+            </section>
+          </div>
+
+          <section class="panel detail-panel">
+            <div class="panel-header">
+              <h2>Audit trail</h2>
+              <div class="header-actions compact-actions">
+                <button class="ghost-button" id="viewAccessRequests" data-toggle-section="accessRequests" type="button">View Access Requests</button>
+                <button class="ghost-button" id="viewBackupHistory" data-toggle-section="backupHistory" type="button">View Backup History</button>
+                <button class="ghost-button" id="downloadFullBackup" type="button">Download Full Backup</button>
+                <button class="ghost-button" id="exportAudit" type="button">Download Security Report</button>
+              </div>
+            </div>
+            <div class="backup-history hidden" id="accessRequestsPanel">
+              <div class="panel-header small-header">
+                <h3>Buyer / investor access requests</h3>
+                <div class="header-actions compact-actions">
+                  <button class="text-button" id="refreshAccessRequests" type="button">Refresh</button>
+                  <button class="text-button" id="downloadAccessRequests" type="button">Download CSV</button>
+                </div>
+              </div>
+              <div id="accessRequestsList" class="backup-list">
+                <p class="empty">No access requests loaded yet.</p>
+              </div>
+            </div>
+            <div class="backup-history hidden" id="backupHistoryPanel">
+              <div class="panel-header small-header">
+                <h3>Backup history</h3>
+                <button class="text-button" id="refreshBackups" type="button">Refresh</button>
+              </div>
+              <div id="backupHistoryList" class="backup-list">
+                <p class="empty">No backup history loaded yet.</p>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Time</th><th>User</th><th>Action</th><th>Details</th><th>Risk</th></tr>
+                </thead>
+                <tbody id="auditRows"></tbody>
+              </table>
+            </div>
+          </section>
+        </section>
+      </main>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="app.js"></script>
+  </body>
+</html>
