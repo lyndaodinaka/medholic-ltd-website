@@ -245,7 +245,8 @@ const expandedSections = {
   reportSoon: false,
   reportLowStock: false,
   backupHistory: false,
-  accessRequests: false
+  accessRequests: false,
+  topbarControls: false
 };
 
 const $ = (selector) => document.querySelector(selector);
@@ -1543,6 +1544,16 @@ function renderAuth() {
   $("#currentUserLabel").textContent = isLoggedIn ? `${currentUser.name} - ${currentUser.role}` : "Signed out";
   updateSyncStatus();
   applyRolePermissions();
+  renderTopbarControls();
+}
+
+function renderTopbarControls() {
+  const controls = $("#topbarControls");
+  const toggle = $("#topbarControlsToggle");
+  if (!controls || !toggle) return;
+  controls.classList.toggle("collapsed", !expandedSections.topbarControls);
+  toggle.textContent = expandedSections.topbarControls ? "Hide Controls" : "Show Controls";
+  toggle.setAttribute("aria-expanded", String(expandedSections.topbarControls));
 }
 
 function normalizedRole() {
@@ -1829,6 +1840,13 @@ document.addEventListener("click", (event) => {
     renderAll();
     if (key === "backupHistory" && expandedSections.backupHistory) refreshBackupHistory();
     if (key === "accessRequests" && expandedSections.accessRequests) refreshAccessRequests();
+    return;
+  }
+
+  const topbarToggle = event.target.closest("#topbarControlsToggle");
+  if (topbarToggle) {
+    expandedSections.topbarControls = !expandedSections.topbarControls;
+    renderTopbarControls();
     return;
   }
 

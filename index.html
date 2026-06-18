@@ -102,12 +102,15 @@
             <p class="eyebrow">Pharmacy operations</p>
             <h1>Medication inventory, sales, sellers, gains, and alerts</h1>
           </div>
-          <div class="header-actions">
-            <span class="sync-pill local" id="syncStatus">Local browser only</span>
-            <span class="user-pill" id="currentUserLabel">Signed out</span>
-            <button class="ghost-button" id="exportCsv" type="button">Download Inventory Report</button>
-            <button class="ghost-button" id="downloadSampleData" type="button">Download Sample Data</button>
-            <button class="ghost-button" id="resetDemo" type="button">Add Sample Data</button>
+          <div class="topbar-control">
+            <button class="ghost-button controls-toggle" id="topbarControlsToggle" type="button" aria-expanded="false">Show Controls</button>
+            <div class="header-actions collapsed" id="topbarControls">
+              <span class="sync-pill local" id="syncStatus">Local browser only</span>
+              <span class="user-pill" id="currentUserLabel">Signed out</span>
+              <button class="ghost-button" id="exportCsv" type="button">Download Inventory Report</button>
+              <button class="ghost-button" id="downloadSampleData" type="button">Download Sample Data</button>
+              <button class="ghost-button" id="resetDemo" type="button">Add Sample Data</button>
+            </div>
           </div>
         </header>
 

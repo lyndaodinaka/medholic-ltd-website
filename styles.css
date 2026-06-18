@@ -353,6 +353,21 @@ h2 {
   justify-content: flex-end;
 }
 
+.topbar-control {
+  display: grid;
+  justify-items: end;
+  gap: 10px;
+  min-width: min(100%, 360px);
+}
+
+.controls-toggle {
+  min-width: 140px;
+}
+
+.header-actions.collapsed {
+  display: none;
+}
+
 .compact-actions {
   gap: 8px;
 }
@@ -1265,6 +1280,11 @@ textarea:focus {
 
   .header-actions {
     justify-content: stretch;
+  }
+
+  .topbar-control {
+    justify-items: stretch;
+    min-width: 0;
   }
 
   .header-actions button {
