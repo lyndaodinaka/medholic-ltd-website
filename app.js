@@ -1015,7 +1015,7 @@ async function handleLoginSubmit(event) {
       });
       const result = await response.json();
       if (!response.ok || !result.ok) {
-        $("#loginHelp").textContent = "Login failed. Use nwaekpelynda1994@gmail.com and the Medholic admin password.";
+        $("#loginHelp").textContent = "Login failed. Check your username and password.";
         return;
       }
       currentUser = result.user;
@@ -1035,7 +1035,7 @@ async function handleLoginSubmit(event) {
 
   const user = users.find((entry) => entry.username === username && entry.password === password);
   if (!user) {
-    $("#loginHelp").textContent = "Login failed. Use nwaekpelynda1994@gmail.com and the Medholic admin password.";
+    $("#loginHelp").textContent = "Login failed. Check your username and password.";
     return;
   }
   currentUser = { username: user.username, name: user.name, role: user.role };
@@ -1950,7 +1950,7 @@ $("#refreshAccessRequests").addEventListener("click", refreshAccessRequests);
 $("#downloadAccessRequests").addEventListener("click", downloadAccessRequestsCsv);
 $("#signOut").addEventListener("click", handleSignOut);
 $("#forgotPassword").addEventListener("click", () => {
-  $("#loginHelp").textContent = "Password recovery is local in this demo. Manager login is nwaekpelynda1994@gmail.com.";
+  $("#loginHelp").textContent = "Contact the Medholic Pharmacy administrator to reset your password.";
 });
 $("#resetDemo").addEventListener("click", () => {
   if (!canManageSensitiveActions()) {
