@@ -72,14 +72,19 @@ button {
 }
 
 .access-toggle {
-  margin-top: 10px;
-  padding-top: 12px;
-  border-top: 1px solid var(--line);
-  border: 0;
-  background: transparent;
+  margin-top: 14px;
+  min-height: 42px;
+  border: 1px solid var(--primary);
+  border-radius: 8px;
+  background: #edf7ff;
   color: var(--primary-dark);
   font-weight: 800;
-  text-decoration: underline;
+  text-decoration: none;
+}
+
+.access-toggle:hover {
+  background: #e1f0ff;
+  box-shadow: 0 8px 20px rgba(8, 120, 220, 0.12);
 }
 
 .login-logo {
