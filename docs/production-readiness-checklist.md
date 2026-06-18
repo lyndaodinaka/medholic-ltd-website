@@ -21,8 +21,8 @@ Use this before you start entering real pharmacy stock, real sales, or staff rec
 
 ## 3. Login Security
 
-- Keep manager email as `nwaekpelynda1994@gmail.com`.
-- Keep manager password as `MedholicAdmin2026!` unless you intentionally change it.
+- Keep the manager email and password private.
+- Do not display manager login details on public pages.
 - Prefer `ADMIN_PASSWORD_HASH` in Railway instead of plain `ADMIN_PASSWORD`.
 - Remove staff accounts immediately when a staff member leaves.
 - Use different staff logins for cashier, pharmacist, inventory clerk, and manager.

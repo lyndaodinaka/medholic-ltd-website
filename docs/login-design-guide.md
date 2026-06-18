@@ -33,7 +33,7 @@ The login section is at the top of `index.html`.
     </label>
     <button class="primary-button wide" type="submit">Log in</button>
     <button class="text-button wide" id="forgotPassword" type="button">Forgot password?</button>
-    <p class="login-help" id="loginHelp">Manager login: nwaekpelynda1994@gmail.com</p>
+    <p class="login-help" id="loginHelp">Enter your assigned account details to continue.</p>
   </form>
 </section>
 ```
@@ -118,9 +118,6 @@ $("#showPassword").addEventListener("click", () => {
 
 ## Login Details
 
-The manager login remains:
-
-- Username: `nwaekpelynda1994@gmail.com`
-- Password: `MedholicAdmin2026!`
+The manager login should be kept private and should not be displayed on the sign-in page.
 
 On Railway, login is checked by the server through `/api/login`. When opened directly as a local file, the app uses the local fallback login in `app.js`.

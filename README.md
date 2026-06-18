@@ -22,10 +22,7 @@ Medholic Pharmacy is a pharmacy inventory, sales, supplier, staff roster, report
 
 ## Login
 
-Manager login:
-
-- Username: `nwaekpelynda1994@gmail.com`
-- Password: `MedholicAdmin2026!`
+The manager login should be kept private and entered only on the sign-in page.
 
 ## Local Use
 
@@ -65,7 +62,4 @@ Marketing page:
 
 - `/marketing/` on your live domain
 
-Important: keep the manager login private. The current manager login remains:
-
-- Username: `nwaekpelynda1994@gmail.com`
-- Password: `MedholicAdmin2026!`
+Important: keep the manager login private. Do not display the manager email or password on public pages.

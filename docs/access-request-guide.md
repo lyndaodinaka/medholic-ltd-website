@@ -13,9 +13,7 @@ On the sign-in page, a buyer or investor can enter:
 
 When they submit, the app opens an email addressed to:
 
-```text
-nwaekpelynda1994@gmail.com
-```
+the private Medholic Pharmacy contact email configured in the app.
 
 On Railway, the request is also saved on the server.
 

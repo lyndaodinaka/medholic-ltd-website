@@ -35,8 +35,8 @@ git push -u origin main
 7. Set these variables:
 
 ```text
-ADMIN_EMAIL=nwaekpelynda1994@gmail.com
-ADMIN_PASSWORD=MedholicAdmin2026!
+ADMIN_EMAIL=your-manager-email@example.com
+ADMIN_PASSWORD=your-manager-password
 ```
 
 8. Deploy.
@@ -46,8 +46,8 @@ ADMIN_PASSWORD=MedholicAdmin2026!
 Open the Railway domain and log in:
 
 ```text
-Username: nwaekpelynda1994@gmail.com
-Password: MedholicAdmin2026!
+Username: your manager email
+Password: your manager password
 ```
 
 Then check:

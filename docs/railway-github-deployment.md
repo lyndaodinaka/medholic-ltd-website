@@ -31,8 +31,8 @@ After Railway finishes deploying:
 
 1. Open the Railway generated domain.
 2. Log in with:
-   - Username: `nwaekpelynda1994@gmail.com`
-   - Password: `MedholicAdmin2026!`
+   - Username: your manager email
+   - Password: your manager password
 3. Test:
    - Capture medicine.
    - Generate stock code.
@@ -103,8 +103,8 @@ Restore is manager-only. The app asks you to type `RESTORE` before replacing dat
 
 In Railway variables, set:
 
-- `ADMIN_EMAIL=nwaekpelynda1994@gmail.com`
-- `ADMIN_PASSWORD=MedholicAdmin2026!`
+- `ADMIN_EMAIL=your-manager-email@example.com`
+- `ADMIN_PASSWORD=your-manager-password`
 
 The app includes these defaults, but setting them in Railway variables is better because you can change them without editing code.
 
@@ -115,7 +115,7 @@ For better security, use `ADMIN_PASSWORD_HASH` instead of `ADMIN_PASSWORD`.
 Generate a password hash locally:
 
 ```powershell
-npm run make-password-hash -- "MedholicAdmin2026!"
+npm run make-password-hash -- "your-manager-password"
 ```
 
 Copy the output into Railway variables:
