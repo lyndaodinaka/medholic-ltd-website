@@ -11,6 +11,7 @@
 - `assets/icon-512.png`
 - `assets/medholic-og-image.png`
 - `marketing/medholic-safe-marketing-photo.png`
+- `marketing/medholic-safe-marketing-photo-official-logo.png`
 - `assets/medholic-pharmacy-logo-chromakey.png`
 - `assets/medholic-logo-transparent.png`
 - `assets/medholic-logo-chromakey.png`
