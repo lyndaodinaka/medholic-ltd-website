@@ -411,6 +411,12 @@ function showToast(message) {
   showToast.timer = window.setTimeout(() => toast.classList.remove("show"), 2800);
 }
 
+function setLoginHelp(message) {
+  const helper = $("#loginHelp");
+  helper.textContent = message || "";
+  helper.classList.toggle("hidden", !message);
+}
+
 function setView(viewId) {
   if (!canView(viewId)) {
     showToast("Your staff role does not have access to that section.");
@@ -1015,7 +1021,7 @@ async function handleLoginSubmit(event) {
       });
       const result = await response.json();
       if (!response.ok || !result.ok) {
-        $("#loginHelp").textContent = "Login failed. Check your username and password.";
+        setLoginHelp("Login failed. Check your username and password.");
         return;
       }
       currentUser = result.user;
@@ -1028,14 +1034,14 @@ async function handleLoginSubmit(event) {
       hydrateFromServer();
       return;
     } catch {
-      $("#loginHelp").textContent = "Server login is not reachable. Try refreshing the Railway page.";
+      setLoginHelp("Server login is not reachable. Try refreshing the Railway page.");
       return;
     }
   }
 
   const user = users.find((entry) => entry.username === username && entry.password === password);
   if (!user) {
-    $("#loginHelp").textContent = "Login failed. Check your username and password.";
+    setLoginHelp("Login failed. Check your username and password.");
     return;
   }
   currentUser = { username: user.username, name: user.name, role: user.role };
@@ -1950,7 +1956,7 @@ $("#refreshAccessRequests").addEventListener("click", refreshAccessRequests);
 $("#downloadAccessRequests").addEventListener("click", downloadAccessRequestsCsv);
 $("#signOut").addEventListener("click", handleSignOut);
 $("#forgotPassword").addEventListener("click", () => {
-  $("#loginHelp").textContent = "Contact the Medholic Pharmacy administrator to reset your password.";
+  setLoginHelp("Contact the Medholic Pharmacy administrator to reset your password.");
 });
 $("#resetDemo").addEventListener("click", () => {
   if (!canManageSensitiveActions()) {
