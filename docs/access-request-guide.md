@@ -13,9 +13,11 @@ On the sign-in page, a buyer or investor can enter:
 
 When they submit, the app opens an email addressed to:
 
-the private Medholic Pharmacy contact email configured in the app.
+lynda.chidi@medholic.net
 
 On Railway, the request is also saved on the server.
+
+This email is the public buyer/investor contact email. Keep the manager login email and password private in Railway Variables.
 
 ## How You View Requests
 

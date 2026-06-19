@@ -6,8 +6,8 @@ const crypto = require("crypto");
 const root = __dirname;
 const port = Number(process.env.PORT || 4177);
 const databaseUrl = process.env.DATABASE_URL || "";
-const adminEmail = (process.env.ADMIN_EMAIL || "nwaekpelynda1994@gmail.com").toLowerCase();
-const adminPassword = process.env.ADMIN_PASSWORD || "MedholicAdmin2026!";
+const adminEmail = (process.env.ADMIN_EMAIL || "").toLowerCase();
+const adminPassword = process.env.ADMIN_PASSWORD || "";
 const adminPasswordHash = process.env.ADMIN_PASSWORD_HASH || "";
 const staffAccountsJson = process.env.STAFF_ACCOUNTS_JSON || "";
 const sessions = new Map();
@@ -135,15 +135,17 @@ function verifyHash(password, storedHash) {
 }
 
 function getStaffAccounts() {
-  const accounts = [
-    {
+  const accounts = [];
+
+  if (adminEmail && (adminPassword || adminPasswordHash)) {
+    accounts.push({
       username: adminEmail,
       password: adminPassword,
       passwordHash: adminPasswordHash,
-      name: "Nwaekpe Lynda",
+      name: process.env.ADMIN_NAME || "Manager",
       role: "Manager"
-    }
-  ];
+    });
+  }
 
   if (!staffAccountsJson) return accounts;
   try {

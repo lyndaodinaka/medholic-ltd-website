@@ -2,6 +2,8 @@
 
 Printable web flyer: `/marketing/flyer.html`
 
+Buyer or investor enquiries: lynda.chidi@medholic.net
+
 ## Medholic Pharmacy
 
 Smarter pharmacy stock, sales, and security tracking.

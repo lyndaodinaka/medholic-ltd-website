@@ -94,6 +94,17 @@ h1 {
   border: 1px solid var(--line);
 }
 
+.contact-line {
+  margin: 2px 0 0;
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.contact-line a {
+  color: var(--red);
+  text-decoration: none;
+}
+
 .feature-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));

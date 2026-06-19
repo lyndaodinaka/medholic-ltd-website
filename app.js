@@ -5,10 +5,10 @@ const apiStateUrl = "/api/state";
 const apiBackupsUrl = "/api/backups";
 const apiHealthUrl = "/api/health";
 const apiAccessRequestsUrl = "/api/access-requests";
+const officialContactEmail = "lynda.chidi@medholic.net";
 
 const users = [
-  { username: "nwaekpelynda1994@gmail.com", password: "MedholicAdmin2026!", name: "Nwaekpe Lynda", role: "Manager" },
-  { username: "admin", password: "MedholicAdmin2026!", name: "Nwaekpe Lynda", role: "Manager" },
+  { username: "local-admin", password: "local-demo-only", name: "Local Demo Manager", role: "Manager" },
   { username: "cashier", password: "cashier123", name: "Cashier", role: "Cashier" },
   { username: "pharmacist", password: "pharmacist123", name: "Pharmacist", role: "Pharmacist" },
   { username: "inventory", password: "inventory123", name: "Inventory Clerk", role: "Inventory clerk" }
@@ -1081,7 +1081,7 @@ async function handleAccessRequestSubmit(event) {
 
   const subject = encodeURIComponent(`Medholic Pharmacy ${request.requestType} request`);
   const body = encodeURIComponent(`Name: ${request.name}\nEmail: ${request.email}\nType: ${request.requestType}\nMessage: ${request.message || "No message added."}`);
-  window.location.href = `mailto:nwaekpelynda1994@gmail.com?subject=${subject}&body=${body}`;
+  window.location.href = `mailto:${officialContactEmail}?subject=${subject}&body=${body}`;
   $("#accessRequestForm").reset();
   $("#accessHelp").textContent = saved
     ? "Request saved. Your email app will also open so Medholic can be notified."

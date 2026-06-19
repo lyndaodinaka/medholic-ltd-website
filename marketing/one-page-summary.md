@@ -6,6 +6,8 @@
 
 Medholic Pharmacy helps pharmacies capture medicines and supplies, track stock, record sales, monitor expiry dates, manage suppliers, and detect possible cash or product loss.
 
+Buyer or investor enquiries: lynda.chidi@medholic.net
+
 ## Key Features
 
 - Barcode scanning or generated stock codes.
