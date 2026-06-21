@@ -22,6 +22,8 @@ Medholic Pharmacy is a pharmacy inventory, sales, supplier, staff roster, report
 
 ## Business And Sales Kit
 
+- Final handoff notes: `docs/final-handoff-notes.md`
+- Release notes: `docs/release-notes.md`
 - Main file map: `docs/medholic-master-index.md`
 - Final launch checklist: `docs/final-business-launch-checklist.md`
 - Revenue plan: `docs/medholic-revenue-plan.md`

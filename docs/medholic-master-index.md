@@ -33,6 +33,8 @@ The app Help section also contains quick links to the marketing page, flyer, pro
 
 ## Customer Onboarding
 
+- `docs/final-handoff-notes.md` - final upload, test, and daily workflow notes.
+- `docs/release-notes.md` - summary of the final business launch version.
 - `docs/won-lead-next-steps.md` - what to do after a customer says yes.
 - `docs/customer-onboarding-checklist.md` - setup details to collect.
 - `docs/access-request-guide.md` - how to manage demo/pricing/buyer/investor requests.
