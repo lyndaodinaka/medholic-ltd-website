@@ -30,6 +30,14 @@ Buyer or investor enquiries: lynda.chidi@medholic.net
 - Medicine stores.
 - Inventory and cashier teams.
 
+## Sales Model
+
+- Starter subscription for a single pharmacy.
+- Standard subscription for pharmacies that need reports, roles, security tracing, and supplier ordering.
+- Premium setup for branches, custom branding, training, and priority support.
+- One-time setup fee for onboarding medicines, staff, suppliers, and training.
+- White-label licensing for buyers who want their own branded version.
+
 ## Brand Message
 
 Friendly, modern, and practical pharmacy operations software for safer inventory and better accountability.

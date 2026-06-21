@@ -6,6 +6,7 @@ const apiBackupsUrl = "/api/backups";
 const apiHealthUrl = "/api/health";
 const apiAccessRequestsUrl = "/api/access-requests";
 const officialContactEmail = "lynda.chidi@medholic.net";
+const leadStatuses = ["New", "Contacted", "Demo booked", "Quoted", "Won", "Lost"];
 
 const users = [
   { username: "local-admin", password: "local-demo-only", name: "Local Demo Manager", role: "Manager" },
@@ -760,12 +761,16 @@ function renderAccessRequests() {
   $("#viewAccessRequests").textContent = expandedSections.accessRequests ? "Hide Access Requests" : "View Access Requests";
   if (!expandedSections.accessRequests) return;
   if (!accessRequests.length) {
-    list.innerHTML = `<p class="empty">No buyer or investor requests found yet.</p>`;
+    list.innerHTML = `<p class="empty">No demo, buyer, investor, or pricing requests found yet.</p>`;
     return;
   }
   list.innerHTML = accessRequests.map((request) => {
     const type = request.requestType || request.request_type || "Request";
+    const status = request.leadStatus || request.lead_status || "New";
     const date = request.created_at || request.createdAt || new Date().toISOString();
+    const statusOptions = leadStatuses
+      .map((item) => `<option value="${escapeHtml(item)}"${item === status ? " selected" : ""}>${escapeHtml(item)}</option>`)
+      .join("");
     return `
       <div class="backup-row">
         <div>
@@ -774,6 +779,12 @@ function renderAccessRequests() {
           <span>${escapeHtml(request.message || "No message added.")}</span>
         </div>
         <div class="backup-actions">
+          <label class="lead-status-label">
+            Status
+            <select class="lead-status-select" data-lead-status="${escapeHtml(String(request.id))}">
+              ${statusOptions}
+            </select>
+          </label>
           <a class="ghost-button" href="mailto:${encodeURIComponent(request.email)}?subject=${encodeURIComponent("Medholic Pharmacy access request")}" target="_blank" rel="noreferrer">Reply</a>
         </div>
       </div>
@@ -1729,17 +1740,50 @@ function downloadAccessRequestsCsv() {
     showToast("Only a manager can download access requests.");
     return;
   }
-  const headers = ["name", "email", "type", "message", "createdAt"];
+  const headers = ["name", "email", "type", "status", "message", "createdAt"];
   const rows = accessRequests.map((request) => ({
     name: request.name,
     email: request.email,
     type: request.requestType || request.request_type,
+    status: request.leadStatus || request.lead_status || "New",
     message: request.message,
     createdAt: request.created_at || request.createdAt
   }));
   const csv = [headers.join(","), ...rows.map((row) => headers.map((header) => csvCell(row[header])).join(","))].join("\n");
   downloadFile(csv, `medholic-access-requests-${new Date().toISOString().slice(0, 10)}.csv`, "text/csv");
   showToast("Access requests downloaded.");
+}
+
+async function updateLeadStatus(requestId, status) {
+  if (!canManageSensitiveActions()) {
+    showToast("Only a manager can update lead status.");
+    return;
+  }
+  const request = accessRequests.find((item) => String(item.id) === String(requestId));
+  if (request) {
+    request.leadStatus = status;
+    request.lead_status = status;
+    renderAccessRequests();
+  }
+  if (location.protocol === "file:" || !sessionToken) {
+    showToast("Lead status updates save on Railway after deployment.");
+    return;
+  }
+  try {
+    const response = await fetch(`${apiAccessRequestsUrl}/${encodeURIComponent(requestId)}/status`, {
+      method: "PATCH",
+      headers: { ...authHeaders(), "Content-Type": "application/json" },
+      body: JSON.stringify({ status })
+    });
+    if (!response.ok) throw new Error("Unable to update lead status");
+    const data = await response.json();
+    accessRequests = accessRequests.map((item) => String(item.id) === String(requestId) ? { ...item, ...data.request } : item);
+    renderAccessRequests();
+    showToast("Lead status updated.");
+  } catch {
+    showToast("Could not update lead status.");
+    refreshAccessRequests();
+  }
 }
 
 async function downloadServerBackup(backupId) {
@@ -1908,6 +1952,13 @@ document.addEventListener("click", (event) => {
     logAction("Employee removed", `${employee?.name || "Unknown employee"} removed from roster.`, "Medium");
     showToast("Employee removed.");
     renderAll();
+  }
+});
+
+document.addEventListener("change", (event) => {
+  const leadStatusSelect = event.target.closest("[data-lead-status]");
+  if (leadStatusSelect) {
+    updateLeadStatus(leadStatusSelect.dataset.leadStatus, leadStatusSelect.value);
   }
 });
 

@@ -41,7 +41,7 @@
         </label>
         <button class="primary-button wide" type="submit">Log in</button>
         <button class="text-button wide" id="forgotPassword" type="button">Forgot password?</button>
-        <button class="access-toggle wide" id="showAccessRequest" type="button">Request Access as Buyer / Investor</button>
+        <button class="access-toggle wide" id="showAccessRequest" type="button">Request Demo, Pricing, Buyer / Investor Access</button>
         <p class="login-help hidden" id="loginHelp"></p>
       </form>
       <form class="access-card hidden" id="accessRequestForm">
@@ -56,8 +56,12 @@
           <input id="accessEmail" type="email" autocomplete="email" required>
         </label>
         <label>
-          I am a
+          I am interested in
           <select id="accessType" required>
+            <option>Demo</option>
+            <option>Subscription</option>
+            <option>Setup</option>
+            <option>White-label</option>
             <option>Buyer</option>
             <option>Investor</option>
           </select>
@@ -516,7 +520,7 @@
             </div>
             <div class="backup-history hidden" id="accessRequestsPanel">
               <div class="panel-header small-header">
-                <h3>Buyer / investor access requests</h3>
+                <h3>Demo, buyer, investor, and pricing requests</h3>
                 <div class="header-actions compact-actions">
                   <button class="text-button" id="refreshAccessRequests" type="button">Refresh</button>
                   <button class="text-button" id="downloadAccessRequests" type="button">Download CSV</button>
@@ -550,5 +554,12 @@
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
     <script src="app.js"></script>
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("/sw.js").catch(() => {});
+        });
+      }
+    </script>
   </body>
 </html>

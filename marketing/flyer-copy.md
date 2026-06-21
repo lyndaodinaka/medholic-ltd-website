@@ -22,3 +22,10 @@ Track medicines, suppliers, sales, expiry dates, staff actions, controlled medic
 ### Built For
 
 Pharmacies, clinics, and medicine stores that need a simple way to manage daily operations.
+
+### How To Buy
+
+- Monthly subscription.
+- Setup and training package.
+- Branch license for growing pharmacies.
+- Custom branded version for serious buyers.

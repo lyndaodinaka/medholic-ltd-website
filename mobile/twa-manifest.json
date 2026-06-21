@@ -1,0 +1,27 @@
+{
+  "packageId": "net.medholic.pharmacy",
+  "host": "medholicpharmacy.up.railway.app",
+  "name": "Medholic Pharmacy",
+  "launcherName": "Medholic",
+  "display": "standalone",
+  "themeColor": "#0878dc",
+  "themeColorDark": "#07599f",
+  "navigationColor": "#ffffff",
+  "navigationColorDark": "#07162a",
+  "backgroundColor": "#ffffff",
+  "startUrl": "/",
+  "iconUrl": "https://medholicpharmacy.up.railway.app/assets/icon-512.png",
+  "maskableIconUrl": "https://medholicpharmacy.up.railway.app/assets/icon-512.png",
+  "monochromeIconUrl": "https://medholicpharmacy.up.railway.app/assets/favicon-32.png",
+  "splashScreenFadeOutDuration": 300,
+  "signingKey": {
+    "path": "./android-keystore/medholic-release.keystore",
+    "alias": "medholic"
+  },
+  "appVersionName": "1.0.0",
+  "appVersionCode": 1,
+  "shortcuts": [],
+  "generatorApp": "bubblewrap-cli",
+  "webManifestUrl": "https://medholicpharmacy.up.railway.app/site.webmanifest",
+  "fallbackType": "customtabs"
+}
