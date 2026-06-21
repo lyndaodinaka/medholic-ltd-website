@@ -230,7 +230,7 @@ let state = loadState();
 let scannerStream = null;
 let scanTimer = null;
 let selectedMedicineId = null;
-let currentUser = JSON.parse(sessionStorage.getItem(sessionKey) || "null");
+let currentUser = normalizeUser(JSON.parse(sessionStorage.getItem(sessionKey) || "null"));
 let sessionToken = sessionStorage.getItem(sessionTokenKey) || "";
 let serverSyncReady = false;
 let saveTimer = null;
@@ -251,6 +251,17 @@ const expandedSections = {
 };
 
 const $ = (selector) => document.querySelector(selector);
+
+function normalizeUser(user) {
+  if (!user) return user;
+  const oldNames = ["Nwaekpe Lynda", "Local Demo Manager", "Manager"];
+  const normalized = { ...user };
+  if (oldNames.includes(normalized.name) && normalized.role === "Manager") {
+    normalized.name = "Lynda Chidi";
+    sessionStorage.setItem(sessionKey, JSON.stringify(normalized));
+  }
+  return normalized;
+}
 const money = (value) => new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(value || 0);
 
 function loadState() {
@@ -1047,7 +1058,7 @@ async function handleLoginSubmit(event) {
         setLoginHelp("Login failed. Check your username and password.");
         return;
       }
-      currentUser = result.user;
+      currentUser = normalizeUser(result.user);
       sessionToken = result.token;
       sessionStorage.setItem(sessionKey, JSON.stringify(currentUser));
       sessionStorage.setItem(sessionTokenKey, sessionToken);
