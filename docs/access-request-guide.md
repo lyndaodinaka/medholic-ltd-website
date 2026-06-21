@@ -29,7 +29,8 @@ This email is the public buyer/investor contact email. Keep the manager login em
 6. Add a follow-up date if you need to chase the person later.
 7. Add a private note for quote amount, next action, or demo details.
 8. Use **Reply** to email the person back.
-9. Use **Download CSV** to save the request list.
+9. Use **Download CSV** to save the full request list.
+10. Use **Download Summary** to save a quick status/type/follow-up report.
 
 ## Lead Status Meaning
 

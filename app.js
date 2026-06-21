@@ -1623,6 +1623,7 @@ function applyRolePermissions() {
   $("#viewAccessRequests").classList.toggle("hidden", Boolean(currentUser) && !canManageSensitiveActions());
   $("#refreshAccessRequests").classList.toggle("hidden", Boolean(currentUser) && !canManageSensitiveActions());
   $("#downloadAccessRequests").classList.toggle("hidden", Boolean(currentUser) && !canManageSensitiveActions());
+  $("#downloadLeadSummary").classList.toggle("hidden", Boolean(currentUser) && !canManageSensitiveActions());
 
   const activeView = document.querySelector(".view.active")?.id;
   if (currentUser && activeView && !canView(activeView)) setView(firstAllowedView());
@@ -1766,6 +1767,50 @@ function downloadAccessRequestsCsv() {
   const csv = [headers.join(","), ...rows.map((row) => headers.map((header) => csvCell(row[header])).join(","))].join("\n");
   downloadFile(csv, `medholic-access-requests-${new Date().toISOString().slice(0, 10)}.csv`, "text/csv");
   showToast("Access requests downloaded.");
+}
+
+function downloadLeadSummaryReport() {
+  if (!canManageSensitiveActions()) {
+    showToast("Only a manager can download the lead summary.");
+    return;
+  }
+  const today = new Date().toISOString().slice(0, 10);
+  const byStatus = Object.fromEntries(leadStatuses.map((status) => [status, 0]));
+  const byType = {};
+  const followUps = [];
+  accessRequests.forEach((request) => {
+    const status = request.leadStatus || request.lead_status || "New";
+    const type = request.requestType || request.request_type || "Request";
+    const followUpDate = request.followUpDate || request.follow_up_date || "";
+    byStatus[status] = (byStatus[status] || 0) + 1;
+    byType[type] = (byType[type] || 0) + 1;
+    if (followUpDate) {
+      followUps.push({
+        name: request.name,
+        email: request.email,
+        type,
+        status,
+        followUpDate,
+        note: request.leadNotes || request.lead_notes || ""
+      });
+    }
+  });
+  followUps.sort((a, b) => a.followUpDate.localeCompare(b.followUpDate));
+  const lines = [
+    "Medholic Pharmacy Lead Summary",
+    `Date: ${today}`,
+    "",
+    "Status Summary",
+    ...Object.entries(byStatus).map(([status, count]) => `${status}: ${count}`),
+    "",
+    "Request Type Summary",
+    ...Object.entries(byType).map(([type, count]) => `${type}: ${count}`),
+    "",
+    "Upcoming Follow-Ups",
+    ...(followUps.length ? followUps.map((item) => `${item.followUpDate} - ${item.name} - ${item.type} - ${item.status} - ${item.email}${item.note ? ` - ${item.note}` : ""}`) : ["No follow-up dates saved."])
+  ];
+  downloadFile(lines.join("\n"), `medholic-lead-summary-${today}.txt`, "text/plain");
+  showToast("Lead summary downloaded.");
 }
 
 function updateLocalLeadRequest(requestId, updates) {
@@ -2077,6 +2122,7 @@ $("#downloadFullBackup").addEventListener("click", downloadFullBackup);
 $("#refreshBackups").addEventListener("click", refreshBackupHistory);
 $("#refreshAccessRequests").addEventListener("click", refreshAccessRequests);
 $("#downloadAccessRequests").addEventListener("click", downloadAccessRequestsCsv);
+$("#downloadLeadSummary").addEventListener("click", downloadLeadSummaryReport);
 $("#signOut").addEventListener("click", handleSignOut);
 $("#forgotPassword").addEventListener("click", () => {
   setLoginHelp("Contact the Medholic Pharmacy administrator to reset your password.");
