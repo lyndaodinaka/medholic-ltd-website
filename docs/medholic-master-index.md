@@ -18,6 +18,7 @@ The app Help section also contains quick links to the marketing page, flyer, pro
 - `marketing/index.html` - main marketing page.
 - `marketing/flyer.html` - printable flyer.
 - `marketing/proposal.html` - proposal page to send to pharmacies.
+- `marketing/pricing-calculator.html` - quick quote calculator for subscriptions, setup, branches, support, and branding.
 - `marketing/medholic-safe-marketing-photo-official-logo.png` - safe promo photo with logo and public contact email.
 
 ## Sales Documents

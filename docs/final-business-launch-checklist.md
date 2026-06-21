@@ -38,6 +38,7 @@ Do not show the manager password in GitHub, screenshots, marketing pages, or pub
 - Open `marketing/index.html`.
 - Open `marketing/flyer.html`.
 - Open `marketing/proposal.html`.
+- Open `marketing/pricing-calculator.html`.
 - Click an enquiry email button.
 - Confirm the email opens to `lynda.chidi@medholic.net`.
 

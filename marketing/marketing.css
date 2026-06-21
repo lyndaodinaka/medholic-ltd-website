@@ -372,6 +372,65 @@ h1 {
   font-weight: 900;
 }
 
+.calculator-sheet {
+  min-height: auto;
+}
+
+.calculator-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.calculator-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.calculator-form label {
+  display: grid;
+  gap: 7px;
+  color: var(--blue-dark);
+  font-weight: 900;
+}
+
+.calculator-form input,
+.calculator-form select {
+  min-height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 0 12px;
+  color: var(--ink);
+  background: #ffffff;
+  font: inherit;
+}
+
+.calculator-result {
+  display: grid;
+  align-content: start;
+  gap: 14px;
+  border: 1px solid rgba(240, 24, 22, 0.35);
+  border-radius: 8px;
+  padding: 18px;
+  background: #fffaf8;
+}
+
+.calculator-result h2 {
+  margin: 0;
+  color: var(--red);
+  font-size: clamp(2.4rem, 6vw, 4.3rem);
+  line-height: 1;
+}
+
+.quote-lines {
+  display: grid;
+  gap: 8px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
 .flyer-columns {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -434,7 +493,9 @@ h1 {
   .proposal-header,
   .flyer-columns,
   .proposal-grid,
-  .proposal-package-grid {
+  .proposal-package-grid,
+  .calculator-grid,
+  .calculator-form {
     grid-template-columns: 1fr;
   }
 
