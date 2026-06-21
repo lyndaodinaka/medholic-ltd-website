@@ -11,6 +11,8 @@ Use this as the main map for your app, marketing, sales, mobile app, and custome
 - `site.webmanifest` - installable app settings.
 - `sw.js` - mobile install/service worker support.
 
+The app Help section also contains quick links to the marketing page, flyer, proposal page, sales kit, launch checklist, demo checklist, revenue plan, onboarding checklist, deployment guide, and backup guide.
+
 ## Marketing Pages
 
 - `marketing/index.html` - main marketing page.
