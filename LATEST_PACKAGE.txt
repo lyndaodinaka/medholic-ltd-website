@@ -1,0 +1,11 @@
+Use this package for GitHub/Railway upload:
+
+MedholicPharmacy-FINAL-with-receipt-20260621-013732.zip
+
+Location:
+C:\Users\Dealt-it.com\OneDrive\Documents\WPS Cloud Files\MedholicPharmacy-FINAL-with-receipt-20260621-013732.zip
+
+Checksum:
+1BC3AA4BE2497AA41F6ECBCBF8C533994402EB446DE2232813AE4A6924BE1D3F
+
+Open the zip and upload the contents to GitHub. Do not upload old zip files into the repository.

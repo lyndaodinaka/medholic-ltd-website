@@ -5,25 +5,25 @@ Use this receipt to confirm you are uploading the correct Medholic Pharmacy pack
 ## Final Package
 
 ```text
-MedholicPharmacy-FINAL-complete-20260621-013534.zip
+MedholicPharmacy-FINAL-with-receipt-20260621-013732.zip
 ```
 
 ## Package Size
 
 ```text
-7,208,967 bytes
+See the zip file properties in the WPS Cloud Files folder.
 ```
 
 ## SHA-256 Checksum
 
 ```text
-497F15FBF480D9F96D1CCDD76E9C2003708428A11637D41C5E1AD6A7B0583B12
+1BC3AA4BE2497AA41F6ECBCBF8C533994402EB446DE2232813AE4A6924BE1D3F
 ```
 
 ## Last Local Commit
 
 ```text
-9aad30d Add final handoff notes
+bafcb04 Add final release receipt
 ```
 
 ## Verified Checks

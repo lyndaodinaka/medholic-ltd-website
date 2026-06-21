@@ -4,7 +4,11 @@ This is the final guide for what to do after receiving the latest Medholic Pharm
 
 ## Latest Package To Upload
 
-Upload the newest complete package created after these notes are added.
+Upload this package:
+
+```text
+MedholicPharmacy-FINAL-with-receipt-20260621-013732.zip
+```
 
 Do not upload old zip files into GitHub. Open the latest zip and upload the contents inside it.
 
