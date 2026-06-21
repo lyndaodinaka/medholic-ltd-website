@@ -26,8 +26,10 @@ This email is the public buyer/investor contact email. Keep the manager login em
 3. Click **View Access Requests**.
 4. Click **Refresh**.
 5. Change the status to **New**, **Contacted**, **Demo booked**, **Quoted**, **Won**, or **Lost**.
-6. Use **Reply** to email the person back.
-7. Use **Download CSV** to save the request list.
+6. Add a follow-up date if you need to chase the person later.
+7. Add a private note for quote amount, next action, or demo details.
+8. Use **Reply** to email the person back.
+9. Use **Download CSV** to save the request list.
 
 ## Lead Status Meaning
 
@@ -37,6 +39,16 @@ This email is the public buyer/investor contact email. Keep the manager login em
 - **Quoted**: price or package sent.
 - **Won**: customer agreed to proceed.
 - **Lost**: customer did not proceed.
+
+## Follow-Up Notes
+
+Use the follow-up date to remember when to contact the lead again. Use the private note for short internal details such as:
+
+- Demo time agreed.
+- Quote amount sent.
+- Package discussed.
+- Branch count.
+- Next action.
 
 ## Important
 

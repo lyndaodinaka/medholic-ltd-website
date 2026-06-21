@@ -627,6 +627,32 @@ h2 {
   font-weight: 800;
 }
 
+.lead-fields {
+  display: grid;
+  grid-template-columns: 150px minmax(180px, 1fr);
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.lead-fields label {
+  display: grid;
+  gap: 4px;
+  color: var(--muted);
+  font-size: 0.74rem;
+  font-weight: 800;
+}
+
+.lead-follow-input,
+.lead-note-input {
+  min-height: 34px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 0 8px;
+  color: var(--ink);
+  background: #ffffff;
+  font: inherit;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -1338,5 +1364,9 @@ textarea:focus {
   .help-logo {
     width: 112px;
     height: 112px;
+  }
+
+  .lead-fields {
+    grid-template-columns: 1fr;
   }
 }

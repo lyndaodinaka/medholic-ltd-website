@@ -31,6 +31,8 @@ Do not show the manager password in GitHub, screenshots, marketing pages, or pub
 - Open Security.
 - View access requests.
 - Change a lead status.
+- Add a lead follow-up date.
+- Add a private lead note.
 - Sign out.
 
 ## 4. Test The Marketing Flow

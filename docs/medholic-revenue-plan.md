@@ -60,6 +60,8 @@ New -> Contacted -> Demo booked -> Quoted -> Won
 
 Use **Lost** only when the person is not moving forward.
 
+Add a follow-up date and private note so you know who to contact next and what was discussed.
+
 When a lead becomes **Won**, use:
 
 - `docs/won-lead-next-steps.md`

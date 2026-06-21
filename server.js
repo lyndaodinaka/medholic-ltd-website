@@ -76,10 +76,14 @@ async function initDatabase() {
       request_type TEXT NOT NULL,
       message TEXT,
       lead_status TEXT NOT NULL DEFAULT 'New',
+      lead_notes TEXT NOT NULL DEFAULT '',
+      follow_up_date TEXT NOT NULL DEFAULT '',
       created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
     )
   `);
   await pgPool.query("ALTER TABLE medholic_access_requests ADD COLUMN IF NOT EXISTS lead_status TEXT NOT NULL DEFAULT 'New'");
+  await pgPool.query("ALTER TABLE medholic_access_requests ADD COLUMN IF NOT EXISTS lead_notes TEXT NOT NULL DEFAULT ''");
+  await pgPool.query("ALTER TABLE medholic_access_requests ADD COLUMN IF NOT EXISTS follow_up_date TEXT NOT NULL DEFAULT ''");
 }
 
 function sendJson(response, status, body) {
@@ -227,16 +231,36 @@ function updateAccessRequestFileStatus(id, status) {
   return record;
 }
 
+function updateAccessRequestFileLead(id, updates) {
+  const records = loadAccessRequestsFromFile();
+  const record = records.find((item) => String(item.id) === String(id));
+  if (!record) return null;
+  if (updates.status) {
+    record.leadStatus = updates.status;
+    record.lead_status = updates.status;
+  }
+  if (Object.prototype.hasOwnProperty.call(updates, "leadNotes")) {
+    record.leadNotes = updates.leadNotes;
+    record.lead_notes = updates.leadNotes;
+  }
+  if (Object.prototype.hasOwnProperty.call(updates, "followUpDate")) {
+    record.followUpDate = updates.followUpDate;
+    record.follow_up_date = updates.followUpDate;
+  }
+  fs.writeFileSync(accessRequestsFile, JSON.stringify(records, null, 2));
+  return record;
+}
+
 async function saveAccessRequest(record) {
   if (!pgPool) {
     saveAccessRequestToFile(record);
     return record;
   }
   const result = await pgPool.query(
-    `INSERT INTO medholic_access_requests (name, email, request_type, message, lead_status)
-     VALUES ($1, $2, $3, $4, $5)
-     RETURNING id, name, email, request_type, message, lead_status, created_at`,
-    [record.name, record.email, record.requestType, record.message, record.leadStatus || "New"]
+    `INSERT INTO medholic_access_requests (name, email, request_type, message, lead_status, lead_notes, follow_up_date)
+     VALUES ($1, $2, $3, $4, $5, $6, $7)
+     RETURNING id, name, email, request_type, message, lead_status, lead_notes, follow_up_date, created_at`,
+    [record.name, record.email, record.requestType, record.message, record.leadStatus || "New", record.leadNotes || "", record.followUpDate || ""]
   );
   return result.rows[0];
 }
@@ -244,7 +268,7 @@ async function saveAccessRequest(record) {
 async function listAccessRequests() {
   if (!pgPool) return loadAccessRequestsFromFile().slice(0, 200);
   const result = await pgPool.query(`
-    SELECT id, name, email, request_type, message, lead_status, created_at
+    SELECT id, name, email, request_type, message, lead_status, lead_notes, follow_up_date, created_at
     FROM medholic_access_requests
     ORDER BY created_at DESC
     LIMIT 200
@@ -265,6 +289,33 @@ async function updateAccessRequestStatus(id, status) {
      WHERE id = $2
      RETURNING id, name, email, request_type, message, lead_status, created_at`,
     [status, id]
+  );
+  if (!result.rows.length) throw new Error("Access request not found");
+  return result.rows[0];
+}
+
+async function updateAccessRequestLead(id, updates) {
+  const status = String(updates.status || "").trim();
+  const leadNotes = String(updates.leadNotes || "").trim().slice(0, 1000);
+  const followUpDate = String(updates.followUpDate || "").trim().slice(0, 40);
+  if (status && !leadStatuses.has(status)) throw new Error("Invalid lead status");
+  if (!pgPool) {
+    const record = updateAccessRequestFileLead(id, {
+      status,
+      leadNotes,
+      followUpDate
+    });
+    if (!record) throw new Error("Access request not found");
+    return record;
+  }
+  const result = await pgPool.query(
+    `UPDATE medholic_access_requests
+     SET lead_status = COALESCE(NULLIF($1, ''), lead_status),
+         lead_notes = $2,
+         follow_up_date = $3
+     WHERE id = $4
+     RETURNING id, name, email, request_type, message, lead_status, lead_notes, follow_up_date, created_at`,
+    [status, leadNotes, followUpDate, id]
   );
   if (!result.rows.length) throw new Error("Access request not found");
   return result.rows[0];
@@ -398,6 +449,10 @@ async function handleApi(request, response, pathname) {
         message,
         leadStatus: "New",
         lead_status: "New",
+        leadNotes: "",
+        lead_notes: "",
+        followUpDate: "",
+        follow_up_date: "",
         created_at: new Date().toISOString()
       };
       await saveAccessRequest(record);
@@ -421,6 +476,19 @@ async function handleApi(request, response, pathname) {
       const body = JSON.parse((await readBody(request)) || "{}");
       const status = String(body.status || "").trim();
       const updated = await updateAccessRequestStatus(decodeURIComponent(accessRequestStatusMatch[1]), status);
+      sendJson(response, 200, { ok: true, request: updated });
+    } catch (error) {
+      sendJson(response, 400, { ok: false, error: error.message });
+    }
+    return true;
+  }
+
+  const accessRequestLeadMatch = pathname.match(/^\/api\/access-requests\/([^/]+)\/lead$/);
+  if (accessRequestLeadMatch && request.method === "PATCH") {
+    if (!requireManager(request, response)) return true;
+    try {
+      const body = JSON.parse((await readBody(request)) || "{}");
+      const updated = await updateAccessRequestLead(decodeURIComponent(accessRequestLeadMatch[1]), body);
       sendJson(response, 200, { ok: true, request: updated });
     } catch (error) {
       sendJson(response, 400, { ok: false, error: error.message });

@@ -767,6 +767,8 @@ function renderAccessRequests() {
   list.innerHTML = accessRequests.map((request) => {
     const type = request.requestType || request.request_type || "Request";
     const status = request.leadStatus || request.lead_status || "New";
+    const leadNotes = request.leadNotes || request.lead_notes || "";
+    const followUpDate = request.followUpDate || request.follow_up_date || "";
     const date = request.created_at || request.createdAt || new Date().toISOString();
     const statusOptions = leadStatuses
       .map((item) => `<option value="${escapeHtml(item)}"${item === status ? " selected" : ""}>${escapeHtml(item)}</option>`)
@@ -777,6 +779,16 @@ function renderAccessRequests() {
           <strong>${escapeHtml(request.name)} - ${escapeHtml(type)}</strong>
           <span>${escapeHtml(request.email)} - ${escapeHtml(formatDateTime(date))}</span>
           <span>${escapeHtml(request.message || "No message added.")}</span>
+          <div class="lead-fields">
+            <label>
+              Follow-up
+              <input class="lead-follow-input" data-lead-follow-up="${escapeHtml(String(request.id))}" type="date" value="${escapeHtml(followUpDate)}">
+            </label>
+            <label>
+              Private note
+              <input class="lead-note-input" data-lead-notes="${escapeHtml(String(request.id))}" value="${escapeHtml(leadNotes)}" placeholder="Next action or quote note">
+            </label>
+          </div>
         </div>
         <div class="backup-actions">
           <label class="lead-status-label">
@@ -1740,18 +1752,35 @@ function downloadAccessRequestsCsv() {
     showToast("Only a manager can download access requests.");
     return;
   }
-  const headers = ["name", "email", "type", "status", "message", "createdAt"];
+  const headers = ["name", "email", "type", "status", "followUpDate", "leadNotes", "message", "createdAt"];
   const rows = accessRequests.map((request) => ({
     name: request.name,
     email: request.email,
     type: request.requestType || request.request_type,
     status: request.leadStatus || request.lead_status || "New",
+    followUpDate: request.followUpDate || request.follow_up_date || "",
+    leadNotes: request.leadNotes || request.lead_notes || "",
     message: request.message,
     createdAt: request.created_at || request.createdAt
   }));
   const csv = [headers.join(","), ...rows.map((row) => headers.map((header) => csvCell(row[header])).join(","))].join("\n");
   downloadFile(csv, `medholic-access-requests-${new Date().toISOString().slice(0, 10)}.csv`, "text/csv");
   showToast("Access requests downloaded.");
+}
+
+function updateLocalLeadRequest(requestId, updates) {
+  accessRequests = accessRequests.map((item) => {
+    if (String(item.id) !== String(requestId)) return item;
+    return {
+      ...item,
+      leadStatus: updates.status ?? item.leadStatus,
+      lead_status: updates.status ?? item.lead_status,
+      leadNotes: updates.leadNotes ?? item.leadNotes,
+      lead_notes: updates.leadNotes ?? item.lead_notes,
+      followUpDate: updates.followUpDate ?? item.followUpDate,
+      follow_up_date: updates.followUpDate ?? item.follow_up_date
+    };
+  });
 }
 
 async function updateLeadStatus(requestId, status) {
@@ -1782,6 +1811,38 @@ async function updateLeadStatus(requestId, status) {
     showToast("Lead status updated.");
   } catch {
     showToast("Could not update lead status.");
+    refreshAccessRequests();
+  }
+}
+
+async function updateLeadDetails(requestId, updates) {
+  if (!canManageSensitiveActions()) {
+    showToast("Only a manager can update lead details.");
+    return;
+  }
+  const existing = accessRequests.find((item) => String(item.id) === String(requestId)) || {};
+  const payload = {
+    status: existing.leadStatus || existing.lead_status || "New",
+    leadNotes: updates.leadNotes ?? existing.leadNotes ?? existing.lead_notes ?? "",
+    followUpDate: updates.followUpDate ?? existing.followUpDate ?? existing.follow_up_date ?? ""
+  };
+  updateLocalLeadRequest(requestId, payload);
+  if (location.protocol === "file:" || !sessionToken) {
+    showToast("Lead details save on Railway after deployment.");
+    return;
+  }
+  try {
+    const response = await fetch(`${apiAccessRequestsUrl}/${encodeURIComponent(requestId)}/lead`, {
+      method: "PATCH",
+      headers: { ...authHeaders(), "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+    if (!response.ok) throw new Error("Unable to update lead details");
+    const data = await response.json();
+    accessRequests = accessRequests.map((item) => String(item.id) === String(requestId) ? { ...item, ...data.request } : item);
+    showToast("Lead details updated.");
+  } catch {
+    showToast("Could not update lead details.");
     refreshAccessRequests();
   }
 }
@@ -1959,6 +2020,17 @@ document.addEventListener("change", (event) => {
   const leadStatusSelect = event.target.closest("[data-lead-status]");
   if (leadStatusSelect) {
     updateLeadStatus(leadStatusSelect.dataset.leadStatus, leadStatusSelect.value);
+  }
+  const leadFollowUp = event.target.closest("[data-lead-follow-up]");
+  if (leadFollowUp) {
+    updateLeadDetails(leadFollowUp.dataset.leadFollowUp, { followUpDate: leadFollowUp.value });
+  }
+});
+
+document.addEventListener("focusout", (event) => {
+  const leadNotes = event.target.closest("[data-lead-notes]");
+  if (leadNotes) {
+    updateLeadDetails(leadNotes.dataset.leadNotes, { leadNotes: leadNotes.value });
   }
 });
 
