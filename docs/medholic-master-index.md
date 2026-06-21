@@ -47,6 +47,7 @@ The app Help section also contains quick links to the marketing page, flyer, pro
 - `docs/railway-github-deployment.md` - Railway and GitHub deployment guide.
 - `docs/live-launch-final-steps.md` - final live launch steps.
 - `docs/mobile-app-play-store-guide.md` - Android/Play Store path.
+- `docs/google-play-submit-next-steps.md` - exact next steps for Google Play listing.
 - `mobile/twa-manifest.json` - Android Trusted Web Activity wrapper settings.
 - `.well-known/assetlinks.json` - Play Store asset links placeholder.
 
