@@ -16,6 +16,7 @@ In Railway Variables, keep:
 ```text
 ADMIN_EMAIL=your private manager email
 ADMIN_PASSWORD=your private manager password
+ADMIN_NAME=Lynda Chidi
 ```
 
 Do not show the manager password in GitHub, screenshots, marketing pages, or public documents.
@@ -23,6 +24,7 @@ Do not show the manager password in GitHub, screenshots, marketing pages, or pub
 ## 3. Test The App
 
 - Log in as manager.
+- Confirm the user label says `Lynda Chidi - Manager`.
 - Add a test medicine.
 - Add a test sale.
 - Check low-stock alert.

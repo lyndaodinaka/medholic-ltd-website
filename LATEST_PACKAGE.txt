@@ -1,11 +1,20 @@
 Use this package for GitHub/Railway upload:
 
-MedholicPharmacy-FINAL-with-receipt-20260621-013732.zip
+MedholicPharmacy-FINAL-LYNDA-CHIDI-PAGES.zip
 
 Location:
-C:\Users\Dealt-it.com\OneDrive\Documents\WPS Cloud Files\MedholicPharmacy-FINAL-with-receipt-20260621-013732.zip
+C:\Users\Dealt-it.com\OneDrive\Documents\WPS Cloud Files\MedholicPharmacy-FINAL-LYNDA-CHIDI-PAGES.zip
 
 Checksum:
-1BC3AA4BE2497AA41F6ECBCBF8C533994402EB446DE2232813AE4A6924BE1D3F
+See UPLOAD_THIS_MEDHOLIC_PACKAGE.txt in the main WPS Cloud Files folder after the final package is created.
 
 Open the zip and upload the contents to GitHub. Do not upload old zip files into the repository.
+
+If the live app still shows the old manager name, set this in Railway Variables:
+
+ADMIN_NAME=Lynda Chidi
+
+Direct pages after upload:
+
+marketing/proposal.html
+marketing/pricing-calculator.html

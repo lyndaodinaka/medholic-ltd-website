@@ -150,7 +150,7 @@ function getStaffAccounts() {
       username: adminEmail,
       password: adminPassword,
       passwordHash: adminPasswordHash,
-      name: process.env.ADMIN_NAME || "Manager",
+      name: process.env.ADMIN_NAME || "Lynda Chidi",
       role: "Manager"
     });
   }

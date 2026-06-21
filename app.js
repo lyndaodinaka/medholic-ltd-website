@@ -9,7 +9,7 @@ const officialContactEmail = "lynda.chidi@medholic.net";
 const leadStatuses = ["New", "Contacted", "Demo booked", "Quoted", "Won", "Lost"];
 
 const users = [
-  { username: "local-admin", password: "local-demo-only", name: "Local Demo Manager", role: "Manager" },
+  { username: "local-admin", password: "local-demo-only", name: "Lynda Chidi", role: "Manager" },
   { username: "cashier", password: "cashier123", name: "Cashier", role: "Cashier" },
   { username: "pharmacist", password: "pharmacist123", name: "Pharmacist", role: "Pharmacist" },
   { username: "inventory", password: "inventory123", name: "Inventory Clerk", role: "Inventory clerk" }

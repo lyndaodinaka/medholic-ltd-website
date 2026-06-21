@@ -59,3 +59,9 @@ lynda.chidi@medholic.net
 ```
 
 Keep manager login details private in Railway Variables only.
+
+For the live manager display name, set:
+
+```text
+ADMIN_NAME=Lynda Chidi
+```

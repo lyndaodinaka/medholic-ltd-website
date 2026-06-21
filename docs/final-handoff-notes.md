@@ -7,7 +7,7 @@ This is the final guide for what to do after receiving the latest Medholic Pharm
 Upload this package:
 
 ```text
-MedholicPharmacy-FINAL-with-receipt-20260621-013732.zip
+MedholicPharmacy-FINAL-LYNDA-CHIDI-PAGES.zip
 ```
 
 Do not upload old zip files into GitHub. Open the latest zip and upload the contents inside it.
@@ -42,6 +42,7 @@ Set these only in Railway Variables:
 ```text
 ADMIN_EMAIL=your private manager email
 ADMIN_PASSWORD=your private manager password
+ADMIN_NAME=Lynda Chidi
 ```
 
 Never write the manager password on public pages, GitHub, flyers, screenshots, or Play Store text.
@@ -65,6 +66,7 @@ lynda.chidi@medholic.net
 7. Open the marketing page.
 8. Open the proposal page.
 9. Open the pricing calculator.
+10. Confirm the user label shows `Lynda Chidi - Manager`.
 
 ## Best Daily Workflow
 

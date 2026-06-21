@@ -5,7 +5,7 @@ Use this receipt to confirm you are uploading the correct Medholic Pharmacy pack
 ## Final Package
 
 ```text
-MedholicPharmacy-FINAL-with-receipt-20260621-013732.zip
+MedholicPharmacy-FINAL-LYNDA-CHIDI-PAGES.zip
 ```
 
 ## Package Size
@@ -17,13 +17,13 @@ See the zip file properties in the WPS Cloud Files folder.
 ## SHA-256 Checksum
 
 ```text
-1BC3AA4BE2497AA41F6ECBCBF8C533994402EB446DE2232813AE4A6924BE1D3F
+See UPLOAD_THIS_MEDHOLIC_PACKAGE.txt in the main WPS Cloud Files folder after the final package is created.
 ```
 
 ## Last Local Commit
 
 ```text
-bafcb04 Add final release receipt
+This update changes the manager display name to Lynda Chidi and adds direct Proposal/Pricing links.
 ```
 
 ## Verified Checks
@@ -47,6 +47,7 @@ Keep these in Railway Variables only:
 ```text
 ADMIN_EMAIL=your private manager email
 ADMIN_PASSWORD=your private manager password
+ADMIN_NAME=Lynda Chidi
 ```
 
 ## Public Contact
