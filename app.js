@@ -1202,12 +1202,6 @@ async function startScanner() {
     $("#generateStockCode").classList.add("attention");
     window.setTimeout(() => $("#generateStockCode").classList.remove("attention"), 2200);
   };
-  if (!("BarcodeDetector" in window)) {
-    showManualBarcodeFallback("Camera barcode scanning is not supported in this browser. Type the barcode manually or click Generate Stock Code.");
-    showToast("Use manual entry or Generate Stock Code.");
-    return;
-  }
-
   if (!navigator.mediaDevices?.getUserMedia) {
     showManualBarcodeFallback("Camera works only on the live https app or localhost. Type the barcode manually or click Generate Stock Code.");
     showToast("Use the live Railway link for camera scanning.");
@@ -1221,6 +1215,14 @@ async function startScanner() {
     await video.play();
     $(".scanner-frame").classList.add("scanning");
     $("#scanToggle").textContent = "Stop camera";
+    if (!("BarcodeDetector" in window)) {
+      status.textContent = "Camera preview is open, but this browser cannot auto-read barcodes. Type the barcode manually or click Generate Stock Code.";
+      $("#barcode").focus();
+      $("#generateStockCode").classList.add("attention");
+      window.setTimeout(() => $("#generateStockCode").classList.remove("attention"), 2200);
+      showToast("Camera opened. Manual barcode entry is ready.");
+      return;
+    }
     status.textContent = "";
     const detector = new BarcodeDetector({ formats: ["ean_13", "ean_8", "code_128", "upc_a", "upc_e"] });
     scanTimer = window.setInterval(async () => {
