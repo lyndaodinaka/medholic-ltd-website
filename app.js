@@ -436,7 +436,7 @@ function setView(viewId) {
   }
   document.querySelectorAll(".view").forEach((view) => view.classList.toggle("active", view.id === viewId));
   document.querySelectorAll(".nav-item").forEach((button) => button.classList.toggle("active", button.dataset.view === viewId));
-  if (viewId !== "capture") stopScanner();
+  if (!["capture", "sales"].includes(viewId)) stopScanner();
 }
 
 function renderAll() {
@@ -1196,32 +1196,43 @@ function updateSalePreview() {
   `;
 }
 
-async function startScanner() {
-  const status = $("#scannerStatus");
+async function startScanner(mode = "capture") {
+  const isSalesMode = mode === "sales";
+  const status = isSalesMode ? $("#saleScannerStatus") : $("#scannerStatus");
+  const video = isSalesMode ? $("#saleScannerVideo") : $("#scannerVideo");
+  const frame = video.closest(".scanner-frame");
+  const toggle = isSalesMode ? $("#saleScanToggle") : $("#scanToggle");
   const showManualBarcodeFallback = (message) => {
     status.textContent = message;
-    $("#barcode").focus();
-    $("#generateStockCode").classList.add("attention");
-    window.setTimeout(() => $("#generateStockCode").classList.remove("attention"), 2200);
+    const input = isSalesMode ? $("#saleBarcode") : $("#barcode");
+    input.focus();
+    if (isSalesMode) {
+      input.classList.add("attention");
+      window.setTimeout(() => input.classList.remove("attention"), 2200);
+    } else {
+      $("#generateStockCode").classList.add("attention");
+      window.setTimeout(() => $("#generateStockCode").classList.remove("attention"), 2200);
+    }
   };
   if (!navigator.mediaDevices?.getUserMedia) {
-    showManualBarcodeFallback("Camera works only on the live https app or localhost. Type the barcode manually or click Generate Stock Code.");
+    showManualBarcodeFallback(isSalesMode ? "Camera works only on the live https app or localhost. Type the barcode manually or use a USB barcode scanner." : "Camera works only on the live https app or localhost. Type the barcode manually or click Generate Stock Code.");
     showToast("Use the live Railway link for camera scanning.");
     return;
   }
 
   try {
+    if (scannerStream) stopScanner();
     scannerStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
-    const video = $("#scannerVideo");
     video.srcObject = scannerStream;
     await video.play();
-    $(".scanner-frame").classList.add("scanning");
-    $("#scanToggle").textContent = "Stop camera";
+    frame.classList.add("scanning");
+    toggle.textContent = isSalesMode ? "Stop sales camera" : "Stop camera";
     if (!("BarcodeDetector" in window)) {
-      status.textContent = "Camera preview is open, but this browser cannot auto-read barcodes. Type the barcode manually or click Generate Stock Code.";
-      $("#barcode").focus();
-      $("#generateStockCode").classList.add("attention");
-      window.setTimeout(() => $("#generateStockCode").classList.remove("attention"), 2200);
+      status.textContent = isSalesMode ? "Camera preview is open, but this browser cannot auto-read barcodes. Type the barcode manually or use a USB barcode scanner." : "Camera preview is open, but this browser cannot auto-read barcodes. Type the barcode manually or click Generate Stock Code.";
+      const input = isSalesMode ? $("#saleBarcode") : $("#barcode");
+      input.focus();
+      input.classList.add("attention");
+      window.setTimeout(() => input.classList.remove("attention"), 2200);
       showToast("Camera opened. Manual barcode entry is ready.");
       return;
     }
@@ -1231,17 +1242,24 @@ async function startScanner() {
       const codes = await detector.detect(video);
       if (codes.length) {
         const code = codes[0].rawValue;
-        $("#barcode").value = code;
-        $("#saleBarcode").value = code;
         const match = state.medicines.find((item) => item.barcode === code);
-        if (match) fillMedicineForm(match);
-        renderBarcodeLabelPreview();
-        showToast(`Captured barcode ${code}`);
+        if (isSalesMode) {
+          $("#saleBarcode").value = code;
+          if (match) $("#saleMedicineSelect").value = match.id;
+          updateSalePreview();
+          showToast(match ? `Loaded ${match.name} for sale.` : `Captured barcode ${code}. Item not found yet.`);
+        } else {
+          $("#barcode").value = code;
+          $("#saleBarcode").value = code;
+          if (match) fillMedicineForm(match);
+          renderBarcodeLabelPreview();
+          showToast(`Captured barcode ${code}`);
+        }
         stopScanner();
       }
     }, 700);
   } catch {
-    showManualBarcodeFallback("Camera could not start. Allow camera permission, close other camera apps, or type the barcode manually / click Generate Stock Code.");
+    showManualBarcodeFallback(isSalesMode ? "Camera could not start. Allow camera permission, close other camera apps, or type the barcode manually." : "Camera could not start. Allow camera permission, close other camera apps, or type the barcode manually / click Generate Stock Code.");
     showToast("Camera could not start. Manual entry is ready.");
   }
 }
@@ -1252,8 +1270,10 @@ function stopScanner() {
   if (scannerStream) scannerStream.getTracks().forEach((track) => track.stop());
   scannerStream = null;
   if ($("#scannerVideo")) $("#scannerVideo").srcObject = null;
-  $(".scanner-frame")?.classList.remove("scanning");
+  if ($("#saleScannerVideo")) $("#saleScannerVideo").srcObject = null;
+  document.querySelectorAll(".scanner-frame").forEach((frame) => frame.classList.remove("scanning"));
   $("#scanToggle").textContent = "Start camera";
+  if ($("#saleScanToggle")) $("#saleScanToggle").textContent = "Start sales camera";
 }
 
 function fillMedicineForm(item) {
@@ -2267,6 +2287,7 @@ $("#barcode").addEventListener("input", renderBarcodeLabelPreview);
 $("#saleBarcode").addEventListener("input", updateSalePreview);
 $("#saleQuantity").addEventListener("input", updateSalePreview);
 $("#scanToggle").addEventListener("click", () => (scannerStream ? stopScanner() : startScanner()));
+$("#saleScanToggle").addEventListener("click", () => (scannerStream ? stopScanner() : startScanner("sales")));
 $("#generateStockCode").addEventListener("click", handleGenerateStockCode);
 $("#refreshBarcodeLabel").addEventListener("click", renderBarcodeLabelPreview);
 $("#printBarcodeLabel").addEventListener("click", printBarcodeLabel);

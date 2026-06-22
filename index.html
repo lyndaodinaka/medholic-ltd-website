@@ -319,6 +319,14 @@
                   <input id="saleBarcode" list="barcodeList" autocomplete="off" required>
                   <datalist id="barcodeList"></datalist>
                 </label>
+                <div class="sales-scanner-box">
+                  <div class="scanner-frame compact-scanner">
+                    <video id="saleScannerVideo" muted playsinline></video>
+                    <div class="scan-line"></div>
+                    <p id="saleScannerStatus">Scan the medication barcode or printed stock-code label, or type it manually above.</p>
+                  </div>
+                  <button class="ghost-button" id="saleScanToggle" type="button">Start sales camera</button>
+                </div>
                 <label>
                   Quantity sold
                   <input id="saleQuantity" type="number" min="1" step="1" value="1" required>

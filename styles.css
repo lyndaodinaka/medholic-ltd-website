@@ -863,6 +863,35 @@ button.report-item {
   margin: 0;
 }
 
+.sales-scanner-box {
+  display: grid;
+  gap: 10px;
+}
+
+.compact-scanner {
+  min-height: 180px;
+  padding: 14px;
+}
+
+.compact-scanner #saleScannerVideo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+}
+
+.compact-scanner.scanning #saleScannerVideo {
+  display: block;
+}
+
+#saleScannerStatus {
+  position: relative;
+  max-width: 260px;
+  margin: 0;
+}
+
 .form-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
