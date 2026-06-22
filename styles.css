@@ -1000,10 +1000,26 @@ textarea:focus {
   display: grid;
   gap: 10px;
   align-items: start;
-  border: 1px dashed rgba(8, 127, 140, 0.32);
+  border: 2px solid rgba(255, 122, 0, 0.32);
   border-radius: 8px;
-  background: #f8fcfd;
+  background: linear-gradient(135deg, #fff8ef, #f8fcfd);
   padding: 12px;
+}
+
+.barcode-label-heading {
+  display: grid;
+  gap: 3px;
+}
+
+.barcode-label-heading strong {
+  color: var(--accent-red);
+  font-size: 1rem;
+}
+
+.barcode-label-heading span {
+  color: var(--muted);
+  font-size: 0.84rem;
+  font-weight: 700;
 }
 
 .barcode-label-preview {
@@ -1060,6 +1076,10 @@ textarea:focus {
 
 .label-actions {
   justify-content: flex-start;
+}
+
+.print-label-button {
+  min-width: 190px;
 }
 
 .hidden {
