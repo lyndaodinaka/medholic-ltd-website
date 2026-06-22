@@ -436,6 +436,22 @@ h2 {
   min-height: 30px;
 }
 
+.attention {
+  animation: attention-pulse 0.7s ease-in-out 3;
+  border-color: var(--danger) !important;
+  box-shadow: 0 0 0 4px rgba(240, 24, 22, 0.16) !important;
+}
+
+@keyframes attention-pulse {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
 .view {
   display: none;
 }

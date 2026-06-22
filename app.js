@@ -1196,9 +1196,21 @@ function updateSalePreview() {
 
 async function startScanner() {
   const status = $("#scannerStatus");
+  const showManualBarcodeFallback = (message) => {
+    status.textContent = message;
+    $("#barcode").focus();
+    $("#generateStockCode").classList.add("attention");
+    window.setTimeout(() => $("#generateStockCode").classList.remove("attention"), 2200);
+  };
   if (!("BarcodeDetector" in window)) {
-    status.textContent = "Barcode scanning is not supported in this browser. Type the barcode manually.";
-    showToast("Manual barcode entry is ready.");
+    showManualBarcodeFallback("Camera barcode scanning is not supported in this browser. Type the barcode manually or click Generate Stock Code.");
+    showToast("Use manual entry or Generate Stock Code.");
+    return;
+  }
+
+  if (!navigator.mediaDevices?.getUserMedia) {
+    showManualBarcodeFallback("Camera works only on the live https app or localhost. Type the barcode manually or click Generate Stock Code.");
+    showToast("Use the live Railway link for camera scanning.");
     return;
   }
 
@@ -1224,8 +1236,8 @@ async function startScanner() {
       }
     }, 700);
   } catch {
-    status.textContent = "Camera permission was not available. Type the barcode manually.";
-    showToast("Camera could not start.");
+    showManualBarcodeFallback("Camera could not start. Allow camera permission, close other camera apps, or type the barcode manually / click Generate Stock Code.");
+    showToast("Camera could not start. Manual entry is ready.");
   }
 }
 
