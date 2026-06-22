@@ -1149,6 +1149,7 @@ function handleMedicineSelect() {
   $("#dose").value = selected?.dose || "";
   $("#sideEffects").value = selected?.sideEffects || "";
   if (!isCustom) $("#medicineName").value = "";
+  renderBarcodeLabelPreview();
 }
 
 function handleSaleMedicineSelect() {
@@ -1160,6 +1161,7 @@ function handleSaleMedicineSelect() {
 
 function handleGenerateStockCode() {
   $("#barcode").value = generateUniqueStockCode();
+  renderBarcodeLabelPreview();
   showToast("Stock code generated.");
 }
 
@@ -1233,6 +1235,7 @@ async function startScanner() {
         $("#saleBarcode").value = code;
         const match = state.medicines.find((item) => item.barcode === code);
         if (match) fillMedicineForm(match);
+        renderBarcodeLabelPreview();
         showToast(`Captured barcode ${code}`);
         stopScanner();
       }
@@ -1275,6 +1278,7 @@ function fillMedicineForm(item) {
   $("#reorder").value = item.reorder;
   $("#formMode").textContent = "Updating stock";
   setClinicalFieldsVisible(Boolean(catalogItem));
+  renderBarcodeLabelPreview();
   selectedMedicineId = item.id;
   setView("capture");
 }
@@ -1429,6 +1433,130 @@ function generateUniqueStockCode() {
     code = `MED-${datePart}-${randomPart}`;
   } while (state.medicines.some((item) => item.barcode === code));
   return code;
+}
+
+const code128Patterns = [
+  "212222", "222122", "222221", "121223", "121322", "131222", "122213", "122312", "132212", "221213",
+  "221312", "231212", "112232", "122132", "122231", "113222", "123122", "123221", "223211", "221132",
+  "221231", "213212", "223112", "312131", "311222", "321122", "321221", "312212", "322112", "322211",
+  "212123", "212321", "232121", "111323", "131123", "131321", "112313", "132113", "132311", "211313",
+  "231113", "231311", "112133", "112331", "132131", "113123", "113321", "133121", "313121", "211331",
+  "231131", "213113", "213311", "213131", "311123", "311321", "331121", "312113", "312311", "332111",
+  "314111", "221411", "431111", "111224", "111422", "121124", "121421", "141122", "141221", "112214",
+  "112412", "122114", "122411", "142112", "142211", "241211", "221114", "413111", "241112", "134111",
+  "111242", "121142", "121241", "114212", "124112", "124211", "411212", "421112", "421211", "212141",
+  "214121", "412121", "111143", "111341", "131141", "114113", "114311", "411113", "411311", "113141",
+  "114131", "311141", "411131", "211412", "211214", "211232", "2331112"
+];
+
+function sanitizeBarcodeValue(value) {
+  return String(value || "")
+    .trim()
+    .replace(/[^\x20-\x7E]/g, "")
+    .slice(0, 48);
+}
+
+function getBarcodeMedicationName() {
+  const selected = $("#medicineSelect").value;
+  if (selected === "Other / custom medication") return $("#medicineName").value.trim() || "Custom medication";
+  return selected || $("#medicineName").value.trim() || "Medication";
+}
+
+function renderCode128Svg(value, height = 78) {
+  const code = sanitizeBarcodeValue(value);
+  if (!code) return "";
+  const values = [...code].map((char) => char.charCodeAt(0) - 32);
+  const checksum = (104 + values.reduce((total, item, index) => total + item * (index + 1), 0)) % 103;
+  const sequence = [104, ...values, checksum, 106];
+  const moduleWidth = 2;
+  const quietZone = 18;
+  let x = quietZone;
+  const bars = [];
+
+  sequence.forEach((item) => {
+    const pattern = code128Patterns[item];
+    [...pattern].forEach((widthText, index) => {
+      const width = Number(widthText) * moduleWidth;
+      if (index % 2 === 0) bars.push(`<rect x="${x}" y="0" width="${width}" height="${height}" fill="#0f172a"></rect>`);
+      x += width;
+    });
+  });
+
+  const svgWidth = x + quietZone;
+  return `<svg role="img" aria-label="Barcode ${escapeHtml(code)}" viewBox="0 0 ${svgWidth} ${height}" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">${bars.join("")}</svg>`;
+}
+
+function renderBarcodeLabelPreview() {
+  const preview = $("#barcodeLabelPreview");
+  if (!preview) return;
+  const code = sanitizeBarcodeValue($("#barcode").value);
+  if (!code) {
+    preview.innerHTML = `<span class="empty">Generate or type a stock code to preview the printable barcode label.</span>`;
+    return;
+  }
+
+  preview.innerHTML = `
+    <div class="barcode-label-card">
+      <strong>Medholic Pharmacy</strong>
+      <span>${escapeHtml(shortText(getBarcodeMedicationName(), 38))}</span>
+      <div class="barcode-svg-wrap">${renderCode128Svg(code)}</div>
+      <code>${escapeHtml(code)}</code>
+    </div>
+  `;
+}
+
+function printBarcodeLabel() {
+  const code = sanitizeBarcodeValue($("#barcode").value);
+  if (!code) {
+    showToast("Generate or type a stock code first.");
+    $("#barcode").focus();
+    return;
+  }
+
+  renderBarcodeLabelPreview();
+  const medicineName = getBarcodeMedicationName();
+  const barcodeSvg = renderCode128Svg(code, 90);
+  const labelWindow = window.open("", "_blank", "width=460,height=560");
+  if (!labelWindow) {
+    showToast("Allow pop-ups so the barcode label can print.");
+    return;
+  }
+
+  labelWindow.document.write(`<!doctype html>
+    <html>
+      <head>
+        <title>Print ${escapeHtml(code)}</title>
+        <style>
+          * { box-sizing: border-box; }
+          body { margin: 0; padding: 24px; font-family: Arial, sans-serif; color: #0f172a; background: #ffffff; }
+          .sheet { display: grid; gap: 14px; justify-items: start; }
+          .label { width: 320px; min-height: 170px; border: 1px solid #0f172a; border-radius: 8px; padding: 12px; text-align: center; page-break-inside: avoid; }
+          .brand { font-size: 18px; font-weight: 800; color: #087f8c; margin-bottom: 4px; }
+          .name { min-height: 34px; font-size: 13px; font-weight: 700; line-height: 1.25; margin-bottom: 8px; }
+          svg { width: 100%; height: 76px; display: block; margin: 0 auto 8px; }
+          code { display: block; font-size: 13px; font-weight: 800; letter-spacing: 1px; }
+          .note { max-width: 320px; font-size: 12px; color: #475569; }
+          @media print {
+            body { padding: 0; }
+            .note { display: none; }
+          }
+        </style>
+      </head>
+      <body>
+        <div class="sheet">
+          <div class="label">
+            <div class="brand">Medholic Pharmacy</div>
+            <div class="name">${escapeHtml(medicineName)}</div>
+            ${barcodeSvg}
+            <code>${escapeHtml(code)}</code>
+          </div>
+          <p class="note">Print this label, cut it out, and stick it on the medication pack, shelf, or storage bin.</p>
+        </div>
+      </body>
+    </html>`);
+  labelWindow.document.close();
+  labelWindow.focus();
+  window.setTimeout(() => labelWindow.print(), 250);
 }
 
 function setClinicalFieldsVisible(isVisible) {
@@ -2130,14 +2258,18 @@ $("#employeeForm").addEventListener("submit", handleEmployeeSubmit);
 $("#cashCheckForm").addEventListener("submit", handleCashCheckSubmit);
 $("#stockAuditForm").addEventListener("submit", handleStockAuditSubmit);
 $("#medicineSelect").addEventListener("change", handleMedicineSelect);
+$("#medicineName").addEventListener("input", renderBarcodeLabelPreview);
 $("#saleMedicineSelect").addEventListener("change", handleSaleMedicineSelect);
 $("#seller").addEventListener("change", handleSupplierSelect);
 $("#seller").addEventListener("blur", handleSupplierSelect);
 $("#inventorySearch").addEventListener("input", renderInventory);
+$("#barcode").addEventListener("input", renderBarcodeLabelPreview);
 $("#saleBarcode").addEventListener("input", updateSalePreview);
 $("#saleQuantity").addEventListener("input", updateSalePreview);
 $("#scanToggle").addEventListener("click", () => (scannerStream ? stopScanner() : startScanner()));
 $("#generateStockCode").addEventListener("click", handleGenerateStockCode);
+$("#refreshBarcodeLabel").addEventListener("click", renderBarcodeLabelPreview);
+$("#printBarcodeLabel").addEventListener("click", printBarcodeLabel);
 $("#exportCsv").addEventListener("click", exportCsv);
 $("#downloadPurchaseOrder").addEventListener("click", downloadPurchaseOrder);
 $("#downloadReorderReport").addEventListener("click", downloadReorderReport);

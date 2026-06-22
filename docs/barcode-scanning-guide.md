@@ -29,7 +29,20 @@ Medholic Pharmacy can work with phones, laptops, desktops, and barcode scanners.
 5. **Generate Stock Code**
    - Use this when a medicine, supply, or equipment item has no barcode.
    - The app creates a unique code such as `MED-YYMMDD-XXXX`.
-   - Write or print that code on the shelf label or product record.
+   - The app now shows a printable barcode label for that code.
+   - Click **Print Barcode Label**, then stick the printed label on the medication pack, shelf, or storage bin.
+
+## How To Generate And Print Your Own Barcode Label
+
+1. Open **Capture**.
+2. Select the medication name, or choose **Other / custom medication** and type the name.
+3. Click **Generate Stock Code**.
+4. Check the barcode label preview that appears under the stock-code field.
+5. Click **Print Barcode Label**.
+6. Stick the printed label on the medication, shelf, or storage container.
+7. Save the medication in inventory with the same stock code.
+
+When a customer buys that item later, scan the printed label or type the stock code into the sales barcode field. Medholic Pharmacy will find the medication because the saved stock code belongs to that inventory item.
 
 ## Recommended Pharmacy Setup
 

@@ -211,6 +211,15 @@
                   <input id="barcode" name="barcode" autocomplete="off" placeholder="Scan, type, or auto-generate">
                 </label>
                 <button class="ghost-button code-button" id="generateStockCode" type="button">Generate Stock Code</button>
+                <div class="barcode-label-tools wide">
+                  <div class="barcode-label-preview" id="barcodeLabelPreview">
+                    <span class="empty">Generate or type a stock code to preview the printable barcode label.</span>
+                  </div>
+                  <div class="header-actions compact-actions label-actions">
+                    <button class="ghost-button" id="refreshBarcodeLabel" type="button">Preview Label</button>
+                    <button class="primary-button" id="printBarcodeLabel" type="button">Print Barcode Label</button>
+                  </div>
+                </div>
                 <label>
                   Batch number
                   <input id="batch" name="batch" autocomplete="off">
