@@ -58,6 +58,12 @@ body {
   font-size: 0.92rem;
   font-weight: 900;
   text-decoration: none;
+  transition: transform 220ms ease, color 220ms ease, background 220ms ease;
+}
+
+.luxury-nav-actions a:hover {
+  color: #ffffff;
+  transform: translateY(-1px);
 }
 
 .luxury-nav-actions .nav-pill {
@@ -120,7 +126,7 @@ body {
 }
 
 .luxury-copy h1 {
-  font-size: 4.8rem;
+  font-size: clamp(3.2rem, 7vw, 4.8rem);
 }
 
 .luxury-copy > p:not(.eyebrow) {
@@ -178,6 +184,89 @@ body {
   border-radius: 20px;
 }
 
+.product-film {
+  width: min(1180px, calc(100% - 40px));
+  margin: 92px auto 0;
+}
+
+.film-stage {
+  min-height: 560px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #071629;
+  box-shadow: 0 34px 96px rgba(8, 43, 84, 0.2);
+  isolation: isolate;
+}
+
+.film-stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background:
+    linear-gradient(90deg, rgba(7, 22, 41, 0.72), transparent 48%, rgba(7, 22, 41, 0.1)),
+    linear-gradient(180deg, transparent 60%, rgba(7, 22, 41, 0.62));
+}
+
+.film-stage::after {
+  content: "";
+  position: absolute;
+  inset: -30% auto -30% -22%;
+  width: 42%;
+  z-index: 3;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transform: rotate(13deg);
+  animation: light-sweep 8s cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
+}
+
+.film-shot {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.film-shot-one {
+  animation: film-shot-a 12s cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
+}
+
+.film-shot-two {
+  opacity: 0;
+  animation: film-shot-b 12s cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
+}
+
+.film-caption {
+  position: absolute;
+  left: 36px;
+  bottom: 34px;
+  z-index: 4;
+  display: grid;
+  gap: 8px;
+  color: #ffffff;
+}
+
+.film-caption span {
+  width: max-content;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  border-radius: 999px;
+  padding: 7px 12px;
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--gold);
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  backdrop-filter: blur(14px);
+}
+
+.film-caption strong {
+  max-width: 560px;
+  font-size: 2.5rem;
+  line-height: 1.04;
+  text-shadow: 0 18px 42px rgba(0, 0, 0, 0.32);
+}
+
 .luxury-statement {
   width: min(900px, calc(100% - 40px));
   margin: 126px auto 0;
@@ -212,6 +301,13 @@ body {
   background: rgba(255, 255, 255, 0.84);
   border: 1px solid rgba(217, 229, 244, 0.9);
   box-shadow: 0 26px 70px rgba(8, 43, 84, 0.1);
+  transition: transform 260ms ease, box-shadow 260ms ease, border-color 260ms ease;
+}
+
+.premium-grid article:hover {
+  transform: translateY(-5px);
+  border-color: rgba(8, 120, 220, 0.28);
+  box-shadow: 0 34px 90px rgba(8, 43, 84, 0.15);
 }
 
 .premium-grid span {
@@ -713,6 +809,55 @@ h1 {
   }
 }
 
+@keyframes light-sweep {
+  0%,
+  24% {
+    transform: translateX(0) rotate(13deg);
+    opacity: 0;
+  }
+  42% {
+    opacity: 1;
+  }
+  68%,
+  100% {
+    transform: translateX(360%) rotate(13deg);
+    opacity: 0;
+  }
+}
+
+@keyframes film-shot-a {
+  0% {
+    opacity: 1;
+    transform: scale(1.04) translate3d(0, 0, 0);
+  }
+  42% {
+    opacity: 1;
+  }
+  54% {
+    opacity: 0;
+    transform: scale(1.1) translate3d(-1.6%, -1%, 0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.1) translate3d(-1.6%, -1%, 0);
+  }
+}
+
+@keyframes film-shot-b {
+  0%,
+  45% {
+    opacity: 0;
+    transform: scale(1.02) translate3d(1.4%, 0, 0);
+  }
+  58% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.08) translate3d(-1.2%, -1%, 0);
+  }
+}
+
 @media (max-width: 760px) {
   .luxury-nav {
     width: min(100% - 24px, 1180px);
@@ -760,6 +905,25 @@ h1 {
     grid-template-columns: 1fr;
   }
 
+  .product-film {
+    width: min(100% - 24px, 1180px);
+    margin-top: 56px;
+  }
+
+  .film-stage {
+    min-height: 420px;
+  }
+
+  .film-caption {
+    left: 18px;
+    right: 18px;
+    bottom: 20px;
+  }
+
+  .film-caption strong {
+    font-size: 1.85rem;
+  }
+
   .phone-mockup {
     width: min(210px, 64vw);
     justify-self: end;
@@ -783,6 +947,14 @@ h1 {
 
   .premium-grid article {
     min-height: 210px;
+  }
+
+  .hero-actions {
+    width: 100%;
+  }
+
+  .hero-actions a {
+    justify-content: center;
   }
 
   .cinematic-hero {
