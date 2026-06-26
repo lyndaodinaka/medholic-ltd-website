@@ -7,6 +7,9 @@
   --ink: #142033;
   --muted: #637089;
   --line: #d9e5f4;
+  --glass: rgba(255, 255, 255, 0.82);
+  --shadow-soft: 0 26px 70px rgba(8, 43, 84, 0.1);
+  --shadow-strong: 0 34px 96px rgba(8, 43, 84, 0.2);
 }
 
 * {
@@ -21,12 +24,34 @@ body {
   background: #f7fbff;
 }
 
+img {
+  max-width: 100%;
+}
+
 .luxury-page {
   min-height: 100vh;
   overflow: hidden;
   background:
     linear-gradient(180deg, rgba(3, 15, 31, 0.82), rgba(5, 23, 43, 0.18) 38%, #f8fbff 68%),
     #f8fbff;
+  position: relative;
+}
+
+.luxury-page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(255, 195, 106, 0.22), transparent 28rem),
+    radial-gradient(circle at 88% 12%, rgba(8, 120, 220, 0.2), transparent 32rem),
+    linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.42));
+}
+
+.luxury-page > * {
+  position: relative;
+  z-index: 1;
 }
 
 .luxury-nav {
@@ -75,6 +100,13 @@ body {
   padding: 0 18px;
   background: rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(18px);
+}
+
+.marketing-nav {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .luxury-hero {
@@ -151,7 +183,7 @@ body {
 .device {
   background: linear-gradient(145deg, rgba(255, 255, 255, 0.94), rgba(238, 247, 255, 0.9));
   border: 1px solid rgba(255, 255, 255, 0.74);
-  box-shadow: 0 34px 90px rgba(8, 43, 84, 0.2);
+  box-shadow: var(--shadow-strong);
   overflow: hidden;
 }
 
@@ -195,7 +227,7 @@ body {
   overflow: hidden;
   border-radius: 8px;
   background: #071629;
-  box-shadow: 0 34px 96px rgba(8, 43, 84, 0.2);
+  box-shadow: var(--shadow-strong);
   isolation: isolate;
 }
 
@@ -298,9 +330,9 @@ body {
   gap: 22px;
   padding: 28px;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.84);
+  background: var(--glass);
   border: 1px solid rgba(217, 229, 244, 0.9);
-  box-shadow: 0 26px 70px rgba(8, 43, 84, 0.1);
+  box-shadow: var(--shadow-soft);
   transition: transform 260ms ease, box-shadow 260ms ease, border-color 260ms ease;
 }
 
@@ -333,6 +365,11 @@ body {
   justify-items: center;
   gap: 24px;
   text-align: center;
+  padding: 34px 24px;
+  border-radius: 8px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.76), rgba(240, 248, 255, 0.9));
+  border: 1px solid rgba(217, 229, 244, 0.82);
+  box-shadow: var(--shadow-soft);
 }
 
 .luxury-cta img {
@@ -350,7 +387,7 @@ body {
   position: relative;
   display: grid;
   align-items: center;
-  padding: 64px max(24px, calc((100vw - 1120px) / 2));
+  padding: 120px max(24px, calc((100vw - 1120px) / 2)) 70px;
   isolation: isolate;
   color: #ffffff;
 }
@@ -468,10 +505,17 @@ h1 {
   min-height: 44px;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   border-radius: 8px;
   padding: 0 16px;
   font-weight: 800;
   text-decoration: none;
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+
+.primary-link:hover,
+.secondary-link:hover {
+  transform: translateY(-2px);
 }
 
 .primary-link {
@@ -574,9 +618,9 @@ h1 {
   min-height: 136px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.94);
+  background: var(--glass);
   padding: 16px;
-  box-shadow: 0 18px 46px rgba(8, 89, 189, 0.08);
+  box-shadow: var(--shadow-soft);
   animation: scene-rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
@@ -668,7 +712,8 @@ h1 {
   border: 1px solid var(--line);
   border-radius: 8px;
   padding: 18px;
-  background: rgba(255, 255, 255, 0.96);
+  background: var(--glass);
+  box-shadow: var(--shadow-soft);
 }
 
 .pricing-grid .featured-plan {
@@ -725,14 +770,17 @@ h1 {
   border: 1px solid var(--line);
   border-radius: 8px;
   padding: 16px;
-  background: #ffffff;
+  background: var(--glass);
   color: var(--ink);
   text-decoration: none;
-  box-shadow: 0 10px 28px rgba(8, 89, 189, 0.08);
+  box-shadow: var(--shadow-soft);
+  transition: transform 240ms ease, border-color 240ms ease, box-shadow 240ms ease;
 }
 
 .sales-kit-grid a:hover {
   border-color: var(--blue);
+  transform: translateY(-4px);
+  box-shadow: 0 32px 82px rgba(8, 43, 84, 0.14);
 }
 
 .sales-kit-grid strong,
@@ -864,6 +912,10 @@ h1 {
     min-height: 82px;
   }
 
+  .marketing-nav {
+    width: min(100% - 24px, 1180px);
+  }
+
   .luxury-brand img {
     width: 150px;
   }
@@ -959,7 +1011,7 @@ h1 {
 
   .cinematic-hero {
     min-height: 88vh;
-    padding: 42px 18px 86px;
+    padding: 96px 18px 86px;
     align-items: end;
   }
 
@@ -989,7 +1041,7 @@ h1 {
   }
 
   h1 {
-    font-size: 3rem;
+    font-size: 2.9rem;
   }
 
   .lead {
@@ -1024,6 +1076,11 @@ h1 {
   .pricing-grid,
   .sales-kit-grid {
     grid-template-columns: 1fr;
+  }
+
+  .primary-link,
+  .secondary-link {
+    width: 100%;
   }
 }
 
