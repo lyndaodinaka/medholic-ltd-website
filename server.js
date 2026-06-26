@@ -592,7 +592,9 @@ const server = http.createServer(async (request, response) => {
   const pathname = decodeURIComponent(request.url.split("?")[0]);
   if (await handleApi(request, response, pathname)) return;
 
-  const requestedPath = pathname === "/" ? "/index.html" : pathname;
+  let requestedPath = pathname;
+  if (pathname === "/") requestedPath = "/landing.html";
+  if (pathname === "/app" || pathname === "/app/") requestedPath = "/index.html";
   let filePath = path.resolve(root, `.${requestedPath}`);
 
   if (!filePath.startsWith(root)) {
