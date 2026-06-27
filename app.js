@@ -14,9 +14,9 @@ const users = [
 
 const roleViews = {
   Manager: ["dashboard", "capture", "inventory", "sales", "roster", "reports", "security", "help"],
-  Pharmacist: ["capture", "inventory", "sales", "help"],
-  Cashier: ["sales", "help"],
-  "Inventory clerk": ["capture", "inventory", "help"]
+  Pharmacist: ["capture", "inventory", "sales"],
+  Cashier: ["sales"],
+  "Inventory clerk": ["capture", "inventory"]
 };
 
 const safetyDose = "Confirm adult or child dose from the prescription, product label, or pharmacy-approved dosing protocol before supply.";
