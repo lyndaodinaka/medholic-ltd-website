@@ -318,6 +318,25 @@ function mergeStaffSaleState(currentState, incomingState, user) {
   return state;
 }
 
+async function recordLoginAudit(user, request, portalPath = "") {
+  const state = await loadState();
+  const forwardedFor = request.headers["x-forwarded-for"];
+  const ip = String(forwardedFor || request.socket.remoteAddress || "").split(",")[0].trim();
+  const route = portalPath || request.headers.referer || "Unknown page";
+  state.auditLogs = state.auditLogs || [];
+  state.auditLogs.unshift({
+    id: crypto.randomUUID(),
+    at: new Date().toISOString(),
+    user: user.name || user.username,
+    role: user.role || "Staff",
+    action: "Login",
+    details: `${user.name || user.username} signed in as ${user.role || "Staff"} from ${route}. IP: ${ip || "unknown"}.`,
+    risk: String(user.role || "").toLowerCase() === "manager" ? "Medium" : "Low"
+  });
+  state.auditLogs = state.auditLogs.slice(0, 500);
+  await saveState(state);
+}
+
 async function loadBackup(backupId) {
   if (pgPool) {
     const result = await pgPool.query("SELECT data, created_at FROM medholic_state_backups WHERE id = $1", [backupId]);
@@ -364,6 +383,7 @@ async function handleApi(request, response, pathname) {
       const token = crypto.randomUUID();
       const user = { username: staffUser.username, name: staffUser.name, role: staffUser.role };
       sessions.set(token, user);
+      await recordLoginAudit(user, request, String(body.portal || ""));
       sendJson(response, 200, { ok: true, token, user });
     } catch (error) {
       sendJson(response, 400, { ok: false, error: error.message });
