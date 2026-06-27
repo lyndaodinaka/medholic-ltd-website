@@ -1793,10 +1793,10 @@ function applyRolePermissions() {
   $("#resetDemo").classList.toggle("hidden", Boolean(currentUser) && !canManageSensitiveActions());
   $("#exportAudit").classList.toggle("hidden", Boolean(currentUser) && !canManageSensitiveActions());
   $("#downloadFullBackup").classList.toggle("hidden", Boolean(currentUser) && !canManageSensitiveActions());
-  $("#viewAccessRequests").classList.toggle("hidden", Boolean(currentUser) && !canManageSensitiveActions());
-  $("#refreshAccessRequests").classList.toggle("hidden", Boolean(currentUser) && !canManageSensitiveActions());
-  $("#downloadAccessRequests").classList.toggle("hidden", Boolean(currentUser) && !canManageSensitiveActions());
-  $("#downloadLeadSummary").classList.toggle("hidden", Boolean(currentUser) && !canManageSensitiveActions());
+  $("#viewAccessRequests")?.classList.toggle("hidden", Boolean(currentUser) && !canManageSensitiveActions());
+  $("#refreshAccessRequests")?.classList.toggle("hidden", Boolean(currentUser) && !canManageSensitiveActions());
+  $("#downloadAccessRequests")?.classList.toggle("hidden", Boolean(currentUser) && !canManageSensitiveActions());
+  $("#downloadLeadSummary")?.classList.toggle("hidden", Boolean(currentUser) && !canManageSensitiveActions());
 
   const activeView = document.querySelector(".view.active")?.id;
   if (currentUser && activeView && !canView(activeView)) setView(firstAllowedView());
@@ -2252,19 +2252,13 @@ document.addEventListener("focusout", (event) => {
   }
 });
 
-$("#loginForm").addEventListener("submit", handleLoginSubmit);
-$("#accessRequestForm").addEventListener("submit", handleAccessRequestSubmit);
-$("#showAccessRequest").addEventListener("click", () => {
-  $("#loginForm").classList.add("hidden");
-  $("#accessRequestForm").classList.remove("hidden");
-  $("#showAccessRequest").classList.add("hidden");
-});
-$("#cancelAccessRequest").addEventListener("click", () => {
-  $("#accessRequestForm").classList.add("hidden");
-  $("#loginForm").classList.remove("hidden");
-  $("#showAccessRequest").classList.remove("hidden");
-});
-$("#showPassword").addEventListener("click", () => {
+function on(selector, eventName, handler) {
+  const element = $(selector);
+  if (element) element.addEventListener(eventName, handler);
+}
+
+on("#loginForm", "submit", handleLoginSubmit);
+on("#showPassword", "click", () => {
   const password = $("#loginPassword");
   const isHidden = password.type === "password";
   password.type = isHidden ? "text" : "password";
@@ -2298,9 +2292,9 @@ $("#exportAudit").addEventListener("click", exportAuditCsv);
 $("#downloadSampleData").addEventListener("click", downloadSampleData);
 $("#downloadFullBackup").addEventListener("click", downloadFullBackup);
 $("#refreshBackups").addEventListener("click", refreshBackupHistory);
-$("#refreshAccessRequests").addEventListener("click", refreshAccessRequests);
-$("#downloadAccessRequests").addEventListener("click", downloadAccessRequestsCsv);
-$("#downloadLeadSummary").addEventListener("click", downloadLeadSummaryReport);
+on("#refreshAccessRequests", "click", refreshAccessRequests);
+on("#downloadAccessRequests", "click", downloadAccessRequestsCsv);
+on("#downloadLeadSummary", "click", downloadLeadSummaryReport);
 $("#signOut").addEventListener("click", handleSignOut);
 $("#forgotPassword").addEventListener("click", () => {
   setLoginHelp("Contact the Medholic Pharmacy administrator to reset your password.");

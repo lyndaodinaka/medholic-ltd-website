@@ -1,44 +1,33 @@
 # Medholic Pharmacy Master Index
 
-Use this as the main map for your app, marketing, sales, mobile app, and customer setup files.
+Use this as the main map for your private Medholic Pharmacy app, brand, mobile app, deployment, and backup files.
 
 ## Live App Files
 
 - `index.html` - main Medholic Pharmacy app.
-- `app.js` - app logic, inventory, sales, reports, lead tracking, and UI actions.
-- `server.js` - Railway server, login, database sync, backups, and access requests.
+- `app.js` - app logic, inventory, sales, reports, security, backups, and UI actions.
+- `server.js` - Railway server, login, database sync, backups, and private app routes.
 - `styles.css` - app design.
 - `site.webmanifest` - installable app settings.
 - `sw.js` - mobile install/service worker support.
 
-The app Help section also contains quick links to the marketing page, flyer, proposal page, sales kit, launch checklist, demo checklist, revenue plan, onboarding checklist, deployment guide, and backup guide.
+The app Help section contains quick links to the private brand page, flyer, launch checklist, deployment guide, backup guide, barcode guide, and login design notes.
 
 ## Marketing Pages
 
 - `marketing/index.html` - main marketing page.
 - `marketing/flyer.html` - printable flyer.
-- `marketing/proposal.html` - proposal page to send to pharmacies.
-- `marketing/pricing-calculator.html` - quick quote calculator for subscriptions, setup, branches, support, and branding.
-- `marketing/medholic-safe-marketing-photo-official-logo.png` - safe promo photo with logo and public contact email.
+- `marketing/medholic-safe-marketing-photo-official-logo.png` - safe brand photo with logo.
 
-## Sales Documents
+## Internal Documents
 
-- `docs/medholic-revenue-plan.md` - how Medholic can make money.
-- `docs/customer-sales-script.md` - what to say to pharmacy owners.
-- `docs/live-demo-checklist.md` - what to show during a demo.
-- `docs/follow-up-email-templates.md` - ready demo, pricing, and white-label emails.
-- `docs/quote-template.md` - quote structure.
 - `docs/invoice-template.md` - invoice template.
-- `docs/service-agreement-template.md` - simple agreement starting template.
 
-## Customer Onboarding
+## Setup And Maintenance
 
 - `docs/final-handoff-notes.md` - final upload, test, and daily workflow notes.
 - `docs/final-release-receipt.md` - checksum and upload record for the final package.
 - `docs/release-notes.md` - summary of the final business launch version.
-- `docs/won-lead-next-steps.md` - what to do after a customer says yes.
-- `docs/customer-onboarding-checklist.md` - setup details to collect.
-- `docs/access-request-guide.md` - how to manage demo/pricing/buyer/investor requests.
 - `docs/backup-and-restore-guide.md` - backup and restore notes.
 - `docs/security-and-live-use.md` - security and live-use guidance.
 
@@ -50,14 +39,6 @@ The app Help section also contains quick links to the marketing page, flyer, pro
 - `docs/google-play-submit-next-steps.md` - exact next steps for Google Play listing.
 - `mobile/twa-manifest.json` - Android Trusted Web Activity wrapper settings.
 - `.well-known/assetlinks.json` - Play Store asset links placeholder.
-
-## Public Contact
-
-Use this for buyer, investor, demo, and pricing enquiries:
-
-```text
-lynda.chidi@medholic.net
-```
 
 Keep manager login details private in Railway Variables only.
 

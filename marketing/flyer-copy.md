@@ -2,8 +2,6 @@
 
 Printable web flyer: `/marketing/flyer.html`
 
-Buyer or investor enquiries: lynda.chidi@medholic.net
-
 ## Medholic Pharmacy
 
 Smarter pharmacy stock, sales, and security tracking.
@@ -21,11 +19,11 @@ Track medicines, suppliers, sales, expiry dates, staff actions, controlled medic
 
 ### Built For
 
-Pharmacies, clinics, and medicine stores that need a simple way to manage daily operations.
+Medholic Pharmacy daily operations.
 
-### How To Buy
+### Private Use
 
-- Monthly subscription.
-- Setup and training package.
-- Branch license for growing pharmacies.
-- Custom branded version for serious buyers.
+- Inventory control.
+- Sales tracking.
+- Supplier records.
+- Security and accountability reports.

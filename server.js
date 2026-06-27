@@ -11,8 +11,8 @@ const adminPassword = process.env.ADMIN_PASSWORD || "";
 const adminPasswordHash = process.env.ADMIN_PASSWORD_HASH || "";
 const staffAccountsJson = process.env.STAFF_ACCOUNTS_JSON || "";
 const sessions = new Map();
-const accessRequestTypes = new Set(["Buyer", "Investor", "Demo", "Subscription", "Setup", "White-label"]);
-const leadStatuses = new Set(["New", "Contacted", "Demo booked", "Quoted", "Won", "Lost"]);
+const accessRequestTypes = new Set();
+const leadStatuses = new Set();
 const dataDir = path.join(root, "data");
 const dataFile = path.join(dataDir, "medholic-state.json");
 const accessRequestsFile = path.join(dataDir, "access-requests.json");
@@ -406,6 +406,11 @@ async function loadBackup(backupId) {
 async function handleApi(request, response, pathname) {
   if (pathname === "/api/health") {
     sendJson(response, 200, { ok: true, app: "Medholic Pharmacy", storage: pgPool ? "postgres" : "file" });
+    return true;
+  }
+
+  if (pathname === "/api/access-request" || pathname.startsWith("/api/access-requests")) {
+    sendJson(response, 404, { ok: false, error: "Access requests are disabled for this private Medholic Pharmacy app." });
     return true;
   }
 

@@ -1,4 +1,4 @@
-# Medholic Pharmacy Privacy Policy Starter
+# Medholic Pharmacy Privacy Policy Template
 
 Medholic Pharmacy records inventory, sales, suppliers, staff activity, and audit events for pharmacy operations.
 
@@ -26,4 +26,3 @@ This prototype stores data in the browser. A production system should store data
 - Data backups.
 - Audit log retention.
 - Controlled access to reports.
-

@@ -6,8 +6,6 @@
 
 Medholic Pharmacy helps pharmacies capture medicines and supplies, track stock, record sales, monitor expiry dates, manage suppliers, and detect possible cash or product loss.
 
-Buyer or investor enquiries: lynda.chidi@medholic.net
-
 ## Key Features
 
 - Barcode scanning or generated stock codes.
@@ -22,21 +20,11 @@ Buyer or investor enquiries: lynda.chidi@medholic.net
 - Audit trail for traceability.
 - Downloadable inventory and security reports.
 
-## Target Users
+## Private Use
 
-- Independent pharmacies.
-- Hospital pharmacies.
-- Small clinics.
-- Medicine stores.
-- Inventory and cashier teams.
-
-## Sales Model
-
-- Starter subscription for a single pharmacy.
-- Standard subscription for pharmacies that need reports, roles, security tracing, and supplier ordering.
-- Premium setup for branches, custom branding, training, and priority support.
-- One-time setup fee for onboarding medicines, staff, suppliers, and training.
-- White-label licensing for buyers who want their own branded version.
+- Medholic Pharmacy manager.
+- Medholic Pharmacy inventory team.
+- Medholic Pharmacy cashier/seller workflow.
 
 ## Brand Message
 

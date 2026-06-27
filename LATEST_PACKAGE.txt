@@ -16,5 +16,6 @@ ADMIN_NAME=Lynda Chidi
 
 Direct pages after upload:
 
-marketing/proposal.html
-marketing/pricing-calculator.html
+/ - private Medholic public-facing landing page
+/app - private manager/staff login
+/marketing/ - private Medholic overview page

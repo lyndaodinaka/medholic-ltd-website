@@ -18,20 +18,15 @@ Medholic Pharmacy is a pharmacy inventory, sales, supplier, staff roster, report
 - Produces inventory and security reports.
 - Records audit events for sales, stock changes, deletions, cash checks, and missing stock.
 - Includes an in-app Help section with launch, marketing, backup, and live-sync guidance.
-- Includes buyer/investor access requests from the sign-in page.
 
-## Business And Sales Kit
+## Private Business Files
 
 - Final handoff notes: `docs/final-handoff-notes.md`
 - Final release receipt: `docs/final-release-receipt.md`
 - Release notes: `docs/release-notes.md`
 - Main file map: `docs/medholic-master-index.md`
 - Final launch checklist: `docs/final-business-launch-checklist.md`
-- Revenue plan: `docs/medholic-revenue-plan.md`
-- Proposal page: `marketing/proposal.html`
-- Customer onboarding checklist: `docs/customer-onboarding-checklist.md`
 - Invoice template: `docs/invoice-template.md`
-- Service agreement template: `docs/service-agreement-template.md`
 
 ## Login
 
@@ -69,7 +64,6 @@ For Railway setup, open:
 - `docs/live-launch-final-steps.md`
 - `docs/login-design-guide.md`
 - `docs/barcode-scanning-guide.md`
-- `docs/access-request-guide.md`
 - `docs/medholic-master-index.md`
 - `docs/final-business-launch-checklist.md`
 

@@ -22,7 +22,7 @@ const requiredFiles = [
   "docs/railway-github-deployment.md",
   "docs/production-readiness-checklist.md",
   "docs/barcode-scanning-guide.md",
-  "docs/access-request-guide.md"
+  "docs/backup-and-restore-guide.md"
 ];
 
 const missing = requiredFiles.filter((file) => !fs.existsSync(path.join(root, file)));

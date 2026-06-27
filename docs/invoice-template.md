@@ -29,11 +29,10 @@ Location:
 
 | Item | Description | Amount |
 | --- | --- | --- |
-| Setup fee | Medholic Pharmacy setup, onboarding, and training | |
-| Monthly subscription | Starter / Standard / Premium package | |
-| Branch license | Additional branch setup or access | |
-| Custom branding | Logo, color, and branded deployment support | |
-| Support package | Priority support, backup, and follow-up assistance | |
+| Stock purchase | Medicine or pharmacy supply purchase | |
+| Supplier order | Supplier preorder or reorder item | |
+| Equipment | Pharmacy equipment, device, or accessory | |
+| Service | Internal pharmacy service or support expense | |
 
 ## Total
 

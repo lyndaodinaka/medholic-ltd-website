@@ -42,38 +42,7 @@
         </label>
         <button class="primary-button wide" type="submit">Log in</button>
         <button class="text-button wide" id="forgotPassword" type="button">Forgot password?</button>
-        <button class="access-toggle wide" id="showAccessRequest" type="button">Request Demo, Pricing, Buyer / Investor Access</button>
         <p class="login-help hidden" id="loginHelp"></p>
-      </form>
-      <form class="access-card hidden" id="accessRequestForm">
-        <h2>Request access</h2>
-        <p class="login-help">For buyers or investors who want Medholic Pharmacy.</p>
-        <label>
-          Full name
-          <input id="accessName" autocomplete="name" required>
-        </label>
-        <label>
-          Email
-          <input id="accessEmail" type="email" autocomplete="email" required>
-        </label>
-        <label>
-          I am interested in
-          <select id="accessType" required>
-            <option>Demo</option>
-            <option>Subscription</option>
-            <option>Setup</option>
-            <option>White-label</option>
-            <option>Buyer</option>
-            <option>Investor</option>
-          </select>
-        </label>
-        <label>
-          Message
-          <textarea id="accessMessage" rows="2" placeholder="Tell us what you are interested in"></textarea>
-        </label>
-        <button class="primary-button wide" type="submit">Send request</button>
-        <button class="text-button wide" id="cancelAccessRequest" type="button">Back to sign in</button>
-        <p class="login-help" id="accessHelp">You will be contacted by Medholic Pharmacy.</p>
       </form>
     </section>
 
@@ -438,40 +407,20 @@
 
           <div class="help-grid">
             <a class="help-card" href="marketing/index.html" target="_blank" rel="noreferrer">
-              <strong>Marketing page</strong>
-              <span>Open the public brand page with the Medholic Pharmacy logo.</span>
+              <strong>Private brand page</strong>
+              <span>Open the Medholic Pharmacy overview page.</span>
             </a>
             <a class="help-card" href="marketing/flyer.html" target="_blank" rel="noreferrer">
               <strong>Printable flyer</strong>
               <span>Open the flyer page for printing or sharing.</span>
             </a>
-            <a class="help-card" href="marketing/proposal.html" target="_blank" rel="noreferrer">
-              <strong>Proposal page</strong>
-              <span>Open the business proposal for pharmacies, clinics, buyers, or investors.</span>
-            </a>
-            <a class="help-card" href="marketing/pricing-calculator.html" target="_blank" rel="noreferrer">
-              <strong>Pricing calculator</strong>
-              <span>Prepare quick setup, subscription, branch, and support estimates.</span>
-            </a>
             <a class="help-card" href="docs/medholic-master-index.md" target="_blank" rel="noreferrer">
-              <strong>Sales kit index</strong>
-              <span>Find the app, marketing, sales, onboarding, mobile, and launch files.</span>
+              <strong>System file index</strong>
+              <span>Find the app, docs, mobile, launch, and backup files.</span>
             </a>
             <a class="help-card" href="docs/final-business-launch-checklist.md" target="_blank" rel="noreferrer">
               <strong>Final launch checklist</strong>
-              <span>Use this before sharing Medholic publicly with pharmacies or buyers.</span>
-            </a>
-            <a class="help-card" href="docs/live-demo-checklist.md" target="_blank" rel="noreferrer">
-              <strong>Live demo checklist</strong>
-              <span>Follow a simple demo flow when showing Medholic to a customer.</span>
-            </a>
-            <a class="help-card" href="docs/medholic-revenue-plan.md" target="_blank" rel="noreferrer">
-              <strong>Revenue plan</strong>
-              <span>Review subscription, setup, branch, support, and white-label income paths.</span>
-            </a>
-            <a class="help-card" href="docs/customer-onboarding-checklist.md" target="_blank" rel="noreferrer">
-              <strong>Customer onboarding</strong>
-              <span>Collect setup details after a pharmacy agrees to proceed.</span>
+              <span>Use this before entering real Medholic Pharmacy stock and sales.</span>
             </a>
             <a class="help-card" href="docs/production-readiness-checklist.md" target="_blank" rel="noreferrer">
               <strong>Production checklist</strong>
@@ -566,19 +515,6 @@
                 <button class="ghost-button" id="viewBackupHistory" data-toggle-section="backupHistory" type="button">View Backup History</button>
                 <button class="ghost-button" id="downloadFullBackup" type="button">Download Full Backup</button>
                 <button class="ghost-button" id="exportAudit" type="button">Download Security Report</button>
-              </div>
-            </div>
-            <div class="backup-history hidden" id="accessRequestsPanel">
-              <div class="panel-header small-header">
-                <h3>Demo, buyer, investor, and pricing requests</h3>
-                <div class="header-actions compact-actions">
-                  <button class="text-button" id="refreshAccessRequests" type="button">Refresh</button>
-                  <button class="text-button" id="downloadAccessRequests" type="button">Download CSV</button>
-                  <button class="text-button" id="downloadLeadSummary" type="button">Download Summary</button>
-                </div>
-              </div>
-              <div id="accessRequestsList" class="backup-list">
-                <p class="empty">No access requests loaded yet.</p>
               </div>
             </div>
             <div class="backup-history hidden" id="backupHistoryPanel">

@@ -55,7 +55,7 @@ Then check:
 - `/api/health` shows `"storage":"postgres"`.
 - The app badge says `Postgres live sync`.
 - The logo appears on the login screen.
-- The sign-in page shows **Request access as buyer or investor**.
+- The sign-in page shows only the private Medholic login.
 - `/marketing/` opens and shows the logo.
 - `/marketing/flyer.html` opens and shows the flyer.
 - Reports download correctly.
