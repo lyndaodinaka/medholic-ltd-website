@@ -122,6 +122,15 @@ const medicineCatalog = [
 
 const catalogEntry = (name) => medicineCatalog.find((item) => item.name === name) || medicineCatalog[0];
 
+const emptyState = {
+  medicines: [],
+  sales: [],
+  employees: [],
+  auditLogs: [],
+  cashChecks: [],
+  stockAdjustments: []
+};
+
 const seedState = {
   medicines: [
     {
@@ -325,6 +334,10 @@ async function hydrateFromServer() {
       state = normalizeState(serverState);
       localStorage.setItem(storageKey, JSON.stringify(state));
       showToast("Loaded shared Railway data.");
+      renderAll();
+    } else if (!canManageSensitiveActions()) {
+      state = normalizeState(serverState);
+      localStorage.setItem(storageKey, JSON.stringify(state));
       renderAll();
     } else {
       pushStateToServer();
@@ -621,7 +634,16 @@ function renderSales() {
   const employeeOptions = state.employees.map((employee) => `<option>${escapeHtml(employee.name)}</option>`).join("");
   $("#saleEmployee").innerHTML = employeeOptions || `<option>Walk-in seller</option>`;
   $("#cashEmployee").innerHTML = employeeOptions || `<option>Manager</option>`;
-  $("#salesGainHeader").classList.toggle("hidden", !canManageSensitiveActions());
+  const managerOnly = canManageSensitiveActions();
+  $("#salesLogPanel").classList.toggle("hidden", !managerOnly);
+  $("#staffSaleNote").classList.toggle("hidden", managerOnly);
+  $("#salesGainHeader").classList.toggle("hidden", !managerOnly);
+
+  if (!managerOnly) {
+    $("#salesRows").innerHTML = "";
+    updateSalePreview();
+    return;
+  }
 
   const rows = state.sales
     .slice()
@@ -633,11 +655,11 @@ function renderSales() {
         <td>${sale.quantity}</td>
         <td>${escapeHtml(sale.employee)}</td>
         <td>${money(sale.total)}<br><span class="muted">${escapeHtml(sale.paymentMethod || "Cash")}</span></td>
-        ${canManageSensitiveActions() ? `<td>${money(sale.gain)}</td>` : ""}
+        <td>${money(sale.gain)}</td>
       </tr>
     `)
     .join("");
-  $("#salesRows").innerHTML = rows || `<tr><td colspan="${canManageSensitiveActions() ? 6 : 5}" class="empty">No sales recorded yet.</td></tr>`;
+  $("#salesRows").innerHTML = rows || `<tr><td colspan="6" class="empty">No sales recorded yet.</td></tr>`;
   updateSalePreview();
 }
 
@@ -1007,10 +1029,14 @@ async function handleLoginSubmit(event) {
       sessionToken = result.token;
       sessionStorage.setItem(sessionKey, JSON.stringify(currentUser));
       sessionStorage.setItem(sessionTokenKey, sessionToken);
+      if (!canManageSensitiveActions()) {
+        state = structuredClone(emptyState);
+        localStorage.removeItem(storageKey);
+      }
       $("#loginForm").reset();
       showToast(`Welcome, ${currentUser.name}.`);
+      await hydrateFromServer();
       renderAll();
-      hydrateFromServer();
       return;
     } catch {
       setLoginHelp("Server login is not reachable. Try refreshing the Railway page.");
@@ -1026,6 +1052,10 @@ async function handleLoginSubmit(event) {
   currentUser = { username: user.username, name: user.name, role: user.role };
   sessionToken = "";
   sessionStorage.setItem(sessionKey, JSON.stringify(currentUser));
+  if (!canManageSensitiveActions()) {
+    state = structuredClone(emptyState);
+    localStorage.removeItem(storageKey);
+  }
   logAction("Login", `${currentUser.name} signed in.`, "Low");
   $("#loginForm").reset();
   showToast(`Welcome, ${currentUser.name}.`);

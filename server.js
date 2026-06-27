@@ -236,6 +236,88 @@ async function saveState(state) {
   );
 }
 
+function isManager(user) {
+  return String(user?.role || "").toLowerCase() === "manager";
+}
+
+function sanitizeMedicineForStaff(item) {
+  return {
+    id: item.id,
+    name: item.name,
+    barcode: item.barcode,
+    batch: item.batch || "",
+    quantity: Number(item.quantity || 0),
+    left: Number(item.left || 0),
+    price: Number(item.price || 0),
+    reorder: Number(item.reorder || 0),
+    expiry: item.expiry || "",
+    controlled: Boolean(item.controlled),
+    function: item.function || "",
+    dose: item.dose || "",
+    sideEffects: item.sideEffects || "",
+    otherNotes: item.otherNotes || ""
+  };
+}
+
+function sanitizeStateForUser(state, user) {
+  if (isManager(user)) return state;
+  return {
+    medicines: (state.medicines || []).map(sanitizeMedicineForStaff),
+    sales: [],
+    employees: (state.employees || []).map((employee) => ({
+      id: employee.id,
+      name: employee.name,
+      role: employee.role || "Staff",
+      shift: employee.shift || ""
+    })),
+    auditLogs: [],
+    cashChecks: [],
+    stockAdjustments: [],
+    updatedAt: state.updatedAt || ""
+  };
+}
+
+function mergeStaffSaleState(currentState, incomingState, user) {
+  const state = { ...emptyState, ...currentState };
+  const existingSaleIds = new Set((state.sales || []).map((sale) => sale.id).filter(Boolean));
+  const newSales = (incomingState.sales || []).filter((sale) => sale.id && !existingSaleIds.has(sale.id));
+
+  newSales.forEach((sale) => {
+    const medicine = (state.medicines || []).find((item) => item.id === sale.medicineId || item.barcode === sale.barcode);
+    const quantity = Number(sale.quantity || 0);
+    if (!medicine || !Number.isFinite(quantity) || quantity <= 0 || quantity > Number(medicine.left || 0)) return;
+
+    medicine.left = Number(medicine.left || 0) - quantity;
+    state.sales.push({
+      id: sale.id,
+      medicineId: medicine.id,
+      medicineName: medicine.name,
+      barcode: medicine.barcode,
+      quantity,
+      employee: sale.employee || user.name || user.username,
+      paymentMethod: sale.paymentMethod || "Cash",
+      doctorReport: sale.doctorReport || "",
+      unitPrice: Number(medicine.price || 0),
+      unitCost: Number(medicine.cost || 0),
+      total: quantity * Number(medicine.price || 0),
+      gain: quantity * (Number(medicine.price || 0) - Number(medicine.cost || 0)),
+      soldAt: sale.soldAt || new Date().toISOString()
+    });
+    state.auditLogs = state.auditLogs || [];
+    state.auditLogs.push({
+      id: crypto.randomUUID(),
+      at: new Date().toISOString(),
+      user: user.name || user.username,
+      role: user.role || "Staff",
+      action: "Staff sale recorded",
+      details: `${quantity} x ${medicine.name} sold by ${sale.employee || user.name || user.username}.`,
+      risk: quantity >= 20 ? "Medium" : "Low"
+    });
+  });
+
+  return state;
+}
+
 async function loadBackup(backupId) {
   if (pgPool) {
     const result = await pgPool.query("SELECT data, created_at FROM medholic_state_backups WHERE id = $1", [backupId]);
@@ -297,8 +379,9 @@ async function handleApi(request, response, pathname) {
   }
 
   if (pathname === "/api/state" && request.method === "GET") {
-    if (!requireAuth(request, response)) return true;
-    sendJson(response, 200, await loadState());
+    const user = requireAuth(request, response);
+    if (!user) return true;
+    sendJson(response, 200, sanitizeStateForUser(await loadState(), user));
     return true;
   }
 
@@ -366,10 +449,14 @@ async function handleApi(request, response, pathname) {
   }
 
   if (pathname === "/api/state" && request.method === "POST") {
-    if (!requireAuth(request, response)) return true;
+    const user = requireAuth(request, response);
+    if (!user) return true;
     try {
       const body = await readBody(request);
-      const state = JSON.parse(body || "{}");
+      const incomingState = JSON.parse(body || "{}");
+      const state = isManager(user)
+        ? incomingState
+        : mergeStaffSaleState(await loadState(), incomingState, user);
       await saveState(state);
       sendJson(response, 200, { ok: true });
     } catch (error) {
