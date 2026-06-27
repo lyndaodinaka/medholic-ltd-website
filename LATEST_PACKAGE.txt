@@ -17,5 +17,6 @@ ADMIN_NAME=Lynda Chidi
 Direct pages after upload:
 
 / - private Medholic public-facing landing page
-/app - private manager/staff login
+/app - manager office login
+/staff - worker counter login
 /marketing/ - private Medholic overview page

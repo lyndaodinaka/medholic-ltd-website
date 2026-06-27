@@ -475,6 +475,7 @@ const server = http.createServer(async (request, response) => {
   let requestedPath = pathname;
   if (pathname === "/") requestedPath = "/landing.html";
   if (pathname === "/app" || pathname === "/app/") requestedPath = "/index.html";
+  if (pathname === "/staff" || pathname === "/staff/") requestedPath = "/staff.html";
   let filePath = path.resolve(root, `.${requestedPath}`);
 
   if (!filePath.startsWith(root)) {

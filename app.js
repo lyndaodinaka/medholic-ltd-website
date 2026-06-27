@@ -4,6 +4,7 @@ const sessionTokenKey = "medholic-session-token";
 const apiStateUrl = "/api/state";
 const apiBackupsUrl = "/api/backups";
 const apiHealthUrl = "/api/health";
+const portalPath = location.pathname.replace(/\/+$/, "") || "/";
 
 const users = [
   { username: "local-admin", password: "local-demo-only", name: "Lynda Chidi", role: "Manager" },
@@ -1035,6 +1036,7 @@ async function handleLoginSubmit(event) {
       }
       $("#loginForm").reset();
       showToast(`Welcome, ${currentUser.name}.`);
+      if (enforcePortalBoundary()) return;
       await hydrateFromServer();
       renderAll();
       return;
@@ -1681,6 +1683,7 @@ function logAction(action, details, risk = "Low") {
 }
 
 function renderAuth() {
+  if (enforcePortalBoundary()) return;
   const isLoggedIn = Boolean(currentUser);
   $("#loginScreen").classList.toggle("hidden", isLoggedIn);
   document.querySelector(".app-shell").classList.toggle("locked", !isLoggedIn);
@@ -1722,6 +1725,18 @@ function canManageSensitiveActions() {
 
 function canDownloadInventoryReport() {
   return canManageSensitiveActions();
+}
+
+function preferredPortalPath() {
+  if (location.protocol === "file:" || !currentUser) return "";
+  return canManageSensitiveActions() ? "/app" : "/staff";
+}
+
+function enforcePortalBoundary() {
+  const target = preferredPortalPath();
+  if (!target || !["/app", "/staff"].includes(portalPath) || portalPath === target) return false;
+  location.assign(target);
+  return true;
 }
 
 function applyRolePermissions() {
