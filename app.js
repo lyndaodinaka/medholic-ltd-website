@@ -4,9 +4,6 @@ const sessionTokenKey = "medholic-session-token";
 const apiStateUrl = "/api/state";
 const apiBackupsUrl = "/api/backups";
 const apiHealthUrl = "/api/health";
-const apiAccessRequestsUrl = "/api/access-requests";
-const officialContactEmail = "lynda.chidi@medholic.net";
-const leadStatuses = ["New", "Contacted", "Demo booked", "Quoted", "Won", "Lost"];
 
 const users = [
   { username: "local-admin", password: "local-demo-only", name: "Lynda Chidi", role: "Manager" },
@@ -17,9 +14,9 @@ const users = [
 
 const roleViews = {
   Manager: ["dashboard", "capture", "inventory", "sales", "roster", "reports", "security", "help"],
-  Pharmacist: ["dashboard", "capture", "inventory", "sales", "reports", "help"],
-  Cashier: ["dashboard", "sales", "help"],
-  "Inventory clerk": ["dashboard", "capture", "inventory", "reports", "help"]
+  Pharmacist: ["capture", "inventory", "sales", "help"],
+  Cashier: ["sales", "help"],
+  "Inventory clerk": ["capture", "inventory", "help"]
 };
 
 const safetyDose = "Confirm adult or child dose from the prescription, product label, or pharmacy-approved dosing protocol before supply.";
@@ -235,7 +232,6 @@ let sessionToken = sessionStorage.getItem(sessionTokenKey) || "";
 let serverSyncReady = false;
 let saveTimer = null;
 let backupHistory = [];
-let accessRequests = [];
 let liveStorageLabel = location.protocol === "file:" ? "Local browser only" : "Checking live sync...";
 let liveStorageMode = location.protocol === "file:" ? "local" : "checking";
 const expandedSections = {
@@ -246,7 +242,6 @@ const expandedSections = {
   reportSoon: false,
   reportLowStock: false,
   backupHistory: false,
-  accessRequests: false,
   topbarControls: false
 };
 
@@ -593,6 +588,7 @@ function renderMedicineDetail() {
 
   selectedMedicineId = item.id;
   const sold = getSoldQuantity(item);
+  const managerDetail = canManageSensitiveActions() ? `<div><span>Unit gain</span><strong>${money(item.price - item.cost)}</strong></div>` : "";
   $("#medicineDetailBody").innerHTML = `
     <div class="detail-grid">
       <div><span>Name</span><strong>${escapeHtml(item.name)}</strong></div>
@@ -601,7 +597,7 @@ function renderMedicineDetail() {
       <div><span>Quantity sold</span><strong>${sold.toLocaleString()}</strong></div>
       <div><span>How many left</span><strong>${Number(item.left || 0).toLocaleString()}</strong></div>
       <div><span>Expiry date</span><strong>${item.expiry || "Not set"}</strong></div>
-      <div><span>Unit gain</span><strong>${money(item.price - item.cost)}</strong></div>
+      ${managerDetail}
       <div><span>Stock alarm</span><strong>${plainAlarmText(item)}</strong></div>
       <div><span>Supplier</span><strong>${escapeHtml(item.seller || "Not set")}</strong></div>
     </div>
@@ -625,6 +621,7 @@ function renderSales() {
   const employeeOptions = state.employees.map((employee) => `<option>${escapeHtml(employee.name)}</option>`).join("");
   $("#saleEmployee").innerHTML = employeeOptions || `<option>Walk-in seller</option>`;
   $("#cashEmployee").innerHTML = employeeOptions || `<option>Manager</option>`;
+  $("#salesGainHeader").classList.toggle("hidden", !canManageSensitiveActions());
 
   const rows = state.sales
     .slice()
@@ -636,11 +633,11 @@ function renderSales() {
         <td>${sale.quantity}</td>
         <td>${escapeHtml(sale.employee)}</td>
         <td>${money(sale.total)}<br><span class="muted">${escapeHtml(sale.paymentMethod || "Cash")}</span></td>
-        <td>${money(sale.gain)}</td>
+        ${canManageSensitiveActions() ? `<td>${money(sale.gain)}</td>` : ""}
       </tr>
     `)
     .join("");
-  $("#salesRows").innerHTML = rows || `<tr><td colspan="6" class="empty">No sales recorded yet.</td></tr>`;
+  $("#salesRows").innerHTML = rows || `<tr><td colspan="${canManageSensitiveActions() ? 6 : 5}" class="empty">No sales recorded yet.</td></tr>`;
   updateSalePreview();
 }
 
@@ -761,58 +758,6 @@ function renderSecurity() {
     .join("");
   $("#auditRows").innerHTML = rows || `<tr><td colspan="5" class="empty">No audit activity yet.</td></tr>`;
   renderBackupHistory();
-  renderAccessRequests();
-}
-
-function renderAccessRequests() {
-  const panel = $("#accessRequestsPanel");
-  const list = $("#accessRequestsList");
-  if (!panel || !list) return;
-  panel.classList.toggle("hidden", !expandedSections.accessRequests);
-  $("#viewAccessRequests").textContent = expandedSections.accessRequests ? "Hide Access Requests" : "View Access Requests";
-  if (!expandedSections.accessRequests) return;
-  if (!accessRequests.length) {
-    list.innerHTML = `<p class="empty">No demo, buyer, investor, or pricing requests found yet.</p>`;
-    return;
-  }
-  list.innerHTML = accessRequests.map((request) => {
-    const type = request.requestType || request.request_type || "Request";
-    const status = request.leadStatus || request.lead_status || "New";
-    const leadNotes = request.leadNotes || request.lead_notes || "";
-    const followUpDate = request.followUpDate || request.follow_up_date || "";
-    const date = request.created_at || request.createdAt || new Date().toISOString();
-    const statusOptions = leadStatuses
-      .map((item) => `<option value="${escapeHtml(item)}"${item === status ? " selected" : ""}>${escapeHtml(item)}</option>`)
-      .join("");
-    return `
-      <div class="backup-row">
-        <div>
-          <strong>${escapeHtml(request.name)} - ${escapeHtml(type)}</strong>
-          <span>${escapeHtml(request.email)} - ${escapeHtml(formatDateTime(date))}</span>
-          <span>${escapeHtml(request.message || "No message added.")}</span>
-          <div class="lead-fields">
-            <label>
-              Follow-up
-              <input class="lead-follow-input" data-lead-follow-up="${escapeHtml(String(request.id))}" type="date" value="${escapeHtml(followUpDate)}">
-            </label>
-            <label>
-              Private note
-              <input class="lead-note-input" data-lead-notes="${escapeHtml(String(request.id))}" value="${escapeHtml(leadNotes)}" placeholder="Next action or quote note">
-            </label>
-          </div>
-        </div>
-        <div class="backup-actions">
-          <label class="lead-status-label">
-            Status
-            <select class="lead-status-select" data-lead-status="${escapeHtml(String(request.id))}">
-              ${statusOptions}
-            </select>
-          </label>
-          <a class="ghost-button" href="mailto:${encodeURIComponent(request.email)}?subject=${encodeURIComponent("Medholic Pharmacy access request")}" target="_blank" rel="noreferrer">Reply</a>
-        </div>
-      </div>
-    `;
-  }).join("");
 }
 
 function renderBackupHistory() {
@@ -1087,41 +1032,6 @@ async function handleLoginSubmit(event) {
   renderAll();
 }
 
-async function handleAccessRequestSubmit(event) {
-  event.preventDefault();
-  const request = {
-    name: $("#accessName").value.trim(),
-    email: $("#accessEmail").value.trim().toLowerCase(),
-    requestType: $("#accessType").value,
-    message: $("#accessMessage").value.trim()
-  };
-  if (!request.name || !request.email) {
-    $("#accessHelp").textContent = "Add your name and email.";
-    return;
-  }
-  let saved = false;
-  if (location.protocol !== "file:") {
-    try {
-      const response = await fetch("/api/access-request", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(request)
-      });
-      saved = response.ok;
-    } catch {
-      saved = false;
-    }
-  }
-
-  const subject = encodeURIComponent(`Medholic Pharmacy ${request.requestType} request`);
-  const body = encodeURIComponent(`Name: ${request.name}\nEmail: ${request.email}\nType: ${request.requestType}\nMessage: ${request.message || "No message added."}`);
-  window.location.href = `mailto:${officialContactEmail}?subject=${subject}&body=${body}`;
-  $("#accessRequestForm").reset();
-  $("#accessHelp").textContent = saved
-    ? "Request saved. Your email app will also open so Medholic can be notified."
-    : "Your email app will open so Medholic can be notified. On Railway, the request is also saved.";
-}
-
 async function handleSignOut() {
   logAction("Sign out", `${currentUser?.name || "User"} signed out.`, "Low");
   if (location.protocol !== "file:" && sessionToken) {
@@ -1186,9 +1096,10 @@ function updateSalePreview() {
   $("#saleMedicineSelect").value = medicine.id;
   setDoctorReportRequired(medicine);
   const qty = Math.max(1, Number($("#saleQuantity").value || 1));
+  const gainText = canManageSensitiveActions() ? ` - expected gain ${money(qty * (medicine.price - medicine.cost))}` : "";
   $("#salePreview").innerHTML = `
     <strong>${escapeHtml(medicine.name)}</strong><br>
-    <span class="muted">${medicine.left} left - ${money(medicine.price)} each - expected gain ${money(qty * (medicine.price - medicine.cost))}</span>
+    <span class="muted">${medicine.left} left - ${money(medicine.price)} each${gainText}</span>
     <div class="preview-note">Recommended dose: ${escapeHtml(medicine.dose || "No recommended dose note added.")}</div>
     ${isControlledMedicine(medicine) ? `<div class="preview-alert critical">Controlled medicine: doctor report or prescription reference required before sale.</div>` : ""}
     <div class="preview-alert ${stockAlarmLevel(medicine)}">${plainAlarmText(medicine)}</div>
@@ -1780,7 +1691,7 @@ function canManageSensitiveActions() {
 }
 
 function canDownloadInventoryReport() {
-  return ["Manager", "Pharmacist", "Inventory clerk"].includes(normalizedRole());
+  return canManageSensitiveActions();
 }
 
 function applyRolePermissions() {
@@ -1793,10 +1704,6 @@ function applyRolePermissions() {
   $("#resetDemo").classList.toggle("hidden", Boolean(currentUser) && !canManageSensitiveActions());
   $("#exportAudit").classList.toggle("hidden", Boolean(currentUser) && !canManageSensitiveActions());
   $("#downloadFullBackup").classList.toggle("hidden", Boolean(currentUser) && !canManageSensitiveActions());
-  $("#viewAccessRequests")?.classList.toggle("hidden", Boolean(currentUser) && !canManageSensitiveActions());
-  $("#refreshAccessRequests")?.classList.toggle("hidden", Boolean(currentUser) && !canManageSensitiveActions());
-  $("#downloadAccessRequests")?.classList.toggle("hidden", Boolean(currentUser) && !canManageSensitiveActions());
-  $("#downloadLeadSummary")?.classList.toggle("hidden", Boolean(currentUser) && !canManageSensitiveActions());
 
   const activeView = document.querySelector(".view.active")?.id;
   if (currentUser && activeView && !canView(activeView)) setView(firstAllowedView());
@@ -1896,172 +1803,6 @@ async function refreshBackupHistory() {
     renderBackupHistory();
   } catch {
     showToast("Could not load backup history.");
-  }
-}
-
-async function refreshAccessRequests() {
-  if (!canManageSensitiveActions()) {
-    showToast("Only a manager can view access requests.");
-    return;
-  }
-  if (location.protocol === "file:" || !sessionToken) {
-    accessRequests = [];
-    renderAccessRequests();
-    showToast("Access requests are saved on the Railway server after deployment.");
-    return;
-  }
-  try {
-    const response = await fetch(apiAccessRequestsUrl, { cache: "no-store", headers: authHeaders() });
-    if (!response.ok) throw new Error("Unable to load access requests");
-    const data = await response.json();
-    accessRequests = data.requests || [];
-    renderAccessRequests();
-  } catch {
-    showToast("Could not load access requests.");
-  }
-}
-
-function downloadAccessRequestsCsv() {
-  if (!canManageSensitiveActions()) {
-    showToast("Only a manager can download access requests.");
-    return;
-  }
-  const headers = ["name", "email", "type", "status", "followUpDate", "leadNotes", "message", "createdAt"];
-  const rows = accessRequests.map((request) => ({
-    name: request.name,
-    email: request.email,
-    type: request.requestType || request.request_type,
-    status: request.leadStatus || request.lead_status || "New",
-    followUpDate: request.followUpDate || request.follow_up_date || "",
-    leadNotes: request.leadNotes || request.lead_notes || "",
-    message: request.message,
-    createdAt: request.created_at || request.createdAt
-  }));
-  const csv = [headers.join(","), ...rows.map((row) => headers.map((header) => csvCell(row[header])).join(","))].join("\n");
-  downloadFile(csv, `medholic-access-requests-${new Date().toISOString().slice(0, 10)}.csv`, "text/csv");
-  showToast("Access requests downloaded.");
-}
-
-function downloadLeadSummaryReport() {
-  if (!canManageSensitiveActions()) {
-    showToast("Only a manager can download the lead summary.");
-    return;
-  }
-  const today = new Date().toISOString().slice(0, 10);
-  const byStatus = Object.fromEntries(leadStatuses.map((status) => [status, 0]));
-  const byType = {};
-  const followUps = [];
-  accessRequests.forEach((request) => {
-    const status = request.leadStatus || request.lead_status || "New";
-    const type = request.requestType || request.request_type || "Request";
-    const followUpDate = request.followUpDate || request.follow_up_date || "";
-    byStatus[status] = (byStatus[status] || 0) + 1;
-    byType[type] = (byType[type] || 0) + 1;
-    if (followUpDate) {
-      followUps.push({
-        name: request.name,
-        email: request.email,
-        type,
-        status,
-        followUpDate,
-        note: request.leadNotes || request.lead_notes || ""
-      });
-    }
-  });
-  followUps.sort((a, b) => a.followUpDate.localeCompare(b.followUpDate));
-  const lines = [
-    "Medholic Pharmacy Lead Summary",
-    `Date: ${today}`,
-    "",
-    "Status Summary",
-    ...Object.entries(byStatus).map(([status, count]) => `${status}: ${count}`),
-    "",
-    "Request Type Summary",
-    ...Object.entries(byType).map(([type, count]) => `${type}: ${count}`),
-    "",
-    "Upcoming Follow-Ups",
-    ...(followUps.length ? followUps.map((item) => `${item.followUpDate} - ${item.name} - ${item.type} - ${item.status} - ${item.email}${item.note ? ` - ${item.note}` : ""}`) : ["No follow-up dates saved."])
-  ];
-  downloadFile(lines.join("\n"), `medholic-lead-summary-${today}.txt`, "text/plain");
-  showToast("Lead summary downloaded.");
-}
-
-function updateLocalLeadRequest(requestId, updates) {
-  accessRequests = accessRequests.map((item) => {
-    if (String(item.id) !== String(requestId)) return item;
-    return {
-      ...item,
-      leadStatus: updates.status ?? item.leadStatus,
-      lead_status: updates.status ?? item.lead_status,
-      leadNotes: updates.leadNotes ?? item.leadNotes,
-      lead_notes: updates.leadNotes ?? item.lead_notes,
-      followUpDate: updates.followUpDate ?? item.followUpDate,
-      follow_up_date: updates.followUpDate ?? item.follow_up_date
-    };
-  });
-}
-
-async function updateLeadStatus(requestId, status) {
-  if (!canManageSensitiveActions()) {
-    showToast("Only a manager can update lead status.");
-    return;
-  }
-  const request = accessRequests.find((item) => String(item.id) === String(requestId));
-  if (request) {
-    request.leadStatus = status;
-    request.lead_status = status;
-    renderAccessRequests();
-  }
-  if (location.protocol === "file:" || !sessionToken) {
-    showToast("Lead status updates save on Railway after deployment.");
-    return;
-  }
-  try {
-    const response = await fetch(`${apiAccessRequestsUrl}/${encodeURIComponent(requestId)}/status`, {
-      method: "PATCH",
-      headers: { ...authHeaders(), "Content-Type": "application/json" },
-      body: JSON.stringify({ status })
-    });
-    if (!response.ok) throw new Error("Unable to update lead status");
-    const data = await response.json();
-    accessRequests = accessRequests.map((item) => String(item.id) === String(requestId) ? { ...item, ...data.request } : item);
-    renderAccessRequests();
-    showToast("Lead status updated.");
-  } catch {
-    showToast("Could not update lead status.");
-    refreshAccessRequests();
-  }
-}
-
-async function updateLeadDetails(requestId, updates) {
-  if (!canManageSensitiveActions()) {
-    showToast("Only a manager can update lead details.");
-    return;
-  }
-  const existing = accessRequests.find((item) => String(item.id) === String(requestId)) || {};
-  const payload = {
-    status: existing.leadStatus || existing.lead_status || "New",
-    leadNotes: updates.leadNotes ?? existing.leadNotes ?? existing.lead_notes ?? "",
-    followUpDate: updates.followUpDate ?? existing.followUpDate ?? existing.follow_up_date ?? ""
-  };
-  updateLocalLeadRequest(requestId, payload);
-  if (location.protocol === "file:" || !sessionToken) {
-    showToast("Lead details save on Railway after deployment.");
-    return;
-  }
-  try {
-    const response = await fetch(`${apiAccessRequestsUrl}/${encodeURIComponent(requestId)}/lead`, {
-      method: "PATCH",
-      headers: { ...authHeaders(), "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    });
-    if (!response.ok) throw new Error("Unable to update lead details");
-    const data = await response.json();
-    accessRequests = accessRequests.map((item) => String(item.id) === String(requestId) ? { ...item, ...data.request } : item);
-    showToast("Lead details updated.");
-  } catch {
-    showToast("Could not update lead details.");
-    refreshAccessRequests();
   }
 }
 
@@ -2168,7 +1909,6 @@ document.addEventListener("click", (event) => {
     expandedSections[key] = !expandedSections[key];
     renderAll();
     if (key === "backupHistory" && expandedSections.backupHistory) refreshBackupHistory();
-    if (key === "accessRequests" && expandedSections.accessRequests) refreshAccessRequests();
     return;
   }
 
@@ -2234,24 +1974,6 @@ document.addEventListener("click", (event) => {
   }
 });
 
-document.addEventListener("change", (event) => {
-  const leadStatusSelect = event.target.closest("[data-lead-status]");
-  if (leadStatusSelect) {
-    updateLeadStatus(leadStatusSelect.dataset.leadStatus, leadStatusSelect.value);
-  }
-  const leadFollowUp = event.target.closest("[data-lead-follow-up]");
-  if (leadFollowUp) {
-    updateLeadDetails(leadFollowUp.dataset.leadFollowUp, { followUpDate: leadFollowUp.value });
-  }
-});
-
-document.addEventListener("focusout", (event) => {
-  const leadNotes = event.target.closest("[data-lead-notes]");
-  if (leadNotes) {
-    updateLeadDetails(leadNotes.dataset.leadNotes, { leadNotes: leadNotes.value });
-  }
-});
-
 function on(selector, eventName, handler) {
   const element = $(selector);
   if (element) element.addEventListener(eventName, handler);
@@ -2292,9 +2014,6 @@ $("#exportAudit").addEventListener("click", exportAuditCsv);
 $("#downloadSampleData").addEventListener("click", downloadSampleData);
 $("#downloadFullBackup").addEventListener("click", downloadFullBackup);
 $("#refreshBackups").addEventListener("click", refreshBackupHistory);
-on("#refreshAccessRequests", "click", refreshAccessRequests);
-on("#downloadAccessRequests", "click", downloadAccessRequestsCsv);
-on("#downloadLeadSummary", "click", downloadLeadSummaryReport);
 $("#signOut").addEventListener("click", handleSignOut);
 $("#forgotPassword").addEventListener("click", () => {
   setLoginHelp("Contact the Medholic Pharmacy administrator to reset your password.");

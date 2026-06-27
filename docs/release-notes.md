@@ -2,7 +2,7 @@
 
 ## Final Business Launch Version
 
-This version turns Medholic Pharmacy from a working pharmacy inventory app into a sellable business product.
+This version prepares Medholic Pharmacy as a private pharmacy operations system.
 
 ## App Improvements
 
@@ -11,24 +11,14 @@ This version turns Medholic Pharmacy from a working pharmacy inventory app into 
 - Installable app support with manifest and service worker.
 - Railway/Postgres live sync support.
 - Private manager login through Railway Variables.
-- Demo/pricing/access request form on the sign-in page.
-- Lead pipeline with status, follow-up date, private notes, and summary download.
 
-## Sales And Marketing Improvements
+## Brand And Operations Improvements
 
-- Marketing page.
+- Simple private landing page.
+- Marketing/overview page.
 - Printable flyer.
-- Proposal page.
-- Pricing calculator.
 - Safe marketing photo with Medholic logo and public contact email.
-- Revenue plan.
-- Sales script.
-- Follow-up email templates.
-- Quote template.
 - Invoice template.
-- Customer onboarding checklist.
-- Service agreement starting template.
-- Won-lead next steps.
 
 ## Mobile And Play Store Preparation
 

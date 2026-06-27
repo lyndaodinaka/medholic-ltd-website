@@ -39,4 +39,4 @@ https://medholicpharmacy.up.railway.app/docs/privacy-policy.md
 - Capture medication screen.
 - Inventory list with stock alerts.
 - Reports page with expiry and low-stock report.
-- Security page with audit and access requests.
+- Security page with audit logs, cash checks, stock checks, and backups.

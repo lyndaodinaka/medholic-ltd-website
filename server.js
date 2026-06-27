@@ -11,11 +11,8 @@ const adminPassword = process.env.ADMIN_PASSWORD || "";
 const adminPasswordHash = process.env.ADMIN_PASSWORD_HASH || "";
 const staffAccountsJson = process.env.STAFF_ACCOUNTS_JSON || "";
 const sessions = new Map();
-const accessRequestTypes = new Set();
-const leadStatuses = new Set();
 const dataDir = path.join(root, "data");
 const dataFile = path.join(dataDir, "medholic-state.json");
-const accessRequestsFile = path.join(dataDir, "access-requests.json");
 const backupDir = path.join(dataDir, "backups");
 let pgPool = null;
 const types = {
@@ -68,22 +65,6 @@ async function initDatabase() {
       created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
     )
   `);
-  await pgPool.query(`
-    CREATE TABLE IF NOT EXISTS medholic_access_requests (
-      id BIGSERIAL PRIMARY KEY,
-      name TEXT NOT NULL,
-      email TEXT NOT NULL,
-      request_type TEXT NOT NULL,
-      message TEXT,
-      lead_status TEXT NOT NULL DEFAULT 'New',
-      lead_notes TEXT NOT NULL DEFAULT '',
-      follow_up_date TEXT NOT NULL DEFAULT '',
-      created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
-    )
-  `);
-  await pgPool.query("ALTER TABLE medholic_access_requests ADD COLUMN IF NOT EXISTS lead_status TEXT NOT NULL DEFAULT 'New'");
-  await pgPool.query("ALTER TABLE medholic_access_requests ADD COLUMN IF NOT EXISTS lead_notes TEXT NOT NULL DEFAULT ''");
-  await pgPool.query("ALTER TABLE medholic_access_requests ADD COLUMN IF NOT EXISTS follow_up_date TEXT NOT NULL DEFAULT ''");
 }
 
 function sendJson(response, status, body) {
@@ -200,127 +181,6 @@ function readBody(request) {
   });
 }
 
-function isValidEmail(value) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value || ""));
-}
-
-function loadAccessRequestsFromFile() {
-  if (!fs.existsSync(accessRequestsFile)) return [];
-  try {
-    const parsed = JSON.parse(fs.readFileSync(accessRequestsFile, "utf8"));
-    return Array.isArray(parsed) ? parsed : [];
-  } catch {
-    return [];
-  }
-}
-
-function saveAccessRequestToFile(record) {
-  fs.mkdirSync(dataDir, { recursive: true });
-  const records = loadAccessRequestsFromFile();
-  records.unshift(record);
-  fs.writeFileSync(accessRequestsFile, JSON.stringify(records.slice(0, 500), null, 2));
-}
-
-function updateAccessRequestFileStatus(id, status) {
-  const records = loadAccessRequestsFromFile();
-  const record = records.find((item) => String(item.id) === String(id));
-  if (!record) return null;
-  record.leadStatus = status;
-  record.lead_status = status;
-  fs.writeFileSync(accessRequestsFile, JSON.stringify(records, null, 2));
-  return record;
-}
-
-function updateAccessRequestFileLead(id, updates) {
-  const records = loadAccessRequestsFromFile();
-  const record = records.find((item) => String(item.id) === String(id));
-  if (!record) return null;
-  if (updates.status) {
-    record.leadStatus = updates.status;
-    record.lead_status = updates.status;
-  }
-  if (Object.prototype.hasOwnProperty.call(updates, "leadNotes")) {
-    record.leadNotes = updates.leadNotes;
-    record.lead_notes = updates.leadNotes;
-  }
-  if (Object.prototype.hasOwnProperty.call(updates, "followUpDate")) {
-    record.followUpDate = updates.followUpDate;
-    record.follow_up_date = updates.followUpDate;
-  }
-  fs.writeFileSync(accessRequestsFile, JSON.stringify(records, null, 2));
-  return record;
-}
-
-async function saveAccessRequest(record) {
-  if (!pgPool) {
-    saveAccessRequestToFile(record);
-    return record;
-  }
-  const result = await pgPool.query(
-    `INSERT INTO medholic_access_requests (name, email, request_type, message, lead_status, lead_notes, follow_up_date)
-     VALUES ($1, $2, $3, $4, $5, $6, $7)
-     RETURNING id, name, email, request_type, message, lead_status, lead_notes, follow_up_date, created_at`,
-    [record.name, record.email, record.requestType, record.message, record.leadStatus || "New", record.leadNotes || "", record.followUpDate || ""]
-  );
-  return result.rows[0];
-}
-
-async function listAccessRequests() {
-  if (!pgPool) return loadAccessRequestsFromFile().slice(0, 200);
-  const result = await pgPool.query(`
-    SELECT id, name, email, request_type, message, lead_status, lead_notes, follow_up_date, created_at
-    FROM medholic_access_requests
-    ORDER BY created_at DESC
-    LIMIT 200
-  `);
-  return result.rows;
-}
-
-async function updateAccessRequestStatus(id, status) {
-  if (!leadStatuses.has(status)) throw new Error("Invalid lead status");
-  if (!pgPool) {
-    const record = updateAccessRequestFileStatus(id, status);
-    if (!record) throw new Error("Access request not found");
-    return record;
-  }
-  const result = await pgPool.query(
-    `UPDATE medholic_access_requests
-     SET lead_status = $1
-     WHERE id = $2
-     RETURNING id, name, email, request_type, message, lead_status, created_at`,
-    [status, id]
-  );
-  if (!result.rows.length) throw new Error("Access request not found");
-  return result.rows[0];
-}
-
-async function updateAccessRequestLead(id, updates) {
-  const status = String(updates.status || "").trim();
-  const leadNotes = String(updates.leadNotes || "").trim().slice(0, 1000);
-  const followUpDate = String(updates.followUpDate || "").trim().slice(0, 40);
-  if (status && !leadStatuses.has(status)) throw new Error("Invalid lead status");
-  if (!pgPool) {
-    const record = updateAccessRequestFileLead(id, {
-      status,
-      leadNotes,
-      followUpDate
-    });
-    if (!record) throw new Error("Access request not found");
-    return record;
-  }
-  const result = await pgPool.query(
-    `UPDATE medholic_access_requests
-     SET lead_status = COALESCE(NULLIF($1, ''), lead_status),
-         lead_notes = $2,
-         follow_up_date = $3
-     WHERE id = $4
-     RETURNING id, name, email, request_type, message, lead_status, lead_notes, follow_up_date, created_at`,
-    [status, leadNotes, followUpDate, id]
-  );
-  if (!result.rows.length) throw new Error("Access request not found");
-  return result.rows[0];
-}
-
 function loadStateFromFile() {
   if (!fs.existsSync(dataFile)) return emptyState;
   try {
@@ -409,11 +269,6 @@ async function handleApi(request, response, pathname) {
     return true;
   }
 
-  if (pathname === "/api/access-request" || pathname.startsWith("/api/access-requests")) {
-    sendJson(response, 404, { ok: false, error: "Access requests are disabled for this private Medholic Pharmacy app." });
-    return true;
-  }
-
   if (pathname === "/api/login" && request.method === "POST") {
     try {
       const body = JSON.parse((await readBody(request)) || "{}");
@@ -428,73 +283,6 @@ async function handleApi(request, response, pathname) {
       const user = { username: staffUser.username, name: staffUser.name, role: staffUser.role };
       sessions.set(token, user);
       sendJson(response, 200, { ok: true, token, user });
-    } catch (error) {
-      sendJson(response, 400, { ok: false, error: error.message });
-    }
-    return true;
-  }
-
-  if (pathname === "/api/access-request" && request.method === "POST") {
-    try {
-      const body = JSON.parse((await readBody(request)) || "{}");
-      const name = String(body.name || "").trim();
-      const email = String(body.email || "").trim().toLowerCase();
-      const requestType = String(body.requestType || "").trim();
-      const message = String(body.message || "").trim();
-      if (!name || !isValidEmail(email) || !accessRequestTypes.has(requestType)) {
-        sendJson(response, 400, { ok: false, error: "Name, valid email, and request type are required" });
-        return true;
-      }
-      const record = {
-        id: crypto.randomUUID(),
-        name,
-        email,
-        requestType,
-        request_type: requestType,
-        message,
-        leadStatus: "New",
-        lead_status: "New",
-        leadNotes: "",
-        lead_notes: "",
-        followUpDate: "",
-        follow_up_date: "",
-        created_at: new Date().toISOString()
-      };
-      await saveAccessRequest(record);
-      sendJson(response, 200, { ok: true });
-    } catch (error) {
-      sendJson(response, 400, { ok: false, error: error.message });
-    }
-    return true;
-  }
-
-  if (pathname === "/api/access-requests" && request.method === "GET") {
-    if (!requireManager(request, response)) return true;
-    sendJson(response, 200, { ok: true, requests: await listAccessRequests() });
-    return true;
-  }
-
-  const accessRequestStatusMatch = pathname.match(/^\/api\/access-requests\/([^/]+)\/status$/);
-  if (accessRequestStatusMatch && request.method === "PATCH") {
-    if (!requireManager(request, response)) return true;
-    try {
-      const body = JSON.parse((await readBody(request)) || "{}");
-      const status = String(body.status || "").trim();
-      const updated = await updateAccessRequestStatus(decodeURIComponent(accessRequestStatusMatch[1]), status);
-      sendJson(response, 200, { ok: true, request: updated });
-    } catch (error) {
-      sendJson(response, 400, { ok: false, error: error.message });
-    }
-    return true;
-  }
-
-  const accessRequestLeadMatch = pathname.match(/^\/api\/access-requests\/([^/]+)\/lead$/);
-  if (accessRequestLeadMatch && request.method === "PATCH") {
-    if (!requireManager(request, response)) return true;
-    try {
-      const body = JSON.parse((await readBody(request)) || "{}");
-      const updated = await updateAccessRequestLead(decodeURIComponent(accessRequestLeadMatch[1]), body);
-      sendJson(response, 200, { ok: true, request: updated });
     } catch (error) {
       sendJson(response, 400, { ok: false, error: error.message });
     }
