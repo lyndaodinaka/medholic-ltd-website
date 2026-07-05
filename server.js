@@ -506,6 +506,11 @@ const server = http.createServer(async (request, response) => {
 
   try {
     if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
+      if (!pathname.endsWith("/")) {
+        response.writeHead(301, { Location: `${pathname}/` });
+        response.end();
+        return;
+      }
       filePath = path.join(filePath, "index.html");
     }
   } catch {
