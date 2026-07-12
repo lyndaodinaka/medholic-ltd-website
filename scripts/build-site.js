@@ -31,8 +31,10 @@ fs.mkdirSync(dist, { recursive: true });
 
 const htmlPath = path.join(root, "marketing", "index.html");
 let html = fs.readFileSync(htmlPath, "utf8");
+const css = fs.readFileSync(path.join(root, "marketing", "marketing.css"), "utf8");
 html = html
   .replace('<base href="/marketing/">', "")
+  .replace('<link rel="stylesheet" href="marketing.css">', `<style>\n${css}\n</style>`)
   .replaceAll('href="/assets/', 'href="assets/')
   .replaceAll('src="/assets/', 'src="assets/')
   .replaceAll('content="/marketing/', 'content="marketing/')
@@ -62,54 +64,23 @@ copyFile(path.join(root, "site.webmanifest"), path.join(dist, "site.webmanifest"
 copyFile(path.join(root, ".openai", "hosting.json"), path.join(dist, ".openai", "hosting.json"));
 
 fs.mkdirSync(serverDir, { recursive: true });
-fs.writeFileSync(path.join(serverDir, "index.js"), `const fs = require("fs");
-const path = require("path");
-const http = require("http");
+fs.writeFileSync(path.join(serverDir, "index.js"), `const html = ${JSON.stringify(html)};
 
-const root = path.resolve(__dirname, "..");
-const types = {
-  ".html": "text/html; charset=utf-8",
-  ".css": "text/css; charset=utf-8",
-  ".js": "text/javascript; charset=utf-8",
-  ".json": "application/json; charset=utf-8",
-  ".webmanifest": "application/manifest+json; charset=utf-8",
-  ".png": "image/png",
-  ".jpg": "image/jpeg",
-  ".jpeg": "image/jpeg",
-  ".md": "text/markdown; charset=utf-8"
-};
+export default {
+  async fetch(request) {
+    const url = new URL(request.url);
+    if (url.pathname === "/" || url.pathname === "/index.html") {
+      return new Response(html, {
+        headers: { "Content-Type": "text/html; charset=utf-8" }
+      });
+    }
 
-function resolveFile(urlPath) {
-  const clean = decodeURIComponent(String(urlPath || "/").split("?")[0]);
-  const relative = clean === "/" ? "index.html" : clean.replace(/^\\/+/, "");
-  const filePath = path.resolve(root, relative);
-  if (!filePath.startsWith(root)) return null;
-  return filePath;
-}
-
-function sendFile(request, response) {
-  const filePath = resolveFile(request.url);
-  if (!filePath || !fs.existsSync(filePath) || fs.statSync(filePath).isDirectory()) {
-    response.writeHead(404, { "Content-Type": "text/plain; charset=utf-8" });
-    response.end("Not found");
-    return;
+    return new Response("Not found", {
+      status: 404,
+      headers: { "Content-Type": "text/plain; charset=utf-8" }
+    });
   }
-  response.writeHead(200, { "Content-Type": types[path.extname(filePath)] || "application/octet-stream" });
-  response.end(fs.readFileSync(filePath));
-}
-
-exports.default = function handler(request, response) {
-  return sendFile(request, response);
 };
-
-exports.handler = exports.default;
-
-if (require.main === module) {
-  const port = Number(process.env.PORT || 3000);
-  http.createServer(sendFile).listen(port, () => {
-    console.log("Medholic public site running on port " + port);
-  });
-}
 `);
 
 console.log("Built Medholic public site in dist.");
