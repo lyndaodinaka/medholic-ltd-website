@@ -7,3 +7,4 @@ release-*/
 *.zip
 data/medholic-state.json
 data/access-requests.json
+dist/

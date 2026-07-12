@@ -26,6 +26,12 @@ function copyDir(from, to, allowList = null) {
   }
 }
 
+function dataUri(relativePath, mimeType) {
+  const filePath = path.join(root, relativePath);
+  const encoded = fs.readFileSync(filePath).toString("base64");
+  return `data:${mimeType};base64,${encoded}`;
+}
+
 fs.rmSync(dist, { recursive: true, force: true });
 fs.mkdirSync(dist, { recursive: true });
 
@@ -35,6 +41,13 @@ const css = fs.readFileSync(path.join(root, "marketing", "marketing.css"), "utf8
 html = html
   .replace('<base href="/marketing/">', "")
   .replace('<link rel="stylesheet" href="marketing.css">', `<style>\n${css}\n</style>`)
+  .replaceAll('/assets/medholic-logo-transparent.png', dataUri(path.join("assets", "medholic-logo-transparent.png"), "image/png"))
+  .replaceAll('/assets/favicon-32.png', dataUri(path.join("assets", "favicon-32.png"), "image/png"))
+  .replaceAll('/assets/apple-touch-icon.png', dataUri(path.join("assets", "apple-touch-icon.png"), "image/png"))
+  .replaceAll('/marketing/lynda-portrait-green.jpg', dataUri(path.join("marketing", "lynda-portrait-green.jpg"), "image/jpeg"))
+  .replaceAll('/marketing/lynda-checking-system.png', dataUri(path.join("marketing", "lynda-checking-system.png"), "image/png"))
+  .replaceAll('/marketing/lynda-presenting-medication.png', dataUri(path.join("marketing", "lynda-presenting-medication.png"), "image/png"))
+  .replaceAll('/marketing/lynda-counting-medication.png', dataUri(path.join("marketing", "lynda-counting-medication.png"), "image/png"))
   .replaceAll('href="/assets/', 'href="assets/')
   .replaceAll('src="/assets/', 'src="assets/')
   .replaceAll('content="/marketing/', 'content="marketing/')
