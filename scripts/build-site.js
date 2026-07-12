@@ -44,10 +44,7 @@ html = html
   .replaceAll('/assets/medholic-logo-transparent.png', dataUri(path.join("assets", "medholic-logo-transparent.png"), "image/png"))
   .replaceAll('/assets/favicon-32.png', dataUri(path.join("assets", "favicon-32.png"), "image/png"))
   .replaceAll('/assets/apple-touch-icon.png', dataUri(path.join("assets", "apple-touch-icon.png"), "image/png"))
-  .replaceAll('/marketing/lynda-portrait-green.jpg', dataUri(path.join("marketing", "lynda-portrait-green.jpg"), "image/jpeg"))
-  .replaceAll('/marketing/lynda-checking-system.png', dataUri(path.join("marketing", "lynda-checking-system.png"), "image/png"))
-  .replaceAll('/marketing/lynda-presenting-medication.png', dataUri(path.join("marketing", "lynda-presenting-medication.png"), "image/png"))
-  .replaceAll('/marketing/lynda-counting-medication.png', dataUri(path.join("marketing", "lynda-counting-medication.png"), "image/png"))
+  .replaceAll('/marketing/medholic-luxury-boardroom.png', dataUri(path.join("marketing", "medholic-luxury-boardroom.png"), "image/png"))
   .replaceAll('href="/assets/', 'href="assets/')
   .replaceAll('src="/assets/', 'src="assets/')
   .replaceAll('content="/marketing/', 'content="marketing/')
@@ -65,9 +62,7 @@ copyDir(path.join(root, "assets"), path.join(dist, "assets"), new Set([
   "medholic-logo-transparent.png"
 ]));
 copyDir(path.join(root, "marketing"), path.join(dist, "marketing"), new Set([
-  "lynda-checking-system.png",
-  "lynda-counting-medication.png",
-  "lynda-presenting-medication.png"
+  "medholic-luxury-boardroom.png"
 ]));
 copyFile(
   path.join(root, "docs", "final-business-launch-checklist.md"),
