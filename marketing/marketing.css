@@ -2340,6 +2340,7 @@ h1 {
 }
 
 .lux-intro,
+.lux-story,
 .lux-grid,
 .lux-statement,
 .lux-contact {
@@ -2358,6 +2359,39 @@ h1 {
 .lux-statement h2,
 .lux-contact h2 {
   font-size: clamp(2.2rem, 4vw, 4.6rem);
+}
+
+.lux-story {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.lux-story article {
+  min-height: 210px;
+  display: grid;
+  align-content: end;
+  gap: 12px;
+  border: 1px solid rgba(248, 220, 159, 0.2);
+  border-radius: 8px;
+  padding: 22px;
+  background:
+    linear-gradient(145deg, rgba(248, 220, 159, 0.11), rgba(255, 255, 255, 0.04)),
+    #0b171d;
+}
+
+.lux-story span {
+  color: #f8dc9f;
+  font-size: 1.1rem;
+  font-weight: 950;
+}
+
+.lux-story p,
+.lux-contact p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.74);
+  line-height: 1.65;
 }
 
 .lux-grid {
@@ -2438,7 +2472,32 @@ h1 {
   color: #102530;
 }
 
-.lux-contact a {
+.lux-contact-reveal {
+  min-height: 160px;
+  display: grid;
+  align-content: center;
+  gap: 14px;
+}
+
+.lux-contact-reveal summary {
+  min-height: 50px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  padding: 0 18px;
+  color: #071015;
+  background: #f8dc9f;
+  font-weight: 950;
+  cursor: pointer;
+  list-style: none;
+}
+
+.lux-contact-reveal summary::-webkit-details-marker {
+  display: none;
+}
+
+.lux-contact-reveal a {
   min-height: 160px;
   display: grid;
   align-content: center;
@@ -2447,18 +2506,19 @@ h1 {
   background: #f8dc9f;
 }
 
-.lux-contact a span,
-.lux-contact a strong {
+.lux-contact-reveal a span,
+.lux-contact-reveal a strong {
   display: block;
 }
 
-.lux-contact a strong {
+.lux-contact-reveal a strong {
   overflow-wrap: anywhere;
   font-size: clamp(1.05rem, 2vw, 1.45rem);
 }
 
 @media (max-width: 880px) {
   .lux-grid,
+  .lux-story,
   .lux-statement,
   .lux-contact {
     grid-template-columns: 1fr;
@@ -2487,7 +2547,8 @@ h1 {
   }
 
   .lux-actions a,
-  .lux-contact a {
+  .lux-contact-reveal a,
+  .lux-contact-reveal summary {
     width: 100%;
   }
 
