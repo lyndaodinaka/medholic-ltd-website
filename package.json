@@ -4,6 +4,7 @@
   "private": true,
   "description": "Medholic Pharmacy inventory, sales, supplier, reporting, and audit web app.",
   "scripts": {
+    "build": "node scripts/build-site.js",
     "start": "node server.js",
     "check": "node --check server.js && node --check app.js",
     "preflight": "node scripts/preflight.js",

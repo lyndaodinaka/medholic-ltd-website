@@ -1,0 +1,62 @@
+const fs = require("fs");
+const path = require("path");
+
+const root = path.resolve(__dirname, "..");
+const dist = path.join(root, "dist");
+
+function copyFile(from, to) {
+  fs.mkdirSync(path.dirname(to), { recursive: true });
+  fs.copyFileSync(from, to);
+}
+
+function copyDir(from, to, allowList = null) {
+  if (!fs.existsSync(from)) return;
+  fs.mkdirSync(to, { recursive: true });
+  for (const entry of fs.readdirSync(from, { withFileTypes: true })) {
+    const source = path.join(from, entry.name);
+    const target = path.join(to, entry.name);
+    if (entry.isDirectory()) {
+      copyDir(source, target, allowList);
+      continue;
+    }
+    if (!allowList || allowList.has(entry.name)) {
+      copyFile(source, target);
+    }
+  }
+}
+
+fs.rmSync(dist, { recursive: true, force: true });
+fs.mkdirSync(dist, { recursive: true });
+
+const htmlPath = path.join(root, "marketing", "index.html");
+let html = fs.readFileSync(htmlPath, "utf8");
+html = html
+  .replace('<base href="/marketing/">', "")
+  .replaceAll('href="/assets/', 'href="assets/')
+  .replaceAll('src="/assets/', 'src="assets/')
+  .replaceAll('content="/marketing/', 'content="marketing/')
+  .replaceAll('src="/marketing/', 'src="marketing/')
+  .replaceAll('href="/app"', 'href="#work"')
+  .replaceAll('href="/docs/final-business-launch-checklist.md"', 'href="docs/final-business-launch-checklist.md"');
+
+fs.writeFileSync(path.join(dist, "index.html"), html);
+copyFile(path.join(root, "marketing", "marketing.css"), path.join(dist, "marketing.css"));
+copyDir(path.join(root, "assets"), path.join(dist, "assets"), new Set([
+  "apple-touch-icon.png",
+  "favicon-32.png",
+  "icon-192.png",
+  "icon-512.png",
+  "medholic-logo-transparent.png"
+]));
+copyDir(path.join(root, "marketing"), path.join(dist, "marketing"), new Set([
+  "lynda-checking-system.png",
+  "lynda-counting-medication.png",
+  "lynda-presenting-medication.png"
+]));
+copyFile(
+  path.join(root, "docs", "final-business-launch-checklist.md"),
+  path.join(dist, "docs", "final-business-launch-checklist.md")
+);
+copyFile(path.join(root, "site.webmanifest"), path.join(dist, "site.webmanifest"));
+
+console.log("Built Medholic public site in dist.");
