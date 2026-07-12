@@ -493,7 +493,7 @@ const server = http.createServer(async (request, response) => {
   if (await handleApi(request, response, pathname)) return;
 
   let requestedPath = pathname;
-  if (pathname === "/") requestedPath = "/landing.html";
+  if (pathname === "/") requestedPath = "/marketing/index.html";
   if (pathname === "/app" || pathname === "/app/") requestedPath = "/index.html";
   if (pathname === "/staff" || pathname === "/staff/") requestedPath = "/staff.html";
   let filePath = path.resolve(root, `.${requestedPath}`);
