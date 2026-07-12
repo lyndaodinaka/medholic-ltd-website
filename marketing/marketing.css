@@ -2215,12 +2215,16 @@ h1 {
 }
 
 .lux-wordmark {
-  color: #f8dc9f;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.35rem;
-  font-weight: 800;
-  letter-spacing: 0.12em;
+  display: inline-flex;
+  align-items: center;
   text-decoration: none;
+}
+
+.lux-wordmark img {
+  width: 154px;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 12px 22px rgba(0, 0, 0, 0.35));
 }
 
 .lux-nav-links {
@@ -2546,7 +2550,11 @@ h1 {
   }
 
   .lux-wordmark {
-    font-size: 1rem;
+    max-width: 132px;
+  }
+
+  .lux-wordmark img {
+    width: 132px;
   }
 
   .lux-nav-links a:not(:last-child) {
