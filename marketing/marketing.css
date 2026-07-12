@@ -2394,6 +2394,17 @@ h1 {
   line-height: 1.65;
 }
 
+.lux-contact .lux-location {
+  width: max-content;
+  max-width: 100%;
+  border: 1px solid rgba(16, 37, 48, 0.14);
+  border-radius: 8px;
+  padding: 10px 13px;
+  color: #102530;
+  background: rgba(16, 37, 48, 0.06);
+  font-weight: 850;
+}
+
 .lux-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
