@@ -32,6 +32,10 @@ function dataUri(relativePath, mimeType) {
   return `data:${mimeType};base64,${encoded}`;
 }
 
+function fileBase64(relativePath) {
+  return fs.readFileSync(path.join(root, relativePath)).toString("base64");
+}
+
 fs.rmSync(dist, { recursive: true, force: true });
 fs.mkdirSync(dist, { recursive: true });
 
@@ -44,6 +48,7 @@ html = html
   .replaceAll('/assets/favicon-32.png', dataUri(path.join("assets", "favicon-32.png"), "image/png"))
   .replaceAll('/assets/apple-touch-icon.png', dataUri(path.join("assets", "apple-touch-icon.png"), "image/png"))
   .replaceAll('/marketing/medholic-wordmark-logo.svg', dataUri(path.join("marketing", "medholic-wordmark-logo.svg"), "image/svg+xml"))
+  .replaceAll('/marketing/medholic-branded-preview.jpg', dataUri(path.join("marketing", "medholic-branded-preview.jpg"), "image/jpeg"))
   .replaceAll('/marketing/medholic-luxury-boardroom.jpg', dataUri(path.join("marketing", "medholic-luxury-boardroom.jpg"), "image/jpeg"))
   .replaceAll('/marketing/spotit-logo.png', dataUri(path.join("marketing", "spotit-logo.png"), "image/png"))
   .replaceAll('/marketing/spotit-demo-nurse-capture.jpg', dataUri(path.join("marketing", "spotit-demo-nurse-capture.jpg"), "image/jpeg"))
@@ -66,6 +71,7 @@ copyDir(path.join(root, "assets"), path.join(dist, "assets"), new Set([
 ]));
 copyDir(path.join(root, "marketing"), path.join(dist, "marketing"), new Set([
   "medholic-wordmark-logo.svg",
+  "medholic-branded-preview.jpg",
   "medholic-luxury-boardroom.jpg",
   "spotit-logo.png",
   "spotit-demo-nurse-capture.jpg",
@@ -80,7 +86,18 @@ copyFile(path.join(root, "site.webmanifest"), path.join(dist, "site.webmanifest"
 copyFile(path.join(root, ".openai", "hosting.json"), path.join(dist, ".openai", "hosting.json"));
 
 fs.mkdirSync(serverDir, { recursive: true });
+const brandedPreviewBase64 = fileBase64(path.join("marketing", "medholic-branded-preview.jpg"));
 fs.writeFileSync(path.join(serverDir, "index.js"), `const html = ${JSON.stringify(html)};
+const brandedPreviewBase64 = ${JSON.stringify(brandedPreviewBase64)};
+
+function base64ToBytes(value) {
+  const binary = atob(value);
+  const bytes = new Uint8Array(binary.length);
+  for (let index = 0; index < binary.length; index += 1) {
+    bytes[index] = binary.charCodeAt(index);
+  }
+  return bytes;
+}
 
 export default {
   async fetch(request) {
@@ -88,6 +105,15 @@ export default {
     if (url.pathname === "/" || url.pathname === "/index.html") {
       return new Response(html, {
         headers: { "Content-Type": "text/html; charset=utf-8" }
+      });
+    }
+
+    if (url.pathname === "/marketing/medholic-branded-preview.jpg") {
+      return new Response(base64ToBytes(brandedPreviewBase64), {
+        headers: {
+          "Content-Type": "image/jpeg",
+          "Cache-Control": "public, max-age=3600"
+        }
       });
     }
 
