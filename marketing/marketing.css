@@ -2218,13 +2218,22 @@ h1 {
   display: inline-flex;
   align-items: center;
   text-decoration: none;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 2.1rem;
+  font-weight: 950;
+  line-height: 1;
+  letter-spacing: 0;
+  filter: drop-shadow(0 12px 22px rgba(0, 0, 0, 0.38));
 }
 
-.lux-wordmark img {
-  width: 154px;
-  height: auto;
-  display: block;
-  filter: drop-shadow(0 12px 22px rgba(0, 0, 0, 0.35));
+.lux-wordmark-med {
+  color: #ff6b2a;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.54);
+}
+
+.lux-wordmark-holic {
+  color: #2f9cf4;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
 .lux-nav-links {
@@ -2660,11 +2669,7 @@ h1 {
   }
 
   .lux-wordmark {
-    max-width: 132px;
-  }
-
-  .lux-wordmark img {
-    width: 132px;
+    font-size: 1.65rem;
   }
 
   .lux-nav-links a:not(:last-child) {

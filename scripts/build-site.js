@@ -41,10 +41,9 @@ const css = fs.readFileSync(path.join(root, "marketing", "marketing.css"), "utf8
 html = html
   .replace('<base href="/marketing/">', "")
   .replace('<link rel="stylesheet" href="marketing.css">', `<style>\n${css}\n</style>`)
-  .replaceAll('/assets/medholic-logo-transparent.png', dataUri(path.join("assets", "medholic-logo-transparent.png"), "image/png"))
   .replaceAll('/assets/favicon-32.png', dataUri(path.join("assets", "favicon-32.png"), "image/png"))
   .replaceAll('/assets/apple-touch-icon.png', dataUri(path.join("assets", "apple-touch-icon.png"), "image/png"))
-  .replaceAll('/marketing/medholic-luxury-boardroom-logo.png', dataUri(path.join("marketing", "medholic-luxury-boardroom-logo.png"), "image/png"))
+  .replaceAll('/marketing/medholic-luxury-boardroom.png', dataUri(path.join("marketing", "medholic-luxury-boardroom.png"), "image/png"))
   .replaceAll('href="/assets/', 'href="assets/')
   .replaceAll('src="/assets/', 'src="assets/')
   .replaceAll('content="/marketing/', 'content="marketing/')
@@ -58,11 +57,10 @@ copyDir(path.join(root, "assets"), path.join(dist, "assets"), new Set([
   "apple-touch-icon.png",
   "favicon-32.png",
   "icon-192.png",
-  "icon-512.png",
-  "medholic-logo-transparent.png"
+  "icon-512.png"
 ]));
 copyDir(path.join(root, "marketing"), path.join(dist, "marketing"), new Set([
-  "medholic-luxury-boardroom-logo.png"
+  "medholic-luxury-boardroom.png"
 ]));
 copyFile(
   path.join(root, "docs", "final-business-launch-checklist.md"),
