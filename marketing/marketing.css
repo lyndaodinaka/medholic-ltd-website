@@ -2353,6 +2353,7 @@ h1 {
 }
 
 .lux-intro,
+.lux-location-panel,
 .lux-story,
 .lux-grid,
 .lux-projects,
@@ -2370,9 +2371,33 @@ h1 {
 }
 
 .lux-intro h2,
+.lux-location-panel h2,
 .lux-statement h2,
 .lux-contact h2 {
   font-size: clamp(2.2rem, 4vw, 4.6rem);
+}
+
+.lux-location-panel {
+  margin-top: 18px;
+  display: grid;
+  gap: 14px;
+  border: 1px solid rgba(248, 220, 159, 0.2);
+  border-radius: 8px;
+  padding: 28px 30px;
+  background:
+    linear-gradient(135deg, rgba(248, 220, 159, 0.13), rgba(0, 88, 181, 0.16)),
+    #0b171d;
+}
+
+.lux-location-panel h2,
+.lux-location-panel p {
+  margin: 0;
+}
+
+.lux-location-panel p:not(.lux-kicker) {
+  max-width: 880px;
+  color: rgba(255, 255, 255, 0.76);
+  line-height: 1.65;
 }
 
 .lux-story {
@@ -2416,17 +2441,6 @@ h1 {
   padding: 12px 14px;
   color: #fff3d2;
   background: rgba(248, 220, 159, 0.1);
-  font-weight: 850;
-}
-
-.lux-contact .lux-location {
-  width: max-content;
-  max-width: 100%;
-  border: 1px solid rgba(16, 37, 48, 0.14);
-  border-radius: 8px;
-  padding: 10px 13px;
-  color: #102530;
-  background: rgba(16, 37, 48, 0.06);
   font-weight: 850;
 }
 
@@ -3045,6 +3059,7 @@ h1 {
   .lux-story,
   .lux-projects,
   .lux-spotit-showcase,
+  .lux-location-panel,
   .lux-statement,
   .lux-contact {
     grid-template-columns: 1fr;
@@ -3121,7 +3136,8 @@ h1 {
   }
 
   .lux-spotit-card,
-  .lux-spotit-copy {
+  .lux-spotit-copy,
+  .lux-location-panel {
     padding: 24px;
   }
 
