@@ -2482,8 +2482,14 @@ h1 {
   align-items: stretch;
 }
 
+.lux-projects-organized {
+  grid-template-columns: 1fr;
+}
+
 .lux-projects-heading,
-.lux-project-card {
+.lux-project-card,
+.lux-project-feature,
+.lux-project-placeholder {
   border: 1px solid rgba(248, 220, 159, 0.18);
   border-radius: 8px;
   background:
@@ -2582,6 +2588,77 @@ h1 {
   color: rgba(255, 255, 255, 0.84);
 }
 
+.lux-project-list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 18px;
+}
+
+.lux-project-feature {
+  display: grid;
+  gap: 22px;
+  padding: 28px;
+}
+
+.lux-project-feature-head {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.38fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: center;
+}
+
+.lux-project-feature-head h3 {
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(2rem, 4vw, 4rem);
+  line-height: 1;
+}
+
+.lux-project-feature-head p:not(.lux-kicker) {
+  margin: 14px 0 0;
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.65;
+}
+
+.lux-project-feature-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(360px, 1.08fr);
+  gap: 18px;
+}
+
+.lux-project-placeholder {
+  display: grid;
+  gap: 12px;
+  padding: 28px;
+  background:
+    linear-gradient(135deg, rgba(248, 220, 159, 0.1), rgba(0, 88, 181, 0.12)),
+    #0b171d;
+}
+
+.lux-project-placeholder span {
+  color: #f8dc9f;
+  font-size: 0.8rem;
+  font-weight: 950;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.lux-project-placeholder h3,
+.lux-project-placeholder p {
+  margin: 0;
+}
+
+.lux-project-placeholder h3 {
+  color: #ffffff;
+  font-size: clamp(1.55rem, 2.7vw, 2.55rem);
+}
+
+.lux-project-placeholder p {
+  max-width: 780px;
+  color: rgba(255, 255, 255, 0.74);
+  line-height: 1.65;
+}
+
 .lux-spotit-card {
   overflow: hidden;
   display: grid;
@@ -2600,6 +2677,7 @@ h1 {
 
 .lux-spotit-logo {
   width: min(360px, 100%);
+  justify-self: start;
   border-radius: 8px;
   padding: 16px;
   background: rgba(255, 255, 255, 0.96);
@@ -2671,6 +2749,13 @@ h1 {
   padding: 30px;
 }
 
+.lux-spotit-copy h4 {
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(1.65rem, 2.5vw, 2.75rem);
+  line-height: 1.05;
+}
+
 .lux-spotit-copy h2 {
   margin: 0;
   color: #ffffff;
@@ -2696,7 +2781,7 @@ h1 {
 }
 
 .lux-spotit-video {
-  min-height: 620px;
+  min-height: 0;
   padding: 16px;
 }
 
@@ -3125,6 +3210,8 @@ h1 {
   .lux-story,
   .lux-projects,
   .lux-spotit-showcase,
+  .lux-project-feature-head,
+  .lux-project-feature-grid,
   .lux-location-panel,
   .lux-statement,
   .lux-contact {
@@ -3225,6 +3312,8 @@ h1 {
 
   .lux-spotit-card,
   .lux-spotit-copy,
+  .lux-project-feature,
+  .lux-project-placeholder,
   .lux-location-panel {
     padding: 24px;
   }
