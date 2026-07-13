@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 210" role="img" aria-labelledby="title desc">
+  <title id="title">Medholic logo</title>
+  <desc id="desc">A refined Medholic wordmark for a nurse-owned health-tech company.</desc>
+  <defs>
+    <linearGradient id="medOrange" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff7a2f"/>
+      <stop offset="0.58" stop-color="#ff4f1a"/>
+      <stop offset="1" stop-color="#d93513"/>
+    </linearGradient>
+    <linearGradient id="holicBlue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3fb8ff"/>
+      <stop offset="0.56" stop-color="#146bd6"/>
+      <stop offset="1" stop-color="#083b8f"/>
+    </linearGradient>
+    <linearGradient id="goldLine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#f6d48a"/>
+      <stop offset="0.5" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#f0b95c"/>
+    </linearGradient>
+    <filter id="softShadow" x="-10%" y="-20%" width="120%" height="150%">
+      <feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#071015" flood-opacity="0.22"/>
+    </filter>
+  </defs>
+  <rect width="760" height="210" rx="0" fill="none"/>
+  <g filter="url(#softShadow)">
+    <text x="28" y="121" fill="url(#medOrange)" font-family="Georgia, 'Times New Roman', serif" font-size="96" font-weight="700" letter-spacing="0">Med</text>
+    <text x="235" y="121" fill="url(#holicBlue)" font-family="Georgia, 'Times New Roman', serif" font-size="96" font-weight="700" letter-spacing="0">holic</text>
+    <path d="M33 143 C154 166, 282 166, 409 145 S631 128, 714 149" fill="none" stroke="url(#goldLine)" stroke-width="7" stroke-linecap="round"/>
+    <path d="M612 50 C632 70, 642 88, 642 111 C642 136, 629 156, 607 170" fill="none" stroke="#f2c872" stroke-width="5" stroke-linecap="round"/>
+    <path d="M632 49 C654 70, 665 89, 665 112 C665 137, 651 158, 628 171" fill="none" stroke="#2c9af1" stroke-width="5" stroke-linecap="round"/>
+    <text x="35" y="188" fill="#f9e7bd" font-family="Inter, Arial, sans-serif" font-size="26" font-weight="700" letter-spacing="4">DIGITAL HEALTH SYSTEMS</text>
+  </g>
+</svg>
