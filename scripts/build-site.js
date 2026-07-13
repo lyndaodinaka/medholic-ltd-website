@@ -43,11 +43,11 @@ html = html
   .replace('<link rel="stylesheet" href="marketing.css">', `<style>\n${css}\n</style>`)
   .replaceAll('/assets/favicon-32.png', dataUri(path.join("assets", "favicon-32.png"), "image/png"))
   .replaceAll('/assets/apple-touch-icon.png', dataUri(path.join("assets", "apple-touch-icon.png"), "image/png"))
-  .replaceAll('/marketing/medholic-luxury-boardroom.png', dataUri(path.join("marketing", "medholic-luxury-boardroom.png"), "image/png"))
+  .replaceAll('/marketing/medholic-luxury-boardroom.jpg', dataUri(path.join("marketing", "medholic-luxury-boardroom.jpg"), "image/jpeg"))
   .replaceAll('/marketing/spotit-logo.png', dataUri(path.join("marketing", "spotit-logo.png"), "image/png"))
-  .replaceAll('/marketing/spotit-demo-nurse-capture.png', dataUri(path.join("marketing", "spotit-demo-nurse-capture.png"), "image/png"))
-  .replaceAll('/marketing/spotit-demo-phone-observation.png', dataUri(path.join("marketing", "spotit-demo-phone-observation.png"), "image/png"))
-  .replaceAll('/marketing/spotit-demo-doctor-review.png', dataUri(path.join("marketing", "spotit-demo-doctor-review.png"), "image/png"))
+  .replaceAll('/marketing/spotit-demo-nurse-capture.jpg', dataUri(path.join("marketing", "spotit-demo-nurse-capture.jpg"), "image/jpeg"))
+  .replaceAll('/marketing/spotit-demo-phone-observation.jpg', dataUri(path.join("marketing", "spotit-demo-phone-observation.jpg"), "image/jpeg"))
+  .replaceAll('/marketing/spotit-demo-doctor-review.jpg', dataUri(path.join("marketing", "spotit-demo-doctor-review.jpg"), "image/jpeg"))
   .replaceAll('href="/assets/', 'href="assets/')
   .replaceAll('src="/assets/', 'src="assets/')
   .replaceAll('content="/marketing/', 'content="marketing/')
@@ -64,11 +64,11 @@ copyDir(path.join(root, "assets"), path.join(dist, "assets"), new Set([
   "icon-512.png"
 ]));
 copyDir(path.join(root, "marketing"), path.join(dist, "marketing"), new Set([
-  "medholic-luxury-boardroom.png",
+  "medholic-luxury-boardroom.jpg",
   "spotit-logo.png",
-  "spotit-demo-nurse-capture.png",
-  "spotit-demo-phone-observation.png",
-  "spotit-demo-doctor-review.png"
+  "spotit-demo-nurse-capture.jpg",
+  "spotit-demo-phone-observation.jpg",
+  "spotit-demo-doctor-review.jpg"
 ]));
 copyFile(
   path.join(root, "docs", "final-business-launch-checklist.md"),
