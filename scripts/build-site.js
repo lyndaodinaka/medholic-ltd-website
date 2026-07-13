@@ -45,6 +45,9 @@ html = html
   .replaceAll('/assets/apple-touch-icon.png', dataUri(path.join("assets", "apple-touch-icon.png"), "image/png"))
   .replaceAll('/marketing/medholic-luxury-boardroom.png', dataUri(path.join("marketing", "medholic-luxury-boardroom.png"), "image/png"))
   .replaceAll('/marketing/spotit-logo.png', dataUri(path.join("marketing", "spotit-logo.png"), "image/png"))
+  .replaceAll('/marketing/spotit-demo-nurse-capture.png', dataUri(path.join("marketing", "spotit-demo-nurse-capture.png"), "image/png"))
+  .replaceAll('/marketing/spotit-demo-phone-observation.png', dataUri(path.join("marketing", "spotit-demo-phone-observation.png"), "image/png"))
+  .replaceAll('/marketing/spotit-demo-doctor-review.png', dataUri(path.join("marketing", "spotit-demo-doctor-review.png"), "image/png"))
   .replaceAll('href="/assets/', 'href="assets/')
   .replaceAll('src="/assets/', 'src="assets/')
   .replaceAll('content="/marketing/', 'content="marketing/')
@@ -62,7 +65,10 @@ copyDir(path.join(root, "assets"), path.join(dist, "assets"), new Set([
 ]));
 copyDir(path.join(root, "marketing"), path.join(dist, "marketing"), new Set([
   "medholic-luxury-boardroom.png",
-  "spotit-logo.png"
+  "spotit-logo.png",
+  "spotit-demo-nurse-capture.png",
+  "spotit-demo-phone-observation.png",
+  "spotit-demo-doctor-review.png"
 ]));
 copyFile(
   path.join(root, "docs", "final-business-launch-checklist.md"),
