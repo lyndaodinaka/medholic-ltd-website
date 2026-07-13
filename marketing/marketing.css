@@ -2370,6 +2370,25 @@ h1 {
   gap: 16px;
 }
 
+.lux-about-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.lux-about-pills span {
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(248, 220, 159, 0.22);
+  border-radius: 8px;
+  padding: 0 13px;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.07);
+  font-weight: 850;
+}
+
 .lux-intro h2,
 .lux-location-panel h2,
 .lux-statement h2,
@@ -2596,8 +2615,11 @@ h1 {
 
 .lux-project-feature {
   display: grid;
-  gap: 22px;
-  padding: 28px;
+  gap: 26px;
+  padding: 32px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.028)),
+    #0b171d;
 }
 
 .lux-project-feature-head {
@@ -2622,8 +2644,9 @@ h1 {
 
 .lux-project-feature-grid {
   display: grid;
-  grid-template-columns: minmax(0, 0.92fr) minmax(360px, 1.08fr);
-  gap: 18px;
+  grid-template-columns: minmax(0, 0.82fr) minmax(420px, 1.18fr);
+  gap: 26px;
+  align-items: center;
 }
 
 .lux-project-placeholder {
@@ -2782,7 +2805,8 @@ h1 {
 
 .lux-spotit-video {
   min-height: 0;
-  padding: 16px;
+  padding: 20px;
+  perspective: 1200px;
 }
 
 .lux-video-frame {
@@ -2796,6 +2820,11 @@ h1 {
     radial-gradient(circle at 28% 18%, rgba(255, 91, 0, 0.2), transparent 32%),
     radial-gradient(circle at 82% 28%, rgba(0, 88, 181, 0.22), transparent 34%),
     #071015;
+  transform: rotateX(3deg) rotateY(-5deg);
+  transform-origin: center;
+  box-shadow:
+    0 34px 90px rgba(0, 0, 0, 0.36),
+    0 0 0 1px rgba(248, 220, 159, 0.06) inset;
 }
 
 .lux-video-topbar {
@@ -2866,22 +2895,22 @@ h1 {
 }
 
 .lux-storyboard-real {
-  grid-template-columns: 1fr;
-  gap: 14px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
 }
 
 .lux-storyboard-real article {
   overflow: hidden;
   display: grid;
-  grid-template-columns: minmax(180px, 0.9fr) minmax(0, 1fr);
+  grid-template-columns: 1fr;
   align-items: end;
-  gap: 16px;
   padding: 0;
+  transform: translateZ(0);
 }
 
 .lux-storyboard-real img {
   width: 100%;
-  height: 190px;
+  height: 230px;
   display: block;
   object-fit: cover;
   object-position: center;
@@ -2890,8 +2919,8 @@ h1 {
 .lux-storyboard-real article span,
 .lux-storyboard-real article strong,
 .lux-storyboard-real article p {
-  margin-left: 0;
-  margin-right: 16px;
+  margin-left: 14px;
+  margin-right: 14px;
 }
 
 .lux-storyboard-real article span {
@@ -2899,7 +2928,7 @@ h1 {
 }
 
 .lux-storyboard-real article p {
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .lux-demo-cta {
