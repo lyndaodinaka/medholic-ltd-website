@@ -3157,6 +3157,13 @@ h1 {
     #0d1b22;
 }
 
+.lux-statement p:not(.lux-kicker) {
+  max-width: 720px;
+  margin: 16px 0 0;
+  color: rgba(255, 255, 255, 0.76);
+  line-height: 1.65;
+}
+
 .lux-tags {
   display: flex;
   flex-wrap: wrap;
