@@ -2240,10 +2240,12 @@ h1 {
   display: flex;
   align-items: center;
   gap: 8px;
+  min-width: 0;
 }
 
 .lux-nav-links a {
   min-height: 38px;
+  flex: 0 0 auto;
   display: inline-flex;
   align-items: center;
   border-radius: 8px;
@@ -2254,7 +2256,7 @@ h1 {
 }
 
 .lux-hero {
-  min-height: 100vh;
+  min-height: 100svh;
   position: relative;
   display: grid;
   align-items: end;
@@ -2365,7 +2367,7 @@ h1 {
 }
 
 .lux-intro {
-  padding: 86px 0 32px;
+  padding: clamp(58px, 8vw, 86px) 0 32px;
   display: grid;
   gap: 16px;
 }
@@ -3235,6 +3237,39 @@ h1 {
 }
 
 @media (max-width: 880px) {
+  .lux-nav {
+    min-height: auto;
+    padding-top: 18px;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .lux-nav-links {
+    width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 8px;
+    padding: 6px;
+    background: rgba(7, 16, 21, 0.48);
+    backdrop-filter: blur(18px);
+  }
+
+  .lux-nav-links::-webkit-scrollbar {
+    display: none;
+  }
+
+  .lux-nav-links a {
+    min-height: 34px;
+    padding: 0 10px;
+    font-size: 0.9rem;
+  }
+
+  .lux-hero-overlay {
+    padding-top: 166px;
+  }
+
   .lux-grid,
   .lux-story,
   .lux-projects,
@@ -3257,6 +3292,10 @@ h1 {
 
   .lux-storyboard-real img {
     height: 240px;
+  }
+
+  .lux-video-frame {
+    transform: none;
   }
 
   .lux-storyboard-real article span,
@@ -3309,19 +3348,41 @@ h1 {
 
 @media (max-width: 620px) {
   .lux-nav {
-    min-height: 74px;
+    width: min(100% - 24px, 1180px);
+    padding-top: 14px;
   }
 
   .lux-wordmark {
     font-size: 1.65rem;
   }
 
-  .lux-nav-links a:not(:last-child) {
-    display: none;
+  .lux-nav-links {
+    gap: 6px;
+  }
+
+  .lux-nav-links a {
+    min-height: 32px;
+    padding: 0 9px;
+    font-size: 0.82rem;
   }
 
   .lux-hero-overlay {
-    padding-bottom: 60px;
+    width: min(100% - 24px, 1180px);
+    padding-top: 148px;
+    padding-bottom: 56px;
+    gap: 16px;
+  }
+
+  .lux-hero h1 {
+    font-size: clamp(2.35rem, 12vw, 4rem);
+    line-height: 1;
+  }
+
+  .lux-hero p:not(.lux-kicker),
+  .lux-intro p,
+  .lux-grid p {
+    font-size: 0.98rem;
+    line-height: 1.62;
   }
 
   .lux-actions a,
@@ -3333,6 +3394,42 @@ h1 {
   .lux-statement,
   .lux-contact {
     padding: 24px;
+  }
+
+  .lux-intro,
+  .lux-location-panel,
+  .lux-story,
+  .lux-grid,
+  .lux-projects,
+  .lux-statement,
+  .lux-contact {
+    width: min(100% - 24px, 1180px);
+  }
+
+  .lux-projects-heading,
+  .lux-project-feature {
+    padding: 24px;
+  }
+
+  .lux-project-feature-head {
+    gap: 18px;
+  }
+
+  .lux-spotit-logo {
+    width: min(250px, 100%);
+    padding: 12px;
+  }
+
+  .lux-storyboard {
+    padding: 10px;
+  }
+
+  .lux-storyboard-real img {
+    height: 210px;
+  }
+
+  .lux-video-topbar {
+    padding: 10px 12px;
   }
 
   .lux-spotit-actions a {
@@ -3392,5 +3489,32 @@ h1 {
   .lux-doctor-panel {
     bottom: 30px;
     left: 166px;
+  }
+}
+
+@media (max-width: 420px) {
+  .lux-actions {
+    display: grid;
+  }
+
+  .lux-actions a {
+    width: 100%;
+  }
+
+  .lux-projects-heading h2,
+  .lux-project-feature-head h3,
+  .lux-spotit-copy h4,
+  .lux-contact h2,
+  .lux-location-panel h2,
+  .lux-intro h2 {
+    overflow-wrap: anywhere;
+  }
+
+  .lux-storyboard-real img {
+    height: 188px;
+  }
+
+  .lux-contact {
+    margin-bottom: 42px;
   }
 }
