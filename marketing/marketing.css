@@ -2568,6 +2568,386 @@ h1 {
   color: rgba(255, 255, 255, 0.84);
 }
 
+.lux-spotit-card {
+  overflow: hidden;
+  display: grid;
+  align-content: center;
+  gap: 18px;
+  border: 1px solid rgba(255, 91, 0, 0.24);
+  border-radius: 8px;
+  padding: 30px;
+  background:
+    radial-gradient(circle at 24% 18%, rgba(255, 91, 0, 0.18), transparent 34%),
+    radial-gradient(circle at 84% 82%, rgba(0, 88, 181, 0.22), transparent 35%),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.035)),
+    #0b171d;
+  box-shadow: 0 22px 68px rgba(0, 0, 0, 0.22);
+}
+
+.lux-spotit-logo {
+  width: min(360px, 100%);
+  border-radius: 8px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.96);
+}
+
+.lux-spotit-card h3 {
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(2rem, 4vw, 4rem);
+  line-height: 1;
+}
+
+.lux-spotit-card p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.65;
+}
+
+.lux-spotit-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.lux-spotit-actions a {
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  padding: 0 16px;
+  text-decoration: none;
+  font-weight: 950;
+}
+
+.lux-spotit-actions a:first-child {
+  color: #ffffff;
+  background: linear-gradient(135deg, #ff5b00, #0058b5);
+}
+
+.lux-spotit-actions a:last-child {
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.lux-spotit-showcase {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(360px, 1.1fr);
+  gap: 18px;
+  align-items: stretch;
+}
+
+.lux-spotit-copy,
+.lux-spotit-video {
+  border: 1px solid rgba(248, 220, 159, 0.18);
+  border-radius: 8px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.035)),
+    #0b171d;
+  box-shadow: 0 22px 68px rgba(0, 0, 0, 0.22);
+}
+
+.lux-spotit-copy {
+  display: grid;
+  align-content: center;
+  gap: 15px;
+  padding: 30px;
+}
+
+.lux-spotit-copy h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(2rem, 3.5vw, 3.65rem);
+  line-height: 1.03;
+}
+
+.lux-spotit-copy p,
+.lux-spotit-copy li {
+  color: rgba(255, 255, 255, 0.76);
+  line-height: 1.62;
+}
+
+.lux-spotit-copy p,
+.lux-spotit-copy ul {
+  margin: 0;
+}
+
+.lux-spotit-copy ul {
+  display: grid;
+  gap: 10px;
+  padding-left: 20px;
+}
+
+.lux-spotit-video {
+  min-height: 620px;
+  padding: 16px;
+}
+
+.lux-video-frame {
+  min-height: 100%;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 28% 18%, rgba(255, 91, 0, 0.2), transparent 32%),
+    radial-gradient(circle at 82% 28%, rgba(0, 88, 181, 0.22), transparent 34%),
+    #071015;
+}
+
+.lux-video-topbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 12px 14px;
+}
+
+.lux-video-topbar span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ff5b00;
+}
+
+.lux-video-topbar span:nth-child(2) {
+  background: #f8dc9f;
+}
+
+.lux-video-topbar span:nth-child(3) {
+  background: #0058b5;
+}
+
+.lux-video-topbar strong {
+  margin-left: 8px;
+  color: rgba(255, 255, 255, 0.84);
+  font-size: 0.82rem;
+}
+
+.lux-storyboard {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  padding: 14px;
+}
+
+.lux-storyboard article {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.lux-storyboard span {
+  color: #f8dc9f;
+  font-size: 0.72rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.lux-storyboard strong,
+.lux-storyboard p {
+  display: block;
+  margin-top: 8px;
+}
+
+.lux-storyboard strong {
+  color: #ffffff;
+}
+
+.lux-storyboard p {
+  margin-bottom: 0;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 0.86rem;
+  line-height: 1.42;
+}
+
+.lux-clinical-scene {
+  position: relative;
+  min-height: 375px;
+  margin: 0 14px 14px;
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)),
+    linear-gradient(135deg, #102530, #08141a);
+}
+
+.lux-clinical-scene::before {
+  content: "";
+  position: absolute;
+  inset: 58% 0 0;
+  background: linear-gradient(180deg, rgba(248, 220, 159, 0.18), rgba(248, 220, 159, 0.04));
+}
+
+.lux-nurse {
+  position: absolute;
+  left: 8%;
+  bottom: 18%;
+  width: 110px;
+  height: 210px;
+  border-radius: 58px 58px 18px 18px;
+  background: linear-gradient(180deg, #f0c7a4 0 24%, #2f9fcf 24% 100%);
+  box-shadow: 0 26px 50px rgba(0, 0, 0, 0.28);
+}
+
+.lux-nurse::before {
+  content: "";
+  position: absolute;
+  left: 27px;
+  top: -34px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #5a382a;
+}
+
+.lux-nurse::after {
+  content: "";
+  position: absolute;
+  left: 25px;
+  top: 78px;
+  width: 60px;
+  height: 76px;
+  border-radius: 8px;
+  background:
+    linear-gradient(90deg, transparent 46%, rgba(255, 255, 255, 0.7) 46% 54%, transparent 54%),
+    rgba(255, 255, 255, 0.34);
+}
+
+.lux-nurse div {
+  position: absolute;
+  right: -72px;
+  top: 118px;
+  width: 96px;
+  height: 14px;
+  border-radius: 999px;
+  transform: rotate(-12deg);
+  background: #f0c7a4;
+}
+
+.lux-patient-card,
+.lux-phone,
+.lux-doctor-panel {
+  position: absolute;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  background: rgba(7, 16, 21, 0.78);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.22);
+}
+
+.lux-patient-card {
+  left: 28%;
+  bottom: 18%;
+  width: 180px;
+  padding: 16px;
+}
+
+.lux-patient-card span,
+.lux-doctor-panel span,
+.lux-phone-screen span {
+  color: #f8dc9f;
+  font-size: 0.72rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.lux-patient-card strong {
+  display: block;
+  margin-top: 8px;
+  color: #ffffff;
+}
+
+.lux-phone {
+  left: 48%;
+  bottom: 12%;
+  width: 138px;
+  height: 250px;
+  padding: 12px;
+  background: #05090d;
+  transform: rotate(-3deg);
+  animation: spotitFloat 4.5s ease-in-out infinite;
+}
+
+.lux-phone-screen {
+  height: 100%;
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  border-radius: 8px;
+  padding: 14px;
+  background: linear-gradient(180deg, #eef7ff, #ffffff);
+}
+
+.lux-wound-dot {
+  width: 72px;
+  height: 72px;
+  justify-self: center;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, #b90918 0 18%, #ff8c7d 19% 36%, #f8dc9f 37% 56%, #0058b5 57% 60%, transparent 61%),
+    #fff4ec;
+}
+
+.lux-phone-screen p {
+  margin: 0;
+  color: #102530;
+  font-size: 0.8rem;
+  font-weight: 850;
+}
+
+.lux-phone-screen strong {
+  color: #ff5b00;
+  font-size: 0.82rem;
+  line-height: 1.25;
+}
+
+.lux-doctor-panel {
+  right: 7%;
+  bottom: 18%;
+  width: 215px;
+  padding: 16px;
+}
+
+.lux-doctor-panel div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.lux-doctor-panel div strong {
+  min-height: 82px;
+  display: grid;
+  place-items: end center;
+  border-radius: 8px;
+  padding: 10px;
+  color: #102530;
+  font-size: 0.8rem;
+  background:
+    radial-gradient(circle at 50% 35%, #ff8c7d 0 12%, #f8dc9f 13% 28%, transparent 29%),
+    #ffffff;
+}
+
+.lux-doctor-panel p {
+  margin: 12px 0 0;
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 0.88rem;
+}
+
+@keyframes spotitFloat {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-3deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(-1deg);
+  }
+}
+
 .lux-statement {
   margin-top: 18px;
   display: grid;
@@ -2664,9 +3044,43 @@ h1 {
   .lux-grid,
   .lux-story,
   .lux-projects,
+  .lux-spotit-showcase,
   .lux-statement,
   .lux-contact {
     grid-template-columns: 1fr;
+  }
+
+  .lux-storyboard {
+    grid-template-columns: 1fr;
+  }
+
+  .lux-spotit-video {
+    min-height: auto;
+  }
+
+  .lux-clinical-scene {
+    min-height: 520px;
+  }
+
+  .lux-nurse {
+    left: 10%;
+    bottom: 52%;
+  }
+
+  .lux-patient-card {
+    left: auto;
+    right: 8%;
+    bottom: 58%;
+  }
+
+  .lux-phone {
+    left: 10%;
+    bottom: 10%;
+  }
+
+  .lux-doctor-panel {
+    right: 8%;
+    bottom: 12%;
   }
 
   .lux-hero h1 {
@@ -2700,5 +3114,61 @@ h1 {
   .lux-statement,
   .lux-contact {
     padding: 24px;
+  }
+
+  .lux-spotit-actions a {
+    width: 100%;
+  }
+
+  .lux-spotit-card,
+  .lux-spotit-copy {
+    padding: 24px;
+  }
+
+  .lux-clinical-scene {
+    min-height: 640px;
+  }
+
+  .lux-patient-card,
+  .lux-doctor-panel {
+    left: 18px;
+    right: 18px;
+    width: auto;
+  }
+
+  .lux-patient-card {
+    bottom: 62%;
+  }
+
+  .lux-nurse {
+    left: 28px;
+    bottom: 70%;
+    width: 82px;
+    height: 150px;
+  }
+
+  .lux-nurse::before {
+    left: 20px;
+    top: -28px;
+    width: 44px;
+    height: 44px;
+  }
+
+  .lux-nurse div {
+    right: -54px;
+    top: 88px;
+    width: 76px;
+  }
+
+  .lux-phone {
+    left: 24px;
+    bottom: 24px;
+    width: 122px;
+    height: 230px;
+  }
+
+  .lux-doctor-panel {
+    bottom: 30px;
+    left: 166px;
   }
 }

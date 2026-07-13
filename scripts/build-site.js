@@ -44,6 +44,7 @@ html = html
   .replaceAll('/assets/favicon-32.png', dataUri(path.join("assets", "favicon-32.png"), "image/png"))
   .replaceAll('/assets/apple-touch-icon.png', dataUri(path.join("assets", "apple-touch-icon.png"), "image/png"))
   .replaceAll('/marketing/medholic-luxury-boardroom.png', dataUri(path.join("marketing", "medholic-luxury-boardroom.png"), "image/png"))
+  .replaceAll('/marketing/spotit-logo.png', dataUri(path.join("marketing", "spotit-logo.png"), "image/png"))
   .replaceAll('href="/assets/', 'href="assets/')
   .replaceAll('src="/assets/', 'src="assets/')
   .replaceAll('content="/marketing/', 'content="marketing/')
@@ -60,7 +61,8 @@ copyDir(path.join(root, "assets"), path.join(dist, "assets"), new Set([
   "icon-512.png"
 ]));
 copyDir(path.join(root, "marketing"), path.join(dist, "marketing"), new Set([
-  "medholic-luxury-boardroom.png"
+  "medholic-luxury-boardroom.png",
+  "spotit-logo.png"
 ]));
 copyFile(
   path.join(root, "docs", "final-business-launch-checklist.md"),
