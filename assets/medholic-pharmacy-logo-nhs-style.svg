@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" role="img" aria-labelledby="title desc">
+  <title id="title">Medholic Pharmacy logo</title>
+  <desc id="desc">A clean NHS-inspired blue and white healthcare logo for Medholic Pharmacy.</desc>
+  <rect width="1200" height="360" rx="34" fill="#005EB8"/>
+  <g fill="#fff">
+    <rect x="72" y="88" width="126" height="126" rx="24"/>
+    <rect x="114" y="58" width="42" height="186" rx="14"/>
+    <rect x="42" y="130" width="186" height="42" rx="14"/>
+  </g>
+  <text x="270" y="170" fill="#fff" font-family="Arial, Helvetica, sans-serif" font-size="104" font-weight="800" letter-spacing="-1">Medholic</text>
+  <text x="276" y="252" fill="#fff" font-family="Arial, Helvetica, sans-serif" font-size="52" font-weight="700" letter-spacing="13">PHARMACY</text>
+  <path d="M270 285h610" stroke="#fff" stroke-width="10" stroke-linecap="round" opacity=".94"/>
+</svg>

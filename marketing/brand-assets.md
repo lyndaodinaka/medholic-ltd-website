@@ -5,6 +5,7 @@
 ## Logo Files
 
 - `assets/medholic-pharmacy-logo-transparent.png`
+- `assets/medholic-pharmacy-logo-nhs-style.svg`
 - `assets/favicon-32.png`
 - `assets/apple-touch-icon.png`
 - `assets/icon-192.png`
