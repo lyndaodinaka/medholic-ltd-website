@@ -3249,6 +3249,142 @@ h1 {
   font-size: clamp(1.05rem, 2vw, 1.45rem);
 }
 
+/* Medholic Ltd blue and white theme */
+.lux-site {
+  color: #17324d;
+  background:
+    radial-gradient(circle at top left, rgba(0, 114, 206, 0.12), transparent 32%),
+    linear-gradient(180deg, #ffffff 0%, #f3f9ff 48%, #ffffff 100%);
+}
+
+.lux-nav-links a {
+  color: rgba(255, 255, 255, 0.94);
+  background: rgba(0, 94, 184, 0.22);
+  border: 1px solid rgba(216, 236, 255, 0.3);
+}
+
+.lux-nav-links a:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.lux-hero::after {
+  background:
+    linear-gradient(90deg, rgba(0, 47, 90, 0.9), rgba(0, 94, 184, 0.56) 44%, rgba(0, 114, 206, 0.12)),
+    linear-gradient(180deg, rgba(0, 47, 90, 0.18), rgba(0, 94, 184, 0.18) 45%, #f3f9ff 98%);
+}
+
+.lux-kicker {
+  color: #005eb8;
+}
+
+.lux-hero .lux-kicker {
+  color: #d8ecff;
+}
+
+.lux-hero h1 {
+  color: #ffffff;
+}
+
+.lux-hero p:not(.lux-kicker) {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.lux-intro h2,
+.lux-location-panel h2,
+.lux-statement h2,
+.lux-contact h2,
+.lux-projects-heading h2,
+.lux-project-feature-head h3,
+.lux-project-placeholder h3,
+.lux-grid h3,
+.lux-spotit-copy h4 {
+  color: #003f7d;
+}
+
+.lux-intro p,
+.lux-grid p,
+.lux-location-panel p:not(.lux-kicker),
+.lux-statement p:not(.lux-kicker),
+.lux-projects-heading p:not(.lux-kicker),
+.lux-project-feature-head p:not(.lux-kicker),
+.lux-project-placeholder p,
+.lux-spotit-copy p,
+.lux-spotit-copy li,
+.lux-contact p {
+  color: #334e68;
+}
+
+.lux-primary {
+  color: #ffffff;
+  background: linear-gradient(135deg, #0072ce, #005eb8);
+  box-shadow: 0 22px 48px rgba(0, 94, 184, 0.24);
+}
+
+.lux-secondary {
+  color: #ffffff;
+  border: 1px solid rgba(216, 236, 255, 0.42);
+  background: rgba(0, 94, 184, 0.22);
+}
+
+.lux-about-pills span,
+.lux-tags span {
+  color: #005eb8;
+  border-color: rgba(0, 94, 184, 0.18);
+  background: #e8f2fb;
+}
+
+.lux-location-panel,
+.lux-grid article,
+.lux-projects-heading,
+.lux-project-feature,
+.lux-project-placeholder,
+.lux-statement,
+.lux-contact {
+  border-color: rgba(0, 94, 184, 0.16);
+  background:
+    linear-gradient(135deg, rgba(232, 242, 251, 0.92), rgba(255, 255, 255, 0.98)),
+    #ffffff;
+  box-shadow: 0 22px 60px rgba(0, 94, 184, 0.08);
+}
+
+.lux-grid span,
+.lux-project-placeholder span,
+.lux-project-card summary span {
+  color: #005eb8;
+}
+
+.lux-spotit-video,
+.lux-video-frame {
+  border-color: rgba(0, 94, 184, 0.18);
+  background:
+    linear-gradient(145deg, rgba(232, 242, 251, 0.9), rgba(255, 255, 255, 0.96)),
+    #ffffff;
+}
+
+.lux-video-topbar,
+.lux-storyboard,
+.lux-storyboard-real article {
+  background: #ffffff;
+  border-color: rgba(0, 94, 184, 0.14);
+}
+
+.lux-video-topbar strong,
+.lux-storyboard-real strong {
+  color: #003f7d;
+}
+
+.lux-video-topbar span,
+.lux-storyboard-real span {
+  color: #005eb8;
+}
+
+.lux-contact-reveal summary,
+.lux-contact-reveal a {
+  color: #ffffff;
+  border-color: #005eb8;
+  background: linear-gradient(135deg, #0072ce, #005eb8);
+}
+
 @media (max-width: 880px) {
   .lux-nav {
     min-height: auto;
