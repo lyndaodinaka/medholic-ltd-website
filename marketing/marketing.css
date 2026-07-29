@@ -3385,6 +3385,67 @@ h1 {
   background: linear-gradient(135deg, #0072ce, #005eb8);
 }
 
+/* Medholic pattern accents: orange/red Med + blue holic */
+.lux-wordmark img {
+  width: clamp(176px, 20vw, 248px);
+}
+
+.lux-hero-logo {
+  width: clamp(270px, 34vw, 440px);
+}
+
+.lux-kicker,
+.lux-grid span,
+.lux-project-placeholder span,
+.lux-project-card summary span,
+.lux-video-topbar span,
+.lux-storyboard-real span {
+  color: #ff5b00;
+}
+
+.lux-hero .lux-kicker {
+  color: #ffffff;
+}
+
+.lux-primary,
+.lux-contact-reveal summary,
+.lux-contact-reveal a {
+  background: linear-gradient(135deg, #ff9b14, #ff5b00 48%, #e01818);
+  border-color: rgba(255, 91, 0, 0.72);
+  box-shadow: 0 22px 48px rgba(255, 91, 0, 0.2);
+}
+
+.lux-secondary {
+  background: rgba(0, 94, 184, 0.26);
+}
+
+.lux-location-panel,
+.lux-grid article,
+.lux-projects-heading,
+.lux-project-feature,
+.lux-project-placeholder,
+.lux-statement,
+.lux-contact {
+  background:
+    radial-gradient(circle at 94% 0%, rgba(0, 114, 206, 0.1), transparent 30%),
+    radial-gradient(circle at 0% 100%, rgba(255, 91, 0, 0.08), transparent 32%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(232, 242, 251, 0.9)),
+    #ffffff;
+}
+
+.lux-about-pills span,
+.lux-tags span {
+  color: #005eb8;
+  border-color: rgba(255, 91, 0, 0.2);
+  background: linear-gradient(135deg, #ffffff, #e8f2fb);
+}
+
+.lux-spotit-logo {
+  background: #ffffff;
+  border: 1px solid rgba(0, 94, 184, 0.12);
+  box-shadow: 0 18px 42px rgba(0, 94, 184, 0.12);
+}
+
 @media (max-width: 880px) {
   .lux-nav {
     min-height: auto;
