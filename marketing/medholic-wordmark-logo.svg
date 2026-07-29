@@ -1,32 +1,36 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 260" role="img" aria-labelledby="title desc">
-  <title id="title">Medholic Ltd logo</title>
-  <desc id="desc">Medholic Ltd logo in orange, red, and blue script with a sweeping underline.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 150" role="img" aria-labelledby="title desc">
+  <title id="title">Medholic logo</title>
+  <desc id="desc">Medholic logo in flowing orange, red, and blue script with a warm orange underline.</desc>
   <defs>
-    <linearGradient id="medWarm" x1="0" y1="0" x2="0.8" y2="1">
-      <stop offset="0" stop-color="#ff9b14"/>
-      <stop offset="0.52" stop-color="#ff5b00"/>
-      <stop offset="1" stop-color="#e01818"/>
+    <linearGradient id="medholicWarm" x1="0" y1="0" x2="0.9" y2="1">
+      <stop offset="0" stop-color="#ff9d00"/>
+      <stop offset="0.48" stop-color="#ff5a00"/>
+      <stop offset="1" stop-color="#e0001a"/>
     </linearGradient>
-    <linearGradient id="holicBlue" x1="0" y1="0" x2="0.9" y2="1">
-      <stop offset="0" stop-color="#22b8ff"/>
-      <stop offset="0.54" stop-color="#008fe8"/>
+    <linearGradient id="medholicBlue" x1="0" y1="0" x2="0.95" y2="1">
+      <stop offset="0" stop-color="#28c7ff"/>
+      <stop offset="0.5" stop-color="#0094eb"/>
       <stop offset="1" stop-color="#005eb8"/>
     </linearGradient>
-    <linearGradient id="swoosh" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#ff5b00"/>
-      <stop offset="0.52" stop-color="#ff8a00"/>
-      <stop offset="1" stop-color="#e24a00"/>
+    <linearGradient id="medholicSweep" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ff5a00"/>
+      <stop offset="0.55" stop-color="#ff7b00"/>
+      <stop offset="1" stop-color="#df3e00"/>
     </linearGradient>
-    <filter id="lift" x="-8%" y="-20%" width="116%" height="150%">
-      <feDropShadow dx="0" dy="10" stdDeviation="9" flood-color="#003f7d" flood-opacity="0.16"/>
+    <filter id="softLift" x="-10%" y="-20%" width="120%" height="150%">
+      <feDropShadow dx="0" dy="3" stdDeviation="2.2" flood-color="#003f7d" flood-opacity="0.18"/>
+    </filter>
+    <filter id="gloss" x="-10%" y="-20%" width="120%" height="150%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="1.1" result="blur"/>
+      <feOffset dy="1" result="offset"/>
+      <feComposite in="SourceGraphic" in2="offset" operator="over"/>
     </filter>
   </defs>
-  <rect width="820" height="260" fill="none"/>
-  <g filter="url(#lift)">
-    <text x="28" y="146" fill="url(#medWarm)" font-family="'Segoe Script', 'Brush Script MT', Georgia, serif" font-size="118" font-weight="900" letter-spacing="0">Med</text>
-    <text x="266" y="146" fill="url(#holicBlue)" font-family="'Segoe Script', 'Brush Script MT', Georgia, serif" font-size="118" font-weight="900" letter-spacing="0">holic</text>
-    <text x="645" y="146" fill="#005eb8" font-family="Arial, Helvetica, sans-serif" font-size="42" font-weight="900" letter-spacing="0">Ltd</text>
-    <path d="M122 184 C276 157, 496 163, 720 181" fill="none" stroke="url(#swoosh)" stroke-width="12" stroke-linecap="round"/>
-    <text x="150" y="226" fill="#005eb8" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="800" letter-spacing="5">HEALTH TECHNOLOGY</text>
+  <rect width="560" height="150" fill="none"/>
+  <g filter="url(#softLift)">
+    <text x="18" y="94" fill="url(#medholicWarm)" stroke="#ff6a00" stroke-width="1.2" paint-order="stroke fill" font-family="'Brush Script MT', 'Segoe Script', 'Lucida Handwriting', cursive" font-size="82" font-weight="900" font-style="italic" letter-spacing="0" filter="url(#gloss)">Med</text>
+    <text x="177" y="94" fill="url(#medholicBlue)" stroke="#0285db" stroke-width="1.2" paint-order="stroke fill" font-family="'Brush Script MT', 'Segoe Script', 'Lucida Handwriting', cursive" font-size="82" font-weight="900" font-style="italic" letter-spacing="0" filter="url(#gloss)">holic</text>
+    <path d="M80 111 C169 96, 300 98, 475 112" fill="none" stroke="url(#medholicSweep)" stroke-width="7" stroke-linecap="round"/>
+    <path d="M83 107 C170 94, 303 96, 472 109" fill="none" stroke="#ffad34" stroke-width="2.2" stroke-linecap="round" opacity="0.55"/>
   </g>
 </svg>
