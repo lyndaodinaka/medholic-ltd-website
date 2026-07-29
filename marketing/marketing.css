@@ -2701,11 +2701,12 @@ h1 {
 }
 
 .lux-spotit-logo {
-  width: min(360px, 100%);
+  width: min(520px, 100%);
   justify-self: start;
   border-radius: 8px;
-  padding: 16px;
+  padding: 12px;
   background: rgba(255, 255, 255, 0.96);
+  object-fit: contain;
 }
 
 .lux-spotit-card h3 {
@@ -3634,8 +3635,8 @@ h1 {
   }
 
   .lux-spotit-logo {
-    width: min(250px, 100%);
-    padding: 12px;
+    width: min(310px, 100%);
+    padding: 10px;
   }
 
   .lux-storyboard {
