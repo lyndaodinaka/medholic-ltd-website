@@ -47,7 +47,7 @@ html = html
   .replace('<link rel="stylesheet" href="marketing.css">', `<style>\n${css}\n</style>`)
   .replaceAll('/assets/favicon-32.png', dataUri(path.join("assets", "favicon-32.png"), "image/png"))
   .replaceAll('/assets/apple-touch-icon.png', dataUri(path.join("assets", "apple-touch-icon.png"), "image/png"))
-  .replaceAll('/marketing/medholic-wordmark-logo.svg', dataUri(path.join("marketing", "medholic-wordmark-logo.svg"), "image/svg+xml"))
+  .replaceAll('/marketing/medholic-logo.jpg', dataUri(path.join("marketing", "medholic-logo.jpg"), "image/jpeg"))
   .replaceAll('/marketing/medholic-branded-preview.jpg', dataUri(path.join("marketing", "medholic-branded-preview.jpg"), "image/jpeg"))
   .replaceAll('/marketing/medholic-luxury-boardroom.jpg', dataUri(path.join("marketing", "medholic-luxury-boardroom.jpg"), "image/jpeg"))
   .replaceAll('/marketing/spotit-logo.png', dataUri(path.join("marketing", "spotit-logo.png"), "image/png"))
@@ -71,6 +71,7 @@ copyDir(path.join(root, "assets"), path.join(dist, "assets"), new Set([
 ]));
 copyDir(path.join(root, "marketing"), path.join(dist, "marketing"), new Set([
   "medholic-wordmark-logo.svg",
+  "medholic-logo.jpg",
   "medholic-branded-preview.jpg",
   "medholic-luxury-boardroom.jpg",
   "spotit-logo.png",
