@@ -1,8 +1,8 @@
 {
-  "name": "medholic-pharmacy",
+  "name": "medholic-ltd-website",
   "version": "1.0.0",
   "private": true,
-  "description": "Medholic Pharmacy inventory, sales, supplier, reporting, and audit web app.",
+  "description": "Medholic Ltd public health-tech website.",
   "scripts": {
     "build": "node scripts/build-site.js",
     "start": "node server.js",

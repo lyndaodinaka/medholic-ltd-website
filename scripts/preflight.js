@@ -10,14 +10,12 @@ const requiredFiles = [
   "package.json",
   "railway.json",
   "site.webmanifest",
-  "assets/medholic-pharmacy-logo-transparent.png",
   "assets/favicon-32.png",
   "assets/apple-touch-icon.png",
   "assets/icon-192.png",
   "assets/icon-512.png",
-  "assets/medholic-og-image.png",
+  "assets/favicon.ico",
   "marketing/index.html",
-  "marketing/flyer.html",
   "marketing/marketing.css",
   "docs/railway-github-deployment.md",
   "docs/production-readiness-checklist.md",
@@ -46,4 +44,4 @@ if (missing.length) {
   process.exit(1);
 }
 
-console.log("Medholic Pharmacy preflight passed.");
+console.log("Medholic Ltd website preflight passed.");
