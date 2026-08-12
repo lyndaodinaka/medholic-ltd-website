@@ -1,14 +1,14 @@
 {
-  "name": "Medholic Pharmacy",
+  "name": "Medholic Ltd",
   "short_name": "Medholic",
-  "description": "Pharmacy inventory, sales, supplier, expiry, report, and security tracking.",
+  "description": "Healthcare technology, careflow systems, digital health tools, and project support from Medholic Ltd.",
   "id": "/",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait-primary",
   "background_color": "#ffffff",
-  "theme_color": "#0878dc",
+  "theme_color": "#0072ce",
   "categories": ["business", "medical", "productivity"],
   "icons": [
     {
