@@ -3250,6 +3250,45 @@ h1 {
   font-size: clamp(1.05rem, 2vw, 1.45rem);
 }
 
+.lux-footer {
+  width: min(100% - 40px, 1180px);
+  margin: -38px auto 40px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 22px;
+  align-items: center;
+  border-top: 1px solid rgba(0, 114, 206, 0.18);
+  padding-top: 22px;
+  color: #31506b;
+  font-size: 0.9rem;
+}
+
+.lux-footer strong {
+  display: block;
+  margin-bottom: 8px;
+  color: #0b4f86;
+  font-size: 0.98rem;
+}
+
+.lux-footer p {
+  max-width: 880px;
+  margin: 0;
+  line-height: 1.7;
+}
+
+.lux-footer span {
+  justify-self: end;
+  border: 1px solid rgba(0, 114, 206, 0.18);
+  border-radius: 999px;
+  padding: 10px 14px;
+  color: #0b4f86;
+  background: rgba(255, 255, 255, 0.72);
+  font-size: 0.78rem;
+  font-weight: 850;
+  text-align: center;
+  white-space: nowrap;
+}
+
 /* Medholic Ltd blue and white theme */
 .lux-site {
   color: #17324d;
@@ -3621,8 +3660,21 @@ h1 {
   .lux-grid,
   .lux-projects,
   .lux-statement,
-  .lux-contact {
+  .lux-contact,
+  .lux-footer {
     width: min(100% - 24px, 1180px);
+  }
+
+  .lux-footer {
+    grid-template-columns: 1fr;
+    margin-top: -18px;
+    gap: 14px;
+    font-size: 0.86rem;
+  }
+
+  .lux-footer span {
+    justify-self: start;
+    white-space: normal;
   }
 
   .lux-projects-heading,
