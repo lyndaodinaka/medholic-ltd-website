@@ -2631,6 +2631,52 @@ h1 {
   align-items: center;
 }
 
+.lux-spotit-summary {
+  grid-template-columns: minmax(220px, 0.34fr) minmax(0, 1fr) auto;
+  cursor: pointer;
+  list-style: none;
+}
+
+.lux-spotit-summary::-webkit-details-marker {
+  display: none;
+}
+
+.lux-spotit-summary .lux-spotit-logo {
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+
+.lux-spotit-summary:hover .lux-spotit-logo {
+  transform: translateY(-2px);
+  box-shadow: 0 22px 48px rgba(0, 94, 184, 0.16);
+}
+
+.lux-toggle-cue {
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 0 14px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #0072ce, #005eb8);
+  font-size: 0.78rem;
+  font-weight: 950;
+  white-space: nowrap;
+}
+
+.lux-spotit-toggle[open] .lux-toggle-cue {
+  background: linear-gradient(135deg, #ff9b14, #ff5b00 48%, #e01818);
+}
+
+.lux-spotit-toggle[open] .lux-toggle-cue::before {
+  content: "Close ";
+}
+
+.lux-spotit-toggle-body {
+  display: grid;
+  gap: 24px;
+}
+
 .lux-project-feature-head h3 {
   margin: 0;
   color: #ffffff;
