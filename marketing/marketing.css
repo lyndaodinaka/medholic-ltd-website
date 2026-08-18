@@ -3026,6 +3026,18 @@ h1 {
   font-size: 0.82rem;
 }
 
+.lux-demo-brand {
+  width: 42px;
+  height: 42px;
+  margin-left: auto;
+  border: 1px solid rgba(0, 94, 184, 0.14);
+  border-radius: 8px;
+  padding: 4px;
+  background: #ffffff;
+  object-fit: contain;
+  box-shadow: 0 10px 22px rgba(0, 94, 184, 0.12);
+}
+
 .lux-storyboard {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -3874,6 +3886,11 @@ h1 {
 
   .lux-video-topbar {
     padding: 10px 12px;
+  }
+
+  .lux-demo-brand {
+    width: 36px;
+    height: 36px;
   }
 
   .lux-spotit-actions a {
