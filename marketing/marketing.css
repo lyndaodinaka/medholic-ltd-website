@@ -2780,7 +2780,7 @@ h1 {
 }
 
 .lux-spotit-logo {
-  width: min(156px, 100%);
+  width: min(420px, 100%);
   justify-self: start;
   border-radius: 8px;
   padding: 12px;
@@ -3027,8 +3027,8 @@ h1 {
 }
 
 .lux-demo-brand {
-  width: 42px;
-  height: 42px;
+  width: 110px;
+  height: 58px;
   margin-left: auto;
   border: 1px solid rgba(0, 94, 184, 0.14);
   border-radius: 8px;
@@ -3872,7 +3872,7 @@ h1 {
   }
 
   .lux-spotit-logo {
-    width: min(132px, 100%);
+    width: min(310px, 100%);
     padding: 10px;
   }
 
@@ -3889,8 +3889,8 @@ h1 {
   }
 
   .lux-demo-brand {
-    width: 36px;
-    height: 36px;
+    width: 82px;
+    height: 44px;
   }
 
   .lux-spotit-actions a {
