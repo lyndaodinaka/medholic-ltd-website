@@ -51,9 +51,6 @@ html = html
   .replaceAll('/marketing/medholic-branded-preview.jpg', dataUri(path.join("marketing", "medholic-branded-preview.jpg"), "image/jpeg"))
   .replaceAll('/marketing/medholic-luxury-boardroom.jpg', dataUri(path.join("marketing", "medholic-luxury-boardroom.jpg"), "image/jpeg"))
   .replaceAll('/marketing/spotit-logo.png', dataUri(path.join("marketing", "spotit-logo.png"), "image/png"))
-  .replaceAll('/marketing/spotit-demo-nurse-capture.jpg', dataUri(path.join("marketing", "spotit-demo-nurse-capture.jpg"), "image/jpeg"))
-  .replaceAll('/marketing/spotit-demo-phone-observation.jpg', dataUri(path.join("marketing", "spotit-demo-phone-observation.jpg"), "image/jpeg"))
-  .replaceAll('/marketing/spotit-demo-doctor-review.jpg', dataUri(path.join("marketing", "spotit-demo-doctor-review.jpg"), "image/jpeg"))
   .replaceAll('href="/assets/', 'href="assets/')
   .replaceAll('src="/assets/', 'src="assets/')
   .replaceAll('content="/marketing/', 'content="marketing/')
@@ -73,10 +70,7 @@ copyDir(path.join(root, "marketing"), path.join(dist, "marketing"), new Set([
   "medholic-wordmark-logo.png",
   "medholic-branded-preview.jpg",
   "medholic-luxury-boardroom.jpg",
-  "spotit-logo.png",
-  "spotit-demo-nurse-capture.jpg",
-  "spotit-demo-phone-observation.jpg",
-  "spotit-demo-doctor-review.jpg"
+  "spotit-logo.png"
 ]));
 copyFile(
   path.join(root, "docs", "final-business-launch-checklist.md"),

@@ -2730,6 +2730,10 @@ h1 {
   align-items: center;
 }
 
+.lux-project-feature-grid--single {
+  grid-template-columns: minmax(0, 1fr);
+}
+
 .lux-project-placeholder {
   display: grid;
   gap: 12px;
