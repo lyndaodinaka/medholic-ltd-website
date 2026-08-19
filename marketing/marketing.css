@@ -2247,6 +2247,15 @@ h1 {
   font-weight: 850;
 }
 
+.spotit-nav {
+  justify-content: flex-end;
+}
+
+.spotit-nav .lux-nav-links {
+  margin-left: auto;
+  justify-content: flex-end;
+}
+
 .lux-hero {
   min-height: 100svh;
   position: relative;
@@ -4367,6 +4376,16 @@ h1 {
     padding: 6px;
     background: rgba(7, 16, 21, 0.48);
     backdrop-filter: blur(18px);
+  }
+
+  .spotit-nav {
+    align-items: flex-end;
+  }
+
+  .spotit-nav .lux-nav-links {
+    width: auto;
+    max-width: 100%;
+    justify-content: flex-end;
   }
 
   .lux-nav-links::-webkit-scrollbar {
