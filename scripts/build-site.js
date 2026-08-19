@@ -76,11 +76,7 @@ copyDir(path.join(root, "marketing"), path.join(dist, "marketing"), new Set([
   "medholic-branded-preview.jpg",
   "medholic-luxury-boardroom.jpg",
   "spotit-logo.png",
-  "spotit-logo-warm.png",
-  "spotit-demo-old-photos.jpg",
-  "spotit-demo-one-photo.jpg",
-  "spotit-demo-wound-changed.jpg",
-  "spotit-demo-smarter-care.jpg"
+  "spotit-logo-warm.png"
 ]));
 copyFile(
   path.join(root, "docs", "final-business-launch-checklist.md"),
@@ -95,10 +91,8 @@ copyFile(path.join(root, ".openai", "hosting.json"), path.join(dist, ".openai", 
 fs.mkdirSync(serverDir, { recursive: true });
 const brandedPreviewBase64 = fileBase64(path.join("marketing", "medholic-branded-preview.jpg"));
 const spotitLogoBase64 = fileBase64(path.join("marketing", "spotit-logo.png"));
-const spotitDemoOldPhotosBase64 = fileBase64(path.join("marketing", "spotit-demo-old-photos.jpg"));
-const spotitDemoOnePhotoBase64 = fileBase64(path.join("marketing", "spotit-demo-one-photo.jpg"));
-const spotitDemoWoundChangedBase64 = fileBase64(path.join("marketing", "spotit-demo-wound-changed.jpg"));
-const spotitDemoSmarterCareBase64 = fileBase64(path.join("marketing", "spotit-demo-smarter-care.jpg"));
+const spotitLogoWarmBase64 = fileBase64(path.join("marketing", "spotit-logo-warm.png"));
+const medholicLogoWarmBase64 = fileBase64(path.join("marketing", "medholic-wordmark-logo-warm.png"));
 const faviconBase64 = fileBase64(path.join("assets", "favicon.ico"));
 const robotsTxt = fs.readFileSync(path.join(root, "robots.txt"), "utf8");
 const sitemapXml = fs.readFileSync(path.join(root, "sitemap.xml"), "utf8");
@@ -106,12 +100,8 @@ fs.writeFileSync(path.join(serverDir, "index.js"), `const html = ${JSON.stringif
 const spotitHtml = ${JSON.stringify(spotitHtml)};
 const brandedPreviewBase64 = ${JSON.stringify(brandedPreviewBase64)};
 const spotitLogoBase64 = ${JSON.stringify(spotitLogoBase64)};
-const spotitDemoImages = new Map([
-  ["/marketing/spotit-demo-old-photos.jpg", ${JSON.stringify(spotitDemoOldPhotosBase64)}],
-  ["/marketing/spotit-demo-one-photo.jpg", ${JSON.stringify(spotitDemoOnePhotoBase64)}],
-  ["/marketing/spotit-demo-wound-changed.jpg", ${JSON.stringify(spotitDemoWoundChangedBase64)}],
-  ["/marketing/spotit-demo-smarter-care.jpg", ${JSON.stringify(spotitDemoSmarterCareBase64)}]
-]);
+const spotitLogoWarmBase64 = ${JSON.stringify(spotitLogoWarmBase64)};
+const medholicLogoWarmBase64 = ${JSON.stringify(medholicLogoWarmBase64)};
 const faviconBase64 = ${JSON.stringify(faviconBase64)};
 const robotsTxt = ${JSON.stringify(robotsTxt)};
 const sitemapXml = ${JSON.stringify(sitemapXml)};
@@ -140,6 +130,10 @@ export default {
       });
     }
 
+    if (url.pathname === "/spotit-demo") {
+      return Response.redirect("https://spotit-wound-app.medholic.net/demo", 302);
+    }
+
     if (url.pathname === "/marketing/medholic-branded-preview.jpg") {
       return new Response(base64ToBytes(brandedPreviewBase64), {
         headers: {
@@ -152,16 +146,25 @@ export default {
     if (url.pathname === "/marketing/spotit-logo.png") {
       return new Response(base64ToBytes(spotitLogoBase64), {
         headers: {
-          "Content-Type": "image/jpeg",
+          "Content-Type": "image/png",
           "Cache-Control": "public, max-age=3600"
         }
       });
     }
 
-    if (spotitDemoImages.has(url.pathname)) {
-      return new Response(base64ToBytes(spotitDemoImages.get(url.pathname)), {
+    if (url.pathname === "/marketing/spotit-logo-warm.png") {
+      return new Response(base64ToBytes(spotitLogoWarmBase64), {
         headers: {
-          "Content-Type": "image/jpeg",
+          "Content-Type": "image/png",
+          "Cache-Control": "public, max-age=3600"
+        }
+      });
+    }
+
+    if (url.pathname === "/marketing/medholic-wordmark-logo-warm.png") {
+      return new Response(base64ToBytes(medholicLogoWarmBase64), {
+        headers: {
+          "Content-Type": "image/png",
           "Cache-Control": "public, max-age=3600"
         }
       });

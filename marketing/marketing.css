@@ -3180,6 +3180,155 @@ h1 {
   border-radius: 8px;
 }
 
+.spotit-product-screen {
+  min-height: 540px;
+  display: grid;
+  align-content: stretch;
+  gap: 18px;
+  padding: 22px;
+  background:
+    radial-gradient(circle at 86% 12%, rgba(216, 176, 112, 0.22), transparent 34%),
+    linear-gradient(145deg, rgba(255, 253, 248, 0.98), rgba(238, 244, 232, 0.92)),
+    #fffdf8;
+}
+
+.spotit-product-topbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  border-bottom: 1px solid rgba(72, 112, 79, 0.18);
+  padding-bottom: 14px;
+  color: #234f34;
+}
+
+.spotit-product-topbar strong {
+  font-size: clamp(1.25rem, 2vw, 1.7rem);
+}
+
+.spotit-product-topbar span {
+  border-radius: 999px;
+  padding: 7px 11px;
+  color: #234f34;
+  background: rgba(216, 176, 112, 0.24);
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
+.spotit-product-layout {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.78fr) minmax(0, 1fr);
+  gap: 18px;
+  align-items: stretch;
+}
+
+.spotit-product-phone,
+.spotit-product-board {
+  border: 1px solid rgba(72, 112, 79, 0.16);
+  border-radius: 8px;
+  background: rgba(255, 253, 248, 0.88);
+  box-shadow: 0 18px 44px rgba(82, 69, 48, 0.1);
+}
+
+.spotit-product-phone {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+  padding: 18px;
+}
+
+.spotit-product-phone span,
+.spotit-product-phone strong,
+.spotit-product-phone small,
+.spotit-product-board span {
+  color: #234f34;
+}
+
+.spotit-product-phone span,
+.spotit-product-board span {
+  font-weight: 900;
+}
+
+.spotit-product-phone small {
+  color: #40584b;
+}
+
+.spotit-product-wound {
+  aspect-ratio: 1;
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 50% 50%, #7d1e19 0 10%, #c64032 11% 22%, #eda091 23% 38%, #d98974 39% 52%, #f3c5b3 53% 100%);
+  box-shadow: inset 0 0 0 10px rgba(255, 253, 248, 0.38);
+}
+
+.spotit-product-board {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  padding: 18px;
+}
+
+.spotit-product-board div {
+  min-height: 116px;
+  display: grid;
+  align-content: space-between;
+  border-radius: 8px;
+  padding: 14px;
+  color: #ffffff;
+  background: linear-gradient(145deg, #6f995d, #315f3a);
+}
+
+.spotit-product-board div:nth-child(1) {
+  background: linear-gradient(145deg, #b84d3d, #86352c);
+}
+
+.spotit-product-board div:nth-child(2) {
+  background: linear-gradient(145deg, #b88549, #8d6332);
+}
+
+.spotit-product-board span,
+.spotit-product-board strong {
+  color: #ffffff;
+}
+
+.spotit-product-board strong {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 1;
+}
+
+.spotit-demo-steps {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.spotit-demo-steps article {
+  display: grid;
+  gap: 6px;
+  border: 1px solid rgba(72, 112, 79, 0.16);
+  border-radius: 8px;
+  padding: 14px;
+  background: rgba(238, 244, 232, 0.82);
+}
+
+.spotit-demo-steps span {
+  width: 28px;
+  height: 28px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #ffffff;
+  background: #48704f;
+  font-weight: 950;
+}
+
+.spotit-demo-steps strong {
+  color: #234f34;
+}
+
+.spotit-demo-steps small {
+  color: #40584b;
+  line-height: 1.35;
+}
+
 .spotit-credibility {
   background:
     linear-gradient(145deg, rgba(0, 114, 206, 0.08), rgba(255, 255, 255, 0.96)),
@@ -4256,6 +4405,14 @@ h1 {
     min-height: 360px;
   }
 
+  .spotit-product-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .spotit-product-screen {
+    min-height: auto;
+  }
+
   .lux-clinical-scene {
     min-height: 520px;
   }
@@ -4425,6 +4582,11 @@ h1 {
   }
 
   .spotit-mini-gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .spotit-product-board,
+  .spotit-demo-steps {
     grid-template-columns: 1fr;
   }
 
