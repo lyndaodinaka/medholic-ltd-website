@@ -2929,7 +2929,7 @@ h1 {
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  padding: 9px 14px 10px;
+  padding: 10px 16px 11px;
   border: 1px solid rgba(122, 90, 52, 0.18);
   border-radius: 999px;
   background: linear-gradient(135deg, rgba(255, 253, 248, 0.96), rgba(239, 228, 209, 0.72));
@@ -2945,7 +2945,7 @@ h1 {
 }
 
 .spotit-medholic-lockup img {
-  width: min(190px, 46vw);
+  width: min(270px, 56vw);
   height: auto;
   display: block;
 }
@@ -4540,11 +4540,11 @@ h1 {
 
   .spotit-medholic-lockup {
     gap: 9px;
-    padding: 8px 11px;
+    padding: 9px 12px;
   }
 
   .spotit-medholic-lockup img {
-    width: min(162px, 48vw);
+    width: min(220px, 68vw);
   }
 
   .lux-nav {
