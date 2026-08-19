@@ -2963,14 +2963,15 @@ h1 {
 
 .spotit-hero-flyer {
   padding: 0;
+  background: linear-gradient(135deg, #fffdf8, #f3ead8);
 }
 
 .spotit-hero-flyer img {
   display: block;
   width: 100%;
-  height: 100%;
-  min-height: 520px;
-  object-fit: cover;
+  height: auto;
+  max-height: 620px;
+  object-fit: contain;
   object-position: center center;
 }
 
@@ -3350,16 +3351,16 @@ h1 {
   overflow: hidden;
   border: 1px solid rgba(72, 112, 79, 0.16);
   border-radius: 8px;
-  background: rgba(255, 253, 248, 0.88);
+  background: linear-gradient(135deg, #fffdf8, #f3ead8);
   box-shadow: 0 24px 70px rgba(0, 56, 112, 0.11);
 }
 
 .spotit-flyer-image img {
   width: 100%;
-  height: 100%;
-  min-height: 520px;
+  height: auto;
+  max-height: 680px;
   display: block;
-  object-fit: cover;
+  object-fit: contain;
   object-position: top center;
 }
 
@@ -4436,7 +4437,7 @@ h1 {
   }
 
   .spotit-hero-flyer img {
-    min-height: 420px;
+    max-height: 520px;
   }
 
   .spotit-metrics {
@@ -4444,7 +4445,7 @@ h1 {
   }
 
   .spotit-visual-main img {
-    min-height: 360px;
+    max-height: 520px;
   }
 
   .spotit-product-layout {
@@ -4487,7 +4488,7 @@ h1 {
 
 @media (max-width: 620px) {
   .spotit-hero-flyer img {
-    min-height: 320px;
+    max-height: 420px;
   }
 
   .lux-nav {
