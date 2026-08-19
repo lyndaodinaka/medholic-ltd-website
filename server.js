@@ -366,7 +366,7 @@ async function loadBackup(backupId) {
 
 async function handleApi(request, response, pathname) {
   if (pathname === "/api/health") {
-    sendJson(response, 200, { ok: true, app: "Medholic Pharmacy", storage: pgPool ? "postgres" : "file" });
+    sendJson(response, 200, { ok: true, app: "Medholic Ltd", storage: pgPool ? "postgres" : "file" });
     return true;
   }
 
@@ -494,6 +494,7 @@ const server = http.createServer(async (request, response) => {
 
   let requestedPath = pathname;
   if (pathname === "/") requestedPath = "/marketing/index.html";
+  if (pathname === "/spotit" || pathname === "/spotit/") requestedPath = "/marketing/spotit.html";
   if (pathname === "/app" || pathname === "/app/") requestedPath = "/index.html";
   if (pathname === "/staff" || pathname === "/staff/") requestedPath = "/staff.html";
   let filePath = path.resolve(root, `.${requestedPath}`);
@@ -534,10 +535,10 @@ const server = http.createServer(async (request, response) => {
 initDatabase()
   .then(() => {
     server.listen(port, "0.0.0.0", () => {
-      console.log(`Medholic Pharmacy is running on port ${port} with ${pgPool ? "Postgres" : "file"} storage`);
+      console.log(`Medholic Ltd website is running on port ${port} with ${pgPool ? "Postgres" : "file"} storage`);
     });
   })
   .catch((error) => {
-    console.error("Failed to initialize Medholic Pharmacy server:", error);
+    console.error("Failed to initialize Medholic Ltd website server:", error);
     process.exit(1);
   });

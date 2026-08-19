@@ -2903,6 +2903,306 @@ h1 {
   margin: 0 auto 34px;
 }
 
+.spotit-confidence-hero {
+  grid-template-columns: minmax(0, 0.92fr) minmax(360px, 1.08fr);
+  gap: 42px;
+  min-height: 76vh;
+}
+
+.spotit-hero-copy {
+  display: grid;
+  gap: 18px;
+  align-content: center;
+}
+
+.spotit-hero-logo {
+  width: min(280px, 70vw);
+  height: auto;
+  display: block;
+}
+
+.spotit-confidence-hero h1 {
+  max-width: 720px;
+  font-size: clamp(2.8rem, 5.8vw, 5.7rem);
+  line-height: 0.94;
+  letter-spacing: 0;
+}
+
+.spotit-confidence-hero p {
+  max-width: 650px;
+  font-size: clamp(1.05rem, 1.55vw, 1.22rem);
+  line-height: 1.55;
+}
+
+.spotit-proof-points {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.spotit-proof-points span {
+  border: 1px solid rgba(0, 114, 206, 0.18);
+  border-radius: 999px;
+  padding: 8px 13px;
+  color: #003f7d;
+  background: #ffffff;
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
+.spotit-dashboard-preview {
+  overflow: hidden;
+  border: 1px solid rgba(0, 94, 184, 0.18);
+  border-radius: 8px;
+  padding: 20px;
+  background:
+    radial-gradient(circle at 82% 4%, rgba(255, 91, 0, 0.16), transparent 30%),
+    linear-gradient(145deg, #ffffff, #edf7ff 48%, #ffffff);
+  box-shadow: 0 34px 90px rgba(0, 68, 137, 0.18);
+}
+
+.spotit-dashboard-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 114, 206, 0.14);
+  padding-bottom: 15px;
+  color: #003f7d;
+}
+
+.spotit-dashboard-top strong {
+  font-size: clamp(1.25rem, 2vw, 1.7rem);
+}
+
+.spotit-dashboard-top span,
+.spotit-patient-strip span,
+.spotit-wound-panel small {
+  color: #587085;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.spotit-patient-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 16px 0;
+}
+
+.spotit-patient-strip span {
+  border-radius: 999px;
+  padding: 7px 10px;
+  background: rgba(0, 114, 206, 0.08);
+}
+
+.spotit-wound-panel {
+  display: grid;
+  grid-template-columns: 128px minmax(0, 1fr);
+  gap: 16px;
+  align-items: center;
+  border: 1px solid rgba(0, 114, 206, 0.14);
+  border-radius: 8px;
+  padding: 14px;
+  background: #ffffff;
+}
+
+.spotit-wound-photo {
+  aspect-ratio: 1;
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 50% 50%, #741d18 0 11%, #c64032 12% 22%, #f5a596 23% 36%, #d98974 37% 50%, #f1c2ae 51% 100%);
+  box-shadow: inset 0 0 0 8px rgba(255, 255, 255, 0.34);
+}
+
+.spotit-wound-panel strong {
+  display: block;
+  margin: 5px 0;
+  color: #003f7d;
+  font-size: 1.15rem;
+}
+
+.spotit-wound-panel p {
+  margin: 0;
+  color: #425f74;
+  font-size: 0.94rem;
+  line-height: 1.42;
+}
+
+.spotit-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.spotit-metric {
+  min-height: 96px;
+  display: grid;
+  align-content: space-between;
+  border-radius: 8px;
+  padding: 13px;
+  color: #ffffff;
+  box-shadow: 0 14px 30px rgba(0, 44, 88, 0.14);
+}
+
+.spotit-metric span {
+  font-size: 0.78rem;
+  font-weight: 850;
+  line-height: 1.15;
+}
+
+.spotit-metric strong {
+  font-size: clamp(1.8rem, 3vw, 2.45rem);
+  line-height: 1;
+}
+
+.spotit-metric-danger {
+  background: linear-gradient(145deg, #cf2d22, #961d18);
+}
+
+.spotit-metric-warn {
+  background: linear-gradient(145deg, #ff8a00, #d95d00);
+}
+
+.spotit-metric-good {
+  background: linear-gradient(145deg, #2f8b57, #196c41);
+}
+
+.spotit-section {
+  width: min(1160px, calc(100% - 40px));
+  margin: 0 auto 34px;
+}
+
+.spotit-card-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.spotit-three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.spotit-four {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.spotit-card-grid article,
+.spotit-credibility-grid article {
+  display: grid;
+  gap: 10px;
+  border: 1px solid rgba(0, 114, 206, 0.14);
+  border-radius: 8px;
+  padding: 22px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 18px 44px rgba(0, 56, 112, 0.08);
+}
+
+.spotit-card-grid span {
+  color: #ff5b00;
+  font-size: 0.78rem;
+  font-weight: 950;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.spotit-card-grid h3,
+.spotit-credibility-grid strong {
+  margin: 0;
+  color: #003f7d;
+  font-size: clamp(1.16rem, 1.9vw, 1.48rem);
+}
+
+.spotit-card-grid p,
+.spotit-credibility-grid p {
+  margin: 0;
+  color: #425f74;
+  line-height: 1.52;
+}
+
+.spotit-visual-showcase {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+  gap: 20px;
+  align-items: stretch;
+  padding: 10px 0 22px;
+}
+
+.spotit-visual-main,
+.spotit-visual-copy {
+  overflow: hidden;
+  border: 1px solid rgba(0, 114, 206, 0.14);
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 24px 70px rgba(0, 56, 112, 0.11);
+}
+
+.spotit-visual-main img {
+  width: 100%;
+  height: 100%;
+  min-height: 540px;
+  display: block;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.spotit-visual-copy {
+  display: grid;
+  align-content: center;
+  gap: 16px;
+  padding: 28px;
+}
+
+.spotit-visual-copy h2 {
+  margin: 0;
+  color: #003f7d;
+  font-size: clamp(2rem, 3.4vw, 3.4rem);
+  line-height: 1;
+}
+
+.spotit-visual-copy p:not(.lux-kicker) {
+  margin: 0;
+  color: #425f74;
+  line-height: 1.56;
+}
+
+.spotit-mini-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.spotit-mini-gallery img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 8px;
+}
+
+.spotit-credibility {
+  background:
+    linear-gradient(145deg, rgba(0, 114, 206, 0.08), rgba(255, 255, 255, 0.96)),
+    #ffffff;
+}
+
+.spotit-credibility-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.spotit-acquisition {
+  background:
+    linear-gradient(135deg, #003f7d, #005eb8);
+}
+
+.spotit-acquisition h2,
+.spotit-acquisition p,
+.spotit-acquisition .lux-kicker {
+  color: #ffffff;
+}
+
 .lux-gallery-heading {
   max-width: 860px;
   margin-bottom: 18px;
@@ -3877,6 +4177,11 @@ h1 {
   .lux-spotit-hero,
   .lux-demo-grid,
   .lux-spotit-showcase,
+  .spotit-confidence-hero,
+  .spotit-three,
+  .spotit-four,
+  .spotit-visual-showcase,
+  .spotit-credibility-grid,
   .lux-project-feature-head,
   .lux-project-feature-grid,
   .lux-seo-band,
@@ -3929,13 +4234,26 @@ h1 {
   .lux-spotit-hero {
     width: min(100% - 28px, 1160px);
     min-height: auto;
-    padding: 56px 0 34px;
+    padding: 168px 0 34px;
   }
 
   .lux-seo-band,
   .lux-spotit-demo-gallery,
+  .spotit-section,
   .lux-product-detail {
     width: min(100% - 28px, 1160px);
+  }
+
+  .spotit-dashboard-preview {
+    padding: 16px;
+  }
+
+  .spotit-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .spotit-visual-main img {
+    min-height: 360px;
   }
 
   .lux-clinical-scene {
@@ -4086,10 +4404,28 @@ h1 {
 
   .lux-spotit-card,
   .lux-spotit-copy,
+  .spotit-card-grid article,
+  .spotit-visual-copy,
   .lux-project-feature,
   .lux-project-placeholder,
   .lux-location-panel {
     padding: 24px;
+  }
+
+  .spotit-confidence-hero h1 {
+    font-size: clamp(2.55rem, 12vw, 4.2rem);
+  }
+
+  .spotit-hero-logo {
+    width: min(230px, 72vw);
+  }
+
+  .spotit-wound-panel {
+    grid-template-columns: 92px minmax(0, 1fr);
+  }
+
+  .spotit-mini-gallery {
+    grid-template-columns: 1fr;
   }
 
   .lux-clinical-scene {
@@ -4152,10 +4488,26 @@ h1 {
   .lux-projects-heading h2,
   .lux-project-feature-head h3,
   .lux-spotit-copy h4,
+  .spotit-confidence-hero h1,
+  .spotit-card-grid h3,
+  .spotit-visual-copy h2,
   .lux-contact h2,
   .lux-location-panel h2,
   .lux-intro h2 {
     overflow-wrap: anywhere;
+  }
+
+  .spotit-dashboard-top,
+  .spotit-wound-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .spotit-dashboard-top {
+    display: grid;
+  }
+
+  .spotit-metric {
+    min-height: 88px;
   }
 
   .lux-storyboard-real img {
