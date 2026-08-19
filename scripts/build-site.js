@@ -39,26 +39,30 @@ function fileBase64(relativePath) {
 fs.rmSync(dist, { recursive: true, force: true });
 fs.mkdirSync(dist, { recursive: true });
 
-const htmlPath = path.join(root, "marketing", "index.html");
-let html = fs.readFileSync(htmlPath, "utf8");
 const css = fs.readFileSync(path.join(root, "marketing", "marketing.css"), "utf8");
-html = html
-  .replace('<base href="/marketing/">', "")
-  .replace('<link rel="stylesheet" href="marketing.css">', `<style>\n${css}\n</style>`)
-  .replaceAll('/assets/favicon-32.png', dataUri(path.join("assets", "favicon-32.png"), "image/png"))
-  .replaceAll('/assets/apple-touch-icon.png', dataUri(path.join("assets", "apple-touch-icon.png"), "image/png"))
-  .replaceAll('/marketing/medholic-wordmark-logo.png', dataUri(path.join("marketing", "medholic-wordmark-logo.png"), "image/png"))
-  .replaceAll('/marketing/medholic-branded-preview.jpg', dataUri(path.join("marketing", "medholic-branded-preview.jpg"), "image/jpeg"))
-  .replaceAll('/marketing/medholic-luxury-boardroom.jpg', dataUri(path.join("marketing", "medholic-luxury-boardroom.jpg"), "image/jpeg"))
-  .replaceAll('/marketing/spotit-logo.png', dataUri(path.join("marketing", "spotit-logo.png"), "image/png"))
-  .replaceAll('href="/assets/', 'href="assets/')
-  .replaceAll('src="/assets/', 'src="assets/')
-  .replaceAll('content="/marketing/', 'content="marketing/')
-  .replaceAll('src="/marketing/', 'src="marketing/')
-  .replaceAll('href="/app"', 'href="#work"')
-  .replaceAll('href="/docs/final-business-launch-checklist.md"', 'href="docs/final-business-launch-checklist.md"');
+function prepareMarketingHtml(fileName) {
+  return fs.readFileSync(path.join(root, "marketing", fileName), "utf8")
+    .replace('<base href="/marketing/">', "")
+    .replace('<link rel="stylesheet" href="marketing.css">', `<style>\n${css}\n</style>`)
+    .replaceAll('/assets/favicon-32.png', dataUri(path.join("assets", "favicon-32.png"), "image/png"))
+    .replaceAll('/assets/apple-touch-icon.png', dataUri(path.join("assets", "apple-touch-icon.png"), "image/png"))
+    .replaceAll('src="/marketing/medholic-wordmark-logo.png"', `src="${dataUri(path.join("marketing", "medholic-wordmark-logo.png"), "image/png")}"`)
+    .replaceAll('src="/marketing/medholic-branded-preview.jpg"', `src="${dataUri(path.join("marketing", "medholic-branded-preview.jpg"), "image/jpeg")}"`)
+    .replaceAll('src="/marketing/medholic-luxury-boardroom.jpg"', `src="${dataUri(path.join("marketing", "medholic-luxury-boardroom.jpg"), "image/jpeg")}"`)
+    .replaceAll('src="/marketing/spotit-logo.png"', `src="${dataUri(path.join("marketing", "spotit-logo.png"), "image/png")}"`)
+    .replaceAll('href="/assets/', 'href="assets/')
+    .replaceAll('src="/assets/', 'src="assets/')
+    .replaceAll('src="/marketing/', 'src="marketing/')
+    .replaceAll('href="/app"', 'href="#work"')
+    .replaceAll('href="/docs/final-business-launch-checklist.md"', 'href="docs/final-business-launch-checklist.md"');
+}
+
+const html = prepareMarketingHtml("index.html");
+const spotitHtml = prepareMarketingHtml("spotit.html");
 
 fs.writeFileSync(path.join(dist, "index.html"), html);
+fs.mkdirSync(path.join(dist, "spotit"), { recursive: true });
+fs.writeFileSync(path.join(dist, "spotit", "index.html"), spotitHtml);
 copyFile(path.join(root, "marketing", "marketing.css"), path.join(dist, "marketing.css"));
 copyDir(path.join(root, "assets"), path.join(dist, "assets"), new Set([
   "apple-touch-icon.png",
@@ -84,11 +88,14 @@ copyFile(path.join(root, ".openai", "hosting.json"), path.join(dist, ".openai", 
 
 fs.mkdirSync(serverDir, { recursive: true });
 const brandedPreviewBase64 = fileBase64(path.join("marketing", "medholic-branded-preview.jpg"));
+const spotitLogoBase64 = fileBase64(path.join("marketing", "spotit-logo.png"));
 const faviconBase64 = fileBase64(path.join("assets", "favicon.ico"));
 const robotsTxt = fs.readFileSync(path.join(root, "robots.txt"), "utf8");
 const sitemapXml = fs.readFileSync(path.join(root, "sitemap.xml"), "utf8");
 fs.writeFileSync(path.join(serverDir, "index.js"), `const html = ${JSON.stringify(html)};
+const spotitHtml = ${JSON.stringify(spotitHtml)};
 const brandedPreviewBase64 = ${JSON.stringify(brandedPreviewBase64)};
+const spotitLogoBase64 = ${JSON.stringify(spotitLogoBase64)};
 const faviconBase64 = ${JSON.stringify(faviconBase64)};
 const robotsTxt = ${JSON.stringify(robotsTxt)};
 const sitemapXml = ${JSON.stringify(sitemapXml)};
@@ -111,10 +118,25 @@ export default {
       });
     }
 
+    if (url.pathname === "/spotit" || url.pathname === "/spotit/" || url.pathname === "/spotit/index.html") {
+      return new Response(spotitHtml, {
+        headers: { "Content-Type": "text/html; charset=utf-8" }
+      });
+    }
+
     if (url.pathname === "/marketing/medholic-branded-preview.jpg") {
       return new Response(base64ToBytes(brandedPreviewBase64), {
         headers: {
           "Content-Type": "image/jpeg",
+          "Cache-Control": "public, max-age=3600"
+        }
+      });
+    }
+
+    if (url.pathname === "/marketing/spotit-logo.png") {
+      return new Response(base64ToBytes(spotitLogoBase64), {
+        headers: {
+          "Content-Type": "image/png",
           "Cache-Control": "public, max-age=3600"
         }
       });
@@ -147,9 +169,22 @@ export default {
       });
     }
 
+    if (["/app", "/login", "/signin", "/signin-with-chatgpt", "/patient", "/patients", "/dashboard", "/admin", "/api", "/private"].some((privatePath) => url.pathname === privatePath || url.pathname.startsWith(privatePath + "/"))) {
+      return new Response("Not found", {
+        status: 404,
+        headers: {
+          "Content-Type": "text/plain; charset=utf-8",
+          "X-Robots-Tag": "noindex, nofollow"
+        }
+      });
+    }
+
     return new Response("Not found", {
       status: 404,
-      headers: { "Content-Type": "text/plain; charset=utf-8" }
+      headers: {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Robots-Tag": "noindex"
+      }
     });
   }
 };

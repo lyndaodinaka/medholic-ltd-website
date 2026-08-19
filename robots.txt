@@ -1,4 +1,14 @@
 User-agent: *
 Allow: /
+Disallow: /app
+Disallow: /login
+Disallow: /signin
+Disallow: /signin-with-chatgpt
+Disallow: /patient
+Disallow: /patients
+Disallow: /dashboard
+Disallow: /admin
+Disallow: /api/
+Disallow: /private/
 
 Sitemap: https://medholic.net/sitemap.xml

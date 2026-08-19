@@ -2827,10 +2827,126 @@ h1 {
   background: linear-gradient(135deg, #ff5b00, #0058b5);
 }
 
-.lux-spotit-actions a:last-child {
+.lux-spotit-actions a:not(:first-child) {
   border: 1px solid rgba(255, 255, 255, 0.24);
   color: #ffffff;
   background: rgba(255, 255, 255, 0.08);
+}
+
+.lux-product-page {
+  background:
+    linear-gradient(180deg, #ffffff 0%, #f4f9ff 46%, #ffffff 100%);
+  color: #102530;
+}
+
+.lux-spotit-hero,
+.lux-seo-band,
+.lux-product-detail {
+  width: min(1160px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.lux-spotit-hero {
+  min-height: 72vh;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.78fr);
+  gap: 34px;
+  align-items: center;
+  padding: 92px 0 54px;
+}
+
+.lux-spotit-hero h1 {
+  margin: 0;
+  color: #003f7d;
+  font-size: clamp(2.5rem, 6vw, 5.8rem);
+  line-height: 0.94;
+}
+
+.lux-spotit-hero p {
+  max-width: 780px;
+  color: #334e68;
+  font-size: clamp(1rem, 1.65vw, 1.22rem);
+  line-height: 1.65;
+}
+
+.lux-spotit-product-card {
+  display: grid;
+  gap: 18px;
+  align-content: center;
+  justify-items: center;
+  border: 1px solid rgba(0, 114, 206, 0.16);
+  border-radius: 8px;
+  padding: 34px;
+  background:
+    radial-gradient(circle at 88% 16%, rgba(255, 91, 0, 0.12), transparent 34%),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(232, 244, 255, 0.92));
+  box-shadow: 0 30px 90px rgba(0, 88, 181, 0.14);
+}
+
+.lux-spotit-product-card img {
+  width: min(420px, 100%);
+  border-radius: 8px;
+}
+
+.lux-spotit-product-card span {
+  border-radius: 999px;
+  padding: 10px 14px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #ff5b00, #0058b5);
+  font-size: 0.8rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.lux-seo-band {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  padding: 24px 0 54px;
+}
+
+.lux-seo-band article,
+.lux-product-detail {
+  border: 1px solid rgba(0, 114, 206, 0.14);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 20px 54px rgba(0, 56, 112, 0.09);
+}
+
+.lux-seo-band article {
+  display: grid;
+  gap: 12px;
+  padding: 24px;
+}
+
+.lux-seo-band span {
+  color: #ff5b00;
+  font-weight: 950;
+}
+
+.lux-seo-band h2,
+.lux-product-detail h2,
+.lux-product-detail h3 {
+  margin: 0;
+  color: #003f7d;
+}
+
+.lux-seo-band h2 {
+  font-size: clamp(1.35rem, 2vw, 1.8rem);
+}
+
+.lux-seo-band p,
+.lux-product-detail p {
+  margin: 0;
+  color: #334e68;
+  line-height: 1.62;
+}
+
+.lux-product-detail {
+  display: grid;
+  gap: 24px;
+  padding: 32px;
+  margin-bottom: 22px;
 }
 
 .lux-sale-grid {
@@ -3706,9 +3822,11 @@ h1 {
   .lux-grid,
   .lux-story,
   .lux-projects,
+  .lux-spotit-hero,
   .lux-spotit-showcase,
   .lux-project-feature-head,
   .lux-project-feature-grid,
+  .lux-seo-band,
   .lux-sale-banner,
   .lux-sale-grid,
   .lux-location-panel,
@@ -3753,6 +3871,17 @@ h1 {
 
   .lux-spotit-video {
     min-height: auto;
+  }
+
+  .lux-spotit-hero {
+    width: min(100% - 28px, 1160px);
+    min-height: auto;
+    padding: 56px 0 34px;
+  }
+
+  .lux-seo-band,
+  .lux-product-detail {
+    width: min(100% - 28px, 1160px);
   }
 
   .lux-clinical-scene {
