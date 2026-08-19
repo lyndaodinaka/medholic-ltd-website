@@ -2898,6 +2898,58 @@ h1 {
   text-transform: uppercase;
 }
 
+.lux-spotit-demo-gallery {
+  width: min(1160px, calc(100% - 40px));
+  margin: 0 auto 34px;
+}
+
+.lux-gallery-heading {
+  max-width: 860px;
+  margin-bottom: 18px;
+}
+
+.lux-gallery-heading h2 {
+  margin: 0;
+  color: #003f7d;
+  font-size: clamp(2rem, 4vw, 3.8rem);
+  line-height: 1;
+}
+
+.lux-gallery-heading p:not(.lux-kicker) {
+  color: #334e68;
+  line-height: 1.65;
+}
+
+.lux-demo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.lux-demo-grid figure {
+  overflow: hidden;
+  margin: 0;
+  border: 1px solid rgba(0, 114, 206, 0.14);
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 24px 70px rgba(0, 56, 112, 0.11);
+}
+
+.lux-demo-grid img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.lux-demo-grid figcaption {
+  padding: 14px 16px 18px;
+  color: #003f7d;
+  font-weight: 850;
+  line-height: 1.35;
+}
+
 .lux-seo-band {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -3823,6 +3875,7 @@ h1 {
   .lux-story,
   .lux-projects,
   .lux-spotit-hero,
+  .lux-demo-grid,
   .lux-spotit-showcase,
   .lux-project-feature-head,
   .lux-project-feature-grid,
@@ -3880,6 +3933,7 @@ h1 {
   }
 
   .lux-seo-band,
+  .lux-spotit-demo-gallery,
   .lux-product-detail {
     width: min(100% - 28px, 1160px);
   }
