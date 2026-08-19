@@ -46,10 +46,10 @@ function prepareMarketingHtml(fileName) {
     .replace('<link rel="stylesheet" href="marketing.css">', `<style>\n${css}\n</style>`)
     .replaceAll('/assets/favicon-32.png', dataUri(path.join("assets", "favicon-32.png"), "image/png"))
     .replaceAll('/assets/apple-touch-icon.png', dataUri(path.join("assets", "apple-touch-icon.png"), "image/png"))
-    .replaceAll('src="/marketing/medholic-wordmark-logo.png"', `src="${dataUri(path.join("marketing", "medholic-wordmark-logo.png"), "image/png")}"`)
+    .replaceAll('src="/marketing/medholic-wordmark-logo-warm.png"', `src="${dataUri(path.join("marketing", "medholic-wordmark-logo-warm.png"), "image/png")}"`)
     .replaceAll('src="/marketing/medholic-branded-preview.jpg"', `src="${dataUri(path.join("marketing", "medholic-branded-preview.jpg"), "image/jpeg")}"`)
     .replaceAll('src="/marketing/medholic-luxury-boardroom.jpg"', `src="${dataUri(path.join("marketing", "medholic-luxury-boardroom.jpg"), "image/jpeg")}"`)
-    .replaceAll('src="/marketing/spotit-logo.png"', `src="${dataUri(path.join("marketing", "spotit-logo.png"), "image/png")}"`)
+    .replaceAll('src="/marketing/spotit-logo-warm.png"', `src="${dataUri(path.join("marketing", "spotit-logo-warm.png"), "image/png")}"`)
     .replaceAll('href="/assets/', 'href="assets/')
     .replaceAll('src="/assets/', 'src="assets/')
     .replaceAll('href="/app"', 'href="#work"')
@@ -65,15 +65,18 @@ fs.writeFileSync(path.join(dist, "spotit", "index.html"), spotitHtml);
 copyFile(path.join(root, "marketing", "marketing.css"), path.join(dist, "marketing.css"));
 copyDir(path.join(root, "assets"), path.join(dist, "assets"), new Set([
   "apple-touch-icon.png",
+  "favicon.ico",
   "favicon-32.png",
   "icon-192.png",
   "icon-512.png"
 ]));
 copyDir(path.join(root, "marketing"), path.join(dist, "marketing"), new Set([
   "medholic-wordmark-logo.png",
+  "medholic-wordmark-logo-warm.png",
   "medholic-branded-preview.jpg",
   "medholic-luxury-boardroom.jpg",
   "spotit-logo.png",
+  "spotit-logo-warm.png",
   "spotit-demo-old-photos.jpg",
   "spotit-demo-one-photo.jpg",
   "spotit-demo-wound-changed.jpg",
