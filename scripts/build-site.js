@@ -77,15 +77,21 @@ copyFile(
   path.join(dist, "docs", "final-business-launch-checklist.md")
 );
 copyFile(path.join(root, "site.webmanifest"), path.join(dist, "site.webmanifest"));
+copyFile(path.join(root, "robots.txt"), path.join(dist, "robots.txt"));
+copyFile(path.join(root, "sitemap.xml"), path.join(dist, "sitemap.xml"));
 copyFile(path.join(root, "assets", "favicon.ico"), path.join(dist, "favicon.ico"));
 copyFile(path.join(root, ".openai", "hosting.json"), path.join(dist, ".openai", "hosting.json"));
 
 fs.mkdirSync(serverDir, { recursive: true });
 const brandedPreviewBase64 = fileBase64(path.join("marketing", "medholic-branded-preview.jpg"));
 const faviconBase64 = fileBase64(path.join("assets", "favicon.ico"));
+const robotsTxt = fs.readFileSync(path.join(root, "robots.txt"), "utf8");
+const sitemapXml = fs.readFileSync(path.join(root, "sitemap.xml"), "utf8");
 fs.writeFileSync(path.join(serverDir, "index.js"), `const html = ${JSON.stringify(html)};
 const brandedPreviewBase64 = ${JSON.stringify(brandedPreviewBase64)};
 const faviconBase64 = ${JSON.stringify(faviconBase64)};
+const robotsTxt = ${JSON.stringify(robotsTxt)};
+const sitemapXml = ${JSON.stringify(sitemapXml)};
 
 function base64ToBytes(value) {
   const binary = atob(value);
@@ -118,6 +124,24 @@ export default {
       return new Response(base64ToBytes(faviconBase64), {
         headers: {
           "Content-Type": "image/x-icon",
+          "Cache-Control": "public, max-age=3600"
+        }
+      });
+    }
+
+    if (url.pathname === "/robots.txt") {
+      return new Response(robotsTxt, {
+        headers: {
+          "Content-Type": "text/plain; charset=utf-8",
+          "Cache-Control": "public, max-age=3600"
+        }
+      });
+    }
+
+    if (url.pathname === "/sitemap.xml") {
+      return new Response(sitemapXml, {
+        headers: {
+          "Content-Type": "application/xml; charset=utf-8",
           "Cache-Control": "public, max-age=3600"
         }
       });
