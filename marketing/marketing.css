@@ -4518,3 +4518,176 @@ h1 {
     margin-bottom: 42px;
   }
 }
+
+/* Medholic Ltd light brown and green premium healthcare theme */
+.lux-site,
+.lux-product-page {
+  color: #173225;
+  background:
+    radial-gradient(circle at 8% 10%, rgba(196, 168, 124, 0.2), transparent 26rem),
+    radial-gradient(circle at 88% 4%, rgba(88, 142, 99, 0.18), transparent 30rem),
+    linear-gradient(180deg, #fbf8f1 0%, #eef6ee 45%, #ffffff 100%);
+}
+
+.lux-hero > img {
+  filter: saturate(0.78) sepia(0.16) hue-rotate(12deg) brightness(0.95);
+}
+
+.lux-hero::after {
+  background:
+    linear-gradient(90deg, rgba(25, 77, 52, 0.88), rgba(47, 107, 79, 0.58) 44%, rgba(196, 168, 124, 0.18)),
+    linear-gradient(180deg, rgba(25, 77, 52, 0.15), rgba(47, 107, 79, 0.18) 45%, #fbf8f1 98%);
+}
+
+.lux-nav-links {
+  border-color: rgba(196, 168, 124, 0.28);
+  background: rgba(246, 241, 230, 0.12);
+}
+
+.lux-nav-links a {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.42);
+  background: rgba(58, 101, 73, 0.82);
+}
+
+.lux-nav-links a:hover {
+  background: #234f37;
+}
+
+.lux-kicker,
+.lux-grid span,
+.lux-project-placeholder span,
+.lux-project-card summary span,
+.lux-video-topbar span,
+.lux-storyboard-real span,
+.spotit-card-grid span,
+.lux-sale-grid span {
+  color: #9a6a2f;
+}
+
+.lux-intro h2,
+.lux-location-panel h2,
+.lux-statement h2,
+.lux-contact h2,
+.lux-projects-heading h2,
+.lux-project-feature-head h3,
+.lux-project-placeholder h3,
+.lux-grid h3,
+.lux-spotit-copy h4,
+.lux-spotit-hero h1,
+.lux-gallery-heading h2,
+.lux-seo-band h2,
+.lux-product-detail h2,
+.lux-product-detail h3,
+.spotit-dashboard-top,
+.spotit-wound-panel strong,
+.spotit-card-grid h3,
+.spotit-credibility-grid strong,
+.spotit-visual-copy h2,
+.lux-footer strong,
+.lux-footer span {
+  color: #194d34;
+}
+
+.lux-intro p,
+.lux-grid p,
+.lux-location-panel p:not(.lux-kicker),
+.lux-statement p:not(.lux-kicker),
+.lux-projects-heading p:not(.lux-kicker),
+.lux-project-feature-head p:not(.lux-kicker),
+.lux-project-placeholder p,
+.lux-spotit-copy p,
+.lux-spotit-copy li,
+.lux-contact p,
+.lux-gallery-heading p:not(.lux-kicker),
+.lux-seo-band p,
+.lux-product-detail p,
+.spotit-card-grid p,
+.spotit-credibility-grid p,
+.spotit-visual-copy p:not(.lux-kicker),
+.spotit-wound-panel p,
+.lux-footer {
+  color: #40584a;
+}
+
+.lux-primary,
+.lux-contact-reveal summary,
+.lux-contact-reveal a,
+.lux-spotit-actions a:first-child {
+  color: #ffffff;
+  border-color: rgba(47, 107, 79, 0.72);
+  background: linear-gradient(135deg, #79a96b, #2f6b4f 58%, #194d34);
+  box-shadow: 0 22px 48px rgba(47, 107, 79, 0.24);
+}
+
+.lux-secondary,
+.lux-spotit-actions a:not(:first-child) {
+  color: #194d34;
+  border-color: rgba(47, 107, 79, 0.22);
+  background: rgba(255, 255, 255, 0.68);
+}
+
+.lux-about-pills span,
+.lux-tags span,
+.spotit-proof-points span,
+.spotit-patient-strip span {
+  color: #194d34;
+  border-color: rgba(154, 106, 47, 0.22);
+  background: linear-gradient(135deg, #ffffff, #eef6ee);
+}
+
+.lux-location-panel,
+.lux-grid article,
+.lux-projects-heading,
+.lux-project-feature,
+.lux-project-placeholder,
+.lux-statement,
+.lux-contact,
+.lux-seo-band article,
+.lux-product-detail,
+.spotit-card-grid article,
+.spotit-credibility-grid article,
+.spotit-visual-main,
+.spotit-visual-copy,
+.spotit-dashboard-preview {
+  border-color: rgba(47, 107, 79, 0.15);
+  background:
+    radial-gradient(circle at 96% 0%, rgba(122, 169, 107, 0.11), transparent 30%),
+    radial-gradient(circle at 0% 100%, rgba(196, 168, 124, 0.13), transparent 34%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(246, 241, 230, 0.9)),
+    #ffffff;
+  box-shadow: 0 22px 58px rgba(61, 83, 66, 0.11);
+}
+
+.spotit-dashboard-top,
+.spotit-wound-panel,
+.lux-video-topbar,
+.lux-storyboard,
+.lux-storyboard-real article {
+  border-color: rgba(47, 107, 79, 0.14);
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.spotit-acquisition {
+  background:
+    radial-gradient(circle at 85% 12%, rgba(196, 168, 124, 0.22), transparent 32%),
+    linear-gradient(135deg, #194d34, #2f6b4f);
+}
+
+.spotit-acquisition h2,
+.spotit-acquisition p,
+.spotit-acquisition .lux-kicker {
+  color: #ffffff;
+}
+
+.spotit-metric-danger {
+  background: linear-gradient(145deg, #b85f47, #8d3f32);
+}
+
+.spotit-metric-warn {
+  background: linear-gradient(145deg, #c4944f, #9a6a2f);
+}
+
+.spotit-metric-good {
+  background: linear-gradient(145deg, #79a96b, #2f6b4f);
+}
