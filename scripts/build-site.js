@@ -52,6 +52,7 @@ function prepareMarketingHtml(fileName) {
     .replaceAll('src="/marketing/spotit-logo-warm.png"', `src="${dataUri(path.join("marketing", "spotit-logo-warm.png"), "image/png")}"`)
     .replaceAll('src="/marketing/spotit-flyer-man-private.jpg"', `src="${dataUri(path.join("marketing", "spotit-flyer-man-private.jpg"), "image/jpeg")}"`)
     .replaceAll('src="/marketing/spotit-flyer-female-private.jpg"', `src="${dataUri(path.join("marketing", "spotit-flyer-female-private.jpg"), "image/jpeg")}"`)
+    .replaceAll('src="/marketing/spotit-wound-changed-flyer.png"', `src="${dataUri(path.join("marketing", "spotit-wound-changed-flyer.png"), "image/png")}"`)
     .replaceAll('href="/assets/', 'href="assets/')
     .replaceAll('src="/assets/', 'src="assets/')
     .replaceAll('href="/app"', 'href="#work"')
@@ -80,7 +81,8 @@ copyDir(path.join(root, "marketing"), path.join(dist, "marketing"), new Set([
   "spotit-logo.png",
   "spotit-logo-warm.png",
   "spotit-flyer-man-private.jpg",
-  "spotit-flyer-female-private.jpg"
+  "spotit-flyer-female-private.jpg",
+  "spotit-wound-changed-flyer.png"
 ]));
 copyFile(
   path.join(root, "docs", "final-business-launch-checklist.md"),

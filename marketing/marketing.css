@@ -2989,6 +2989,8 @@ h1 {
 
 .spotit-hero-flyer {
   padding: 0;
+  display: grid;
+  place-items: center;
   background: linear-gradient(135deg, #fffdf8, #f3ead8);
 }
 
@@ -2996,7 +2998,6 @@ h1 {
   display: block;
   width: 100%;
   height: auto;
-  max-height: 620px;
   object-fit: contain;
   object-position: center center;
 }
@@ -3375,6 +3376,8 @@ h1 {
 
 .spotit-flyer-image {
   overflow: hidden;
+  display: grid;
+  place-items: center;
   border: 1px solid rgba(72, 112, 79, 0.16);
   border-radius: 8px;
   background: linear-gradient(135deg, #fffdf8, #f3ead8);
@@ -3384,7 +3387,6 @@ h1 {
 .spotit-flyer-image img {
   width: 100%;
   height: auto;
-  max-height: 680px;
   display: block;
   object-fit: contain;
   object-position: top center;
@@ -4463,7 +4465,7 @@ h1 {
   }
 
   .spotit-hero-flyer img {
-    max-height: 520px;
+    max-height: none;
   }
 
   .spotit-metrics {
@@ -4471,7 +4473,7 @@ h1 {
   }
 
   .spotit-visual-main img {
-    max-height: 520px;
+    max-height: none;
   }
 
   .spotit-product-layout {
@@ -4514,7 +4516,7 @@ h1 {
 
 @media (max-width: 620px) {
   .spotit-hero-flyer img {
-    max-height: 420px;
+    max-height: none;
   }
 
   .spotit-medholic-lockup {
