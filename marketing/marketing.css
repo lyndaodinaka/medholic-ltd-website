@@ -4519,6 +4519,157 @@ h1 {
   }
 }
 
+/* Medholic Ltd warm clinical theme: light brown, green and soft white */
+.lux-site,
+.lux-product-page {
+  color: #20352c;
+  background:
+    radial-gradient(circle at 12% 10%, rgba(124, 157, 107, 0.16), transparent 30rem),
+    radial-gradient(circle at 88% 6%, rgba(190, 158, 118, 0.18), transparent 34rem),
+    linear-gradient(180deg, #fbf7ef 0%, #f1eadc 48%, #f8fbf3 100%);
+}
+
+.lux-nav-links a {
+  color: #ffffff;
+  background: rgba(72, 112, 79, 0.78);
+  border-color: rgba(255, 255, 255, 0.42);
+}
+
+.lux-nav-links a:hover {
+  background: #355f3f;
+}
+
+.lux-kicker,
+.lux-grid span,
+.lux-project-placeholder span,
+.lux-project-card summary span,
+.lux-video-topbar span,
+.lux-storyboard-real span,
+.spotit-card-grid span {
+  color: #7a5a34;
+}
+
+.lux-intro h2,
+.lux-location-panel h2,
+.lux-statement h2,
+.lux-contact h2,
+.lux-projects-heading h2,
+.lux-project-feature-head h3,
+.lux-project-placeholder h3,
+.lux-grid h3,
+.lux-spotit-copy h4,
+.lux-spotit-hero h1,
+.lux-gallery-heading h2,
+.lux-seo-band h2,
+.lux-product-detail h2,
+.lux-product-detail h3,
+.spotit-dashboard-top,
+.spotit-wound-panel strong,
+.spotit-card-grid h3,
+.spotit-credibility-grid strong,
+.spotit-visual-copy h2 {
+  color: #234f34;
+}
+
+.lux-intro p,
+.lux-grid p,
+.lux-location-panel p:not(.lux-kicker),
+.lux-statement p:not(.lux-kicker),
+.lux-projects-heading p:not(.lux-kicker),
+.lux-project-feature-head p:not(.lux-kicker),
+.lux-project-placeholder p,
+.lux-spotit-copy p,
+.lux-spotit-copy li,
+.lux-contact p,
+.lux-gallery-heading p:not(.lux-kicker),
+.lux-seo-band p,
+.lux-product-detail p,
+.spotit-card-grid p,
+.spotit-credibility-grid p,
+.spotit-visual-copy p:not(.lux-kicker),
+.spotit-wound-panel p {
+  color: #40584b;
+}
+
+.lux-primary,
+.lux-contact-reveal summary,
+.lux-contact-reveal a {
+  background: linear-gradient(135deg, #7ba26f, #48704f 54%, #2f5938);
+  border-color: rgba(72, 112, 79, 0.72);
+  box-shadow: 0 22px 48px rgba(72, 112, 79, 0.18);
+}
+
+.lux-secondary {
+  color: #ffffff;
+  background: rgba(122, 90, 52, 0.55);
+  border-color: rgba(122, 90, 52, 0.3);
+}
+
+.lux-about-pills span,
+.lux-tags span,
+.spotit-proof-points span,
+.spotit-patient-strip span {
+  color: #234f34;
+  border-color: rgba(122, 90, 52, 0.2);
+  background: linear-gradient(135deg, #fffdf8, #efe4d1);
+}
+
+.lux-location-panel,
+.lux-grid article,
+.lux-projects-heading,
+.lux-project-feature,
+.lux-project-placeholder,
+.lux-statement,
+.lux-contact,
+.lux-seo-band article,
+.lux-product-detail,
+.spotit-card-grid article,
+.spotit-credibility-grid article,
+.spotit-visual-main,
+.spotit-visual-copy,
+.spotit-dashboard-preview,
+.spotit-wound-panel {
+  border-color: rgba(122, 90, 52, 0.16);
+  background:
+    radial-gradient(circle at 95% 0%, rgba(124, 157, 107, 0.12), transparent 30%),
+    linear-gradient(135deg, rgba(255, 253, 248, 0.98), rgba(239, 228, 209, 0.88)),
+    #fffdf8;
+  box-shadow: 0 24px 64px rgba(82, 69, 48, 0.1);
+}
+
+.spotit-dashboard-preview {
+  background:
+    radial-gradient(circle at 86% 4%, rgba(122, 90, 52, 0.14), transparent 32%),
+    linear-gradient(145deg, #fffdf8, #efe4d1 48%, #f8fbf3);
+}
+
+.spotit-metric-danger {
+  background: linear-gradient(145deg, #b84d3d, #86352c);
+}
+
+.spotit-metric-warn {
+  background: linear-gradient(145deg, #b88549, #8d6332);
+}
+
+.spotit-metric-good {
+  background: linear-gradient(145deg, #6f995d, #315f3a);
+}
+
+.spotit-acquisition {
+  background:
+    linear-gradient(135deg, #2f5938, #48704f 62%, #7a5a34);
+}
+
+.lux-footer {
+  border-top-color: rgba(72, 112, 79, 0.22);
+  color: #40584b;
+}
+
+.lux-footer strong,
+.lux-footer span {
+  color: #234f34;
+}
+
 /* Medholic Ltd light brown and green premium healthcare theme */
 .lux-site,
 .lux-product-page {
