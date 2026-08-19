@@ -3329,6 +3329,10 @@ h1 {
   line-height: 1.35;
 }
 
+.spotit-home-flyer {
+  margin-top: 18px;
+}
+
 .spotit-credibility {
   background:
     linear-gradient(145deg, rgba(0, 114, 206, 0.08), rgba(255, 255, 255, 0.96)),

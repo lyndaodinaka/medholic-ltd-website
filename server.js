@@ -493,11 +493,6 @@ const server = http.createServer(async (request, response) => {
   if (await handleApi(request, response, pathname)) return;
 
   let requestedPath = pathname;
-  if (pathname === "/spotit-demo") {
-    response.writeHead(302, { Location: "https://spotit-wound-app.medholic.net/demo" });
-    response.end();
-    return;
-  }
   if (pathname === "/") requestedPath = "/marketing/index.html";
   if (pathname === "/spotit" || pathname === "/spotit/") requestedPath = "/marketing/spotit.html";
   if (pathname === "/app" || pathname === "/app/") requestedPath = "/index.html";

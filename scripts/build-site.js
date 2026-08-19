@@ -130,10 +130,6 @@ export default {
       });
     }
 
-    if (url.pathname === "/spotit-demo") {
-      return Response.redirect("https://spotit-wound-app.medholic.net/demo", 302);
-    }
-
     if (url.pathname === "/marketing/medholic-branded-preview.jpg") {
       return new Response(base64ToBytes(brandedPreviewBase64), {
         headers: {
