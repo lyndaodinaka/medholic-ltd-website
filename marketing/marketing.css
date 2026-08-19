@@ -2915,6 +2915,32 @@ h1 {
   align-content: center;
 }
 
+.spotit-medholic-lockup {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 14px 10px;
+  border: 1px solid rgba(122, 90, 52, 0.18);
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(255, 253, 248, 0.96), rgba(239, 228, 209, 0.72));
+  box-shadow: 0 16px 42px rgba(82, 69, 48, 0.1);
+}
+
+.spotit-medholic-lockup span {
+  color: #446d47;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.spotit-medholic-lockup img {
+  width: min(190px, 46vw);
+  height: auto;
+  display: block;
+}
+
 .spotit-hero-logo {
   width: min(280px, 70vw);
   height: auto;
@@ -4489,6 +4515,15 @@ h1 {
 @media (max-width: 620px) {
   .spotit-hero-flyer img {
     max-height: 420px;
+  }
+
+  .spotit-medholic-lockup {
+    gap: 9px;
+    padding: 8px 11px;
+  }
+
+  .spotit-medholic-lockup img {
+    width: min(162px, 48vw);
   }
 
   .lux-nav {
