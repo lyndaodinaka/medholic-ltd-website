@@ -46,10 +46,15 @@ function prepareMarketingHtml(fileName) {
     .replace('<link rel="stylesheet" href="marketing.css">', `<style>\n${css}\n</style>`)
     .replaceAll('/assets/favicon-32.png', dataUri(path.join("assets", "favicon-32.png"), "image/png"))
     .replaceAll('/assets/apple-touch-icon.png', dataUri(path.join("assets", "apple-touch-icon.png"), "image/png"))
+    .replaceAll('/assets/medholic-favicon-32.png', dataUri(path.join("assets", "medholic-favicon-32.png"), "image/png"))
+    .replaceAll('/assets/medholic-apple-touch-icon.png', dataUri(path.join("assets", "medholic-apple-touch-icon.png"), "image/png"))
+    .replaceAll('src="/marketing/medholic-signature-logo.png"', `src="${dataUri(path.join("marketing", "medholic-signature-logo.png"), "image/png")}"`)
     .replaceAll('src="/marketing/medholic-wordmark-logo-warm.png"', `src="${dataUri(path.join("marketing", "medholic-wordmark-logo-warm.png"), "image/png")}"`)
     .replaceAll('src="/marketing/medholic-wordmark-logo-no-line.png"', `src="${dataUri(path.join("marketing", "medholic-wordmark-logo-no-line.png"), "image/png")}"`)
     .replaceAll('src="/marketing/medholic-branded-preview.jpg"', `src="${dataUri(path.join("marketing", "medholic-branded-preview.jpg"), "image/jpeg")}"`)
     .replaceAll('src="/marketing/medholic-luxury-boardroom.jpg"', `src="${dataUri(path.join("marketing", "medholic-luxury-boardroom.jpg"), "image/jpeg")}"`)
+    .replaceAll('src="/marketing/medholic-corporate-hero.png"', `src="${dataUri(path.join("marketing", "medholic-corporate-hero.png"), "image/png")}"`)
+    .replaceAll('src="/marketing/medholic-simulation-consulting.png"', `src="${dataUri(path.join("marketing", "medholic-simulation-consulting.png"), "image/png")}"`)
     .replaceAll('src="/marketing/spotit-clinical-review-building.png"', `src="${dataUri(path.join("marketing", "spotit-clinical-review-building.png"), "image/png")}"`)
     .replaceAll('src="/marketing/spotit-logo-warm.png"', `src="${dataUri(path.join("marketing", "spotit-logo-warm.png"), "image/png")}"`)
     .replaceAll('src="/marketing/spotit-flyer-man-private.jpg"', `src="${dataUri(path.join("marketing", "spotit-flyer-man-private.jpg"), "image/jpeg")}"`)
@@ -73,14 +78,22 @@ copyDir(path.join(root, "assets"), path.join(dist, "assets"), new Set([
   "favicon.ico",
   "favicon-32.png",
   "icon-192.png",
-  "icon-512.png"
+  "icon-512.png",
+  "medholic-favicon.ico",
+  "medholic-favicon-32.png",
+  "medholic-apple-touch-icon.png",
+  "medholic-icon-192.png",
+  "medholic-icon-512.png"
 ]));
 copyDir(path.join(root, "marketing"), path.join(dist, "marketing"), new Set([
+  "medholic-signature-logo.png",
   "medholic-wordmark-logo.png",
   "medholic-wordmark-logo-warm.png",
   "medholic-wordmark-logo-no-line.png",
   "medholic-branded-preview.jpg",
   "medholic-luxury-boardroom.jpg",
+  "medholic-corporate-hero.png",
+  "medholic-simulation-consulting.png",
   "spotit-clinical-review-building.png",
   "spotit-logo.png",
   "spotit-logo-warm.png",
@@ -95,7 +108,7 @@ copyFile(
 copyFile(path.join(root, "site.webmanifest"), path.join(dist, "site.webmanifest"));
 copyFile(path.join(root, "robots.txt"), path.join(dist, "robots.txt"));
 copyFile(path.join(root, "sitemap.xml"), path.join(dist, "sitemap.xml"));
-copyFile(path.join(root, "assets", "favicon.ico"), path.join(dist, "favicon.ico"));
+copyFile(path.join(root, "assets", "medholic-favicon.ico"), path.join(dist, "favicon.ico"));
 copyFile(path.join(root, ".openai", "hosting.json"), path.join(dist, ".openai", "hosting.json"));
 
 fs.mkdirSync(serverDir, { recursive: true });
@@ -103,7 +116,7 @@ const brandedPreviewBase64 = fileBase64(path.join("marketing", "medholic-branded
 const spotitLogoBase64 = fileBase64(path.join("marketing", "spotit-logo.png"));
 const spotitLogoWarmBase64 = fileBase64(path.join("marketing", "spotit-logo-warm.png"));
 const medholicLogoWarmBase64 = fileBase64(path.join("marketing", "medholic-wordmark-logo-warm.png"));
-const faviconBase64 = fileBase64(path.join("assets", "favicon.ico"));
+const faviconBase64 = fileBase64(path.join("assets", "medholic-favicon.ico"));
 const robotsTxt = fs.readFileSync(path.join(root, "robots.txt"), "utf8");
 const sitemapXml = fs.readFileSync(path.join(root, "sitemap.xml"), "utf8");
 fs.writeFileSync(path.join(serverDir, "index.js"), `const html = ${JSON.stringify(html)};
