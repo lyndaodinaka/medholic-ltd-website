@@ -47,8 +47,10 @@ function prepareMarketingHtml(fileName) {
     .replaceAll('/assets/favicon-32.png', dataUri(path.join("assets", "favicon-32.png"), "image/png"))
     .replaceAll('/assets/apple-touch-icon.png', dataUri(path.join("assets", "apple-touch-icon.png"), "image/png"))
     .replaceAll('src="/marketing/medholic-wordmark-logo-warm.png"', `src="${dataUri(path.join("marketing", "medholic-wordmark-logo-warm.png"), "image/png")}"`)
+    .replaceAll('src="/marketing/medholic-wordmark-logo-no-line.png"', `src="${dataUri(path.join("marketing", "medholic-wordmark-logo-no-line.png"), "image/png")}"`)
     .replaceAll('src="/marketing/medholic-branded-preview.jpg"', `src="${dataUri(path.join("marketing", "medholic-branded-preview.jpg"), "image/jpeg")}"`)
     .replaceAll('src="/marketing/medholic-luxury-boardroom.jpg"', `src="${dataUri(path.join("marketing", "medholic-luxury-boardroom.jpg"), "image/jpeg")}"`)
+    .replaceAll('src="/marketing/spotit-clinical-review-building.png"', `src="${dataUri(path.join("marketing", "spotit-clinical-review-building.png"), "image/png")}"`)
     .replaceAll('src="/marketing/spotit-logo-warm.png"', `src="${dataUri(path.join("marketing", "spotit-logo-warm.png"), "image/png")}"`)
     .replaceAll('src="/marketing/spotit-flyer-man-private.jpg"', `src="${dataUri(path.join("marketing", "spotit-flyer-man-private.jpg"), "image/jpeg")}"`)
     .replaceAll('src="/marketing/spotit-flyer-female-private.jpg"', `src="${dataUri(path.join("marketing", "spotit-flyer-female-private.jpg"), "image/jpeg")}"`)
@@ -76,8 +78,10 @@ copyDir(path.join(root, "assets"), path.join(dist, "assets"), new Set([
 copyDir(path.join(root, "marketing"), path.join(dist, "marketing"), new Set([
   "medholic-wordmark-logo.png",
   "medholic-wordmark-logo-warm.png",
+  "medholic-wordmark-logo-no-line.png",
   "medholic-branded-preview.jpg",
   "medholic-luxury-boardroom.jpg",
+  "spotit-clinical-review-building.png",
   "spotit-logo.png",
   "spotit-logo-warm.png",
   "spotit-flyer-man-private.jpg",

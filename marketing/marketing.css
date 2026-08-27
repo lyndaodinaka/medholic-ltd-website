@@ -3011,6 +3011,57 @@ h1 {
   object-position: center center;
 }
 
+.spotit-clinical-review-card {
+  position: relative;
+  min-height: 560px;
+  overflow: hidden;
+  border: 1px solid rgba(47, 107, 79, 0.14);
+  border-radius: 22px;
+  background: #f7fbf8;
+  box-shadow: 0 28px 90px rgba(34, 75, 56, 0.15);
+}
+
+.spotit-clinical-review-card img {
+  width: 100%;
+  height: 100%;
+  min-height: 560px;
+  display: block;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.spotit-dashboard-chip {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: 24px;
+  display: grid;
+  gap: 5px;
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.58);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: 0 20px 52px rgba(12, 35, 27, 0.18);
+  backdrop-filter: blur(18px);
+}
+
+.spotit-dashboard-chip span {
+  color: #2f6b4f;
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.spotit-dashboard-chip strong {
+  color: #0d231a;
+  font-size: clamp(1.35rem, 2.2vw, 2rem);
+}
+
+.spotit-dashboard-chip small {
+  color: #51665d;
+  font-size: 0.95rem;
+}
+
 .spotit-dashboard-top {
   display: flex;
   justify-content: space-between;
@@ -5106,4 +5157,76 @@ h1 {
 
 .spotit-metric-good {
   background: linear-gradient(145deg, #79a96b, #2f6b4f);
+}
+
+/* Light, modern healthcare-software polish for the public marketing pages. */
+.lux-site {
+  background:
+    radial-gradient(circle at 10% 0%, rgba(220, 186, 113, 0.18), transparent 28%),
+    radial-gradient(circle at 90% 8%, rgba(128, 166, 105, 0.22), transparent 30%),
+    linear-gradient(180deg, #fbfaf6 0%, #f3f8f2 48%, #ffffff 100%);
+  color: #10231a;
+}
+
+.lux-nav-links {
+  margin-left: auto;
+  padding: 7px;
+  border: 1px solid rgba(47, 107, 79, 0.13);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: 0 18px 55px rgba(23, 55, 39, 0.12);
+  backdrop-filter: blur(18px);
+}
+
+.lux-nav-links a {
+  color: #244632;
+}
+
+.lux-nav-links a:hover {
+  color: #ffffff;
+  background: #2f6b4f;
+}
+
+.lux-hero::after {
+  opacity: 0.18;
+}
+
+.lux-hero-overlay {
+  color: #10231a;
+  text-shadow: none;
+}
+
+.lux-hero > img {
+  opacity: 0.22;
+  filter: saturate(0.92) brightness(1.25);
+}
+
+.lux-hero h1,
+.lux-spotit-hero h1 {
+  color: #10231a;
+}
+
+.lux-hero p:not(.lux-kicker),
+.lux-spotit-hero p:not(.lux-kicker),
+.lux-intro p,
+.lux-location-panel p,
+.lux-grid p,
+.lux-statement p,
+.lux-projects-heading p,
+.lux-contact p {
+  color: #51665d;
+}
+
+.spotit-confidence-hero {
+  gap: clamp(28px, 5vw, 64px);
+  align-items: center;
+  min-height: 82vh;
+}
+
+.spotit-hero-logo {
+  width: min(260px, 70vw);
+}
+
+.spotit-clinical-review-card {
+  border-radius: 24px;
 }
