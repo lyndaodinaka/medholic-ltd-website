@@ -5375,3 +5375,65 @@ h1 {
     border-radius: 16px;
   }
 }
+
+/* Keep the Medholic hero photograph fully visible instead of using it as covered background art. */
+.lux-hero-split {
+  width: min(1180px, calc(100% - 32px));
+  min-height: auto;
+  margin: 0 auto;
+  padding: clamp(112px, 12vw, 150px) 0 clamp(44px, 7vw, 78px);
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(420px, 1.1fr);
+  gap: clamp(24px, 5vw, 62px);
+  align-items: center;
+  overflow: visible;
+  background: transparent;
+}
+
+.lux-hero-split::after {
+  display: none;
+}
+
+.lux-hero-split .lux-hero-overlay {
+  width: auto;
+  margin: 0;
+  padding: 0;
+}
+
+.lux-hero-visual {
+  margin: 0;
+  border-radius: 30px;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow: 0 32px 92px rgba(25, 77, 52, 0.18);
+}
+
+.lux-hero-visual img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: center;
+}
+
+@media (max-width: 880px) {
+  .lux-hero-split {
+    width: min(100% - 24px, 1180px);
+    padding-top: 126px;
+    grid-template-columns: 1fr;
+  }
+
+  .lux-hero-visual {
+    border-radius: 22px;
+  }
+}
+
+@media (max-width: 620px) {
+  .lux-hero-split {
+    padding-top: 118px;
+  }
+
+  .lux-hero-visual img {
+    aspect-ratio: 4 / 3;
+  }
+}
