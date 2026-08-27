@@ -5437,3 +5437,79 @@ h1 {
     aspect-ratio: 4 / 3;
   }
 }
+
+/* Slim desktop sidebars give both Medholic pages a lighter, more premium app feel. */
+.lux-side-rail {
+  position: fixed;
+  left: 18px;
+  top: 50%;
+  z-index: 20;
+  width: 76px;
+  display: grid;
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid rgba(47, 107, 79, 0.14);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 24px 70px rgba(25, 77, 52, 0.14);
+  backdrop-filter: blur(18px);
+  transform: translateY(-50%);
+}
+
+.lux-side-rail a {
+  min-height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  color: #244632;
+  background: rgba(238, 246, 238, 0.72);
+  font-size: 0.72rem;
+  font-weight: 900;
+  line-height: 1;
+  text-align: center;
+  text-decoration: none;
+  transition: transform 180ms ease, background 180ms ease, color 180ms ease;
+}
+
+.lux-side-rail a:hover {
+  color: #ffffff;
+  background: #2f6b4f;
+  transform: translateY(-1px);
+}
+
+.lux-side-rail .rail-mark {
+  min-height: 54px;
+  color: #efbd70;
+  background: linear-gradient(145deg, #528b5b, #1f5637);
+  font-size: 1.45rem;
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.18);
+}
+
+.spotit-side-rail .rail-mark {
+  color: #ffffff;
+  background: linear-gradient(145deg, #0f62c7, #063f93);
+}
+
+@media (min-width: 1260px) {
+  .lux-side-rail ~ .lux-hero-split,
+  .lux-side-rail ~ .lux-intro,
+  .lux-side-rail ~ .lux-location-panel,
+  .lux-side-rail ~ .lux-grid,
+  .lux-side-rail ~ .lux-showcase,
+  .lux-side-rail ~ .lux-statement,
+  .lux-side-rail ~ .lux-projects,
+  .lux-side-rail ~ .lux-contact,
+  .lux-side-rail ~ .lux-footer,
+  .lux-side-rail ~ .lux-spotit-hero,
+  .lux-side-rail ~ .spotit-section,
+  .lux-side-rail ~ .lux-spotit-demo-gallery,
+  .lux-side-rail ~ .lux-product-detail {
+    transform: translateX(38px);
+  }
+}
+
+@media (max-width: 1120px) {
+  .lux-side-rail {
+    display: none;
+  }
+}
