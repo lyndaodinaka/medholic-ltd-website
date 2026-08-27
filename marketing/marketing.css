@@ -5513,3 +5513,113 @@ h1 {
     display: none;
   }
 }
+
+/* Spotit product page: clean NHS-inspired light blue clinical software theme. */
+.lux-product-page {
+  color: #09233f;
+  background:
+    radial-gradient(circle at 10% 2%, rgba(0, 114, 206, 0.16), transparent 28rem),
+    radial-gradient(circle at 88% 8%, rgba(65, 182, 230, 0.18), transparent 30rem),
+    linear-gradient(180deg, #f4fbff 0%, #eaf6fd 46%, #ffffff 100%);
+}
+
+.lux-product-page .lux-nav-links {
+  border-color: rgba(0, 94, 184, 0.14);
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 18px 55px rgba(0, 94, 184, 0.12);
+}
+
+.lux-product-page .lux-nav-links a {
+  color: #003f7d;
+}
+
+.lux-product-page .lux-nav-links a:hover {
+  color: #ffffff;
+  background: #005eb8;
+}
+
+.lux-product-page .lux-kicker,
+.lux-product-page .spotit-card-grid span,
+.lux-product-page .lux-gallery-heading .lux-kicker {
+  color: #005eb8;
+}
+
+.lux-product-page .spotit-confidence-hero h1,
+.lux-product-page .lux-gallery-heading h2,
+.lux-product-page .spotit-card-grid h3,
+.lux-product-page .spotit-visual-copy h2,
+.lux-product-page .lux-product-detail h2,
+.lux-product-page .spotit-credibility-grid strong,
+.lux-product-page .lux-contact h2 {
+  color: #003f7d;
+}
+
+.lux-product-page .spotit-confidence-hero p,
+.lux-product-page .spotit-card-grid p,
+.lux-product-page .spotit-visual-copy p:not(.lux-kicker),
+.lux-product-page .lux-product-detail p,
+.lux-product-page .spotit-credibility-grid p {
+  color: #36566f;
+}
+
+.lux-product-page .lux-primary,
+.lux-product-page .lux-spotit-actions a:first-child {
+  background: linear-gradient(135deg, #41b6e6, #0072ce 42%, #005eb8);
+  border-color: rgba(0, 94, 184, 0.72);
+  box-shadow: 0 22px 48px rgba(0, 94, 184, 0.22);
+}
+
+.lux-product-page .lux-secondary,
+.lux-product-page .lux-spotit-actions a:not(:first-child) {
+  color: #003f7d;
+  border-color: rgba(0, 94, 184, 0.2);
+  background: rgba(255, 255, 255, 0.76);
+}
+
+.lux-product-page .spotit-proof-points span,
+.lux-product-page .spotit-patient-strip span,
+.lux-product-page .spotit-mini-gallery article,
+.lux-product-page .spotit-card-grid article,
+.lux-product-page .spotit-visual-main,
+.lux-product-page .spotit-visual-copy,
+.lux-product-page .lux-product-detail,
+.lux-product-page .spotit-dashboard-preview {
+  border-color: rgba(0, 94, 184, 0.14);
+  background:
+    radial-gradient(circle at 96% 0%, rgba(65, 182, 230, 0.13), transparent 30%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(232, 246, 253, 0.92)),
+    #ffffff;
+  box-shadow: 0 24px 64px rgba(0, 94, 184, 0.11);
+}
+
+.lux-product-page .spotit-dashboard-chip {
+  border-color: rgba(0, 94, 184, 0.18);
+  background: rgba(232, 246, 253, 0.9);
+}
+
+.lux-product-page .spotit-acquisition {
+  background:
+    radial-gradient(circle at 86% 12%, rgba(65, 182, 230, 0.24), transparent 32%),
+    linear-gradient(135deg, #003f7d, #005eb8 60%, #0072ce);
+}
+
+.lux-product-page .spotit-acquisition h2,
+.lux-product-page .spotit-acquisition p,
+.lux-product-page .spotit-acquisition .lux-kicker {
+  color: #ffffff;
+}
+
+.spotit-side-rail .rail-mark {
+  color: #ffffff;
+  background: linear-gradient(145deg, #41b6e6, #005eb8);
+}
+
+.spotit-side-rail a {
+  color: #003f7d;
+  background: rgba(232, 246, 253, 0.82);
+}
+
+.spotit-side-rail a:hover {
+  color: #ffffff;
+  background: #005eb8;
+}
