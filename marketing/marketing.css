@@ -5623,3 +5623,113 @@ h1 {
   color: #ffffff;
   background: #005eb8;
 }
+
+/* Medholic main site: Diamix-style fresh green and rich brown colourway. */
+.lux-site:not(.lux-product-page) {
+  color: #2f251a;
+  background:
+    radial-gradient(circle at 8% 0%, rgba(151, 202, 78, 0.28), transparent 28rem),
+    radial-gradient(circle at 88% 6%, rgba(129, 79, 42, 0.2), transparent 30rem),
+    linear-gradient(180deg, #fffaf0 0%, #f4ead8 42%, #f1f8e8 75%, #ffffff 100%);
+}
+
+.lux-site:not(.lux-product-page) .lux-nav-links {
+  border-color: rgba(92, 55, 30, 0.16);
+  background: rgba(255, 250, 239, 0.86);
+  box-shadow: 0 18px 55px rgba(92, 55, 30, 0.12);
+}
+
+.lux-site:not(.lux-product-page) .lux-nav-links a {
+  color: #5c371e;
+}
+
+.lux-site:not(.lux-product-page) .lux-nav-links a:hover {
+  color: #fffaf0;
+  background: #6fae2d;
+}
+
+.lux-site:not(.lux-product-page) .lux-kicker,
+.lux-site:not(.lux-product-page) .lux-grid span,
+.lux-site:not(.lux-product-page) .lux-project-placeholder span,
+.lux-site:not(.lux-product-page) .lux-sale-grid span {
+  color: #6a3e21;
+}
+
+.lux-site:not(.lux-product-page) .lux-hero h1,
+.lux-site:not(.lux-product-page) .lux-intro h2,
+.lux-site:not(.lux-product-page) .lux-location-panel h2,
+.lux-site:not(.lux-product-page) .lux-showcase h2,
+.lux-site:not(.lux-product-page) .lux-statement h2,
+.lux-site:not(.lux-product-page) .lux-contact h2,
+.lux-site:not(.lux-product-page) .lux-projects-heading h2,
+.lux-site:not(.lux-product-page) .lux-project-feature-head h3,
+.lux-site:not(.lux-product-page) .lux-project-placeholder h3,
+.lux-site:not(.lux-product-page) .lux-grid h3,
+.lux-site:not(.lux-product-page) .lux-spotit-copy h4 {
+  color: #2b622a;
+}
+
+.lux-site:not(.lux-product-page) .lux-hero p:not(.lux-kicker),
+.lux-site:not(.lux-product-page) .lux-intro p,
+.lux-site:not(.lux-product-page) .lux-location-panel p,
+.lux-site:not(.lux-product-page) .lux-showcase p:not(.lux-kicker),
+.lux-site:not(.lux-product-page) .lux-statement p,
+.lux-site:not(.lux-product-page) .lux-projects-heading p,
+.lux-site:not(.lux-product-page) .lux-contact p {
+  color: #5d5145;
+}
+
+.lux-site:not(.lux-product-page) .lux-primary,
+.lux-site:not(.lux-product-page) .lux-contact-reveal summary,
+.lux-site:not(.lux-product-page) .lux-contact-reveal a {
+  color: #fffaf0;
+  border-color: rgba(92, 55, 30, 0.26);
+  background: linear-gradient(135deg, #97ca4e, #6fae2d 42%, #5c371e);
+  box-shadow: 0 22px 48px rgba(92, 55, 30, 0.18);
+}
+
+.lux-site:not(.lux-product-page) .lux-secondary {
+  color: #5c371e;
+  border-color: rgba(92, 55, 30, 0.22);
+  background: rgba(255, 250, 239, 0.76);
+}
+
+.lux-site:not(.lux-product-page) .lux-location-panel,
+.lux-site:not(.lux-product-page) .lux-grid article,
+.lux-site:not(.lux-product-page) .lux-showcase,
+.lux-site:not(.lux-product-page) .lux-statement,
+.lux-site:not(.lux-product-page) .lux-contact,
+.lux-site:not(.lux-product-page) .lux-projects-heading,
+.lux-site:not(.lux-product-page) .lux-project-feature,
+.lux-site:not(.lux-product-page) .lux-project-placeholder {
+  border-color: rgba(92, 55, 30, 0.14);
+  background:
+    radial-gradient(circle at 96% 0%, rgba(151, 202, 78, 0.14), transparent 30%),
+    radial-gradient(circle at 0% 100%, rgba(129, 79, 42, 0.12), transparent 34%),
+    linear-gradient(135deg, rgba(255, 250, 239, 0.98), rgba(244, 234, 216, 0.9)),
+    #fffaf0;
+  box-shadow: 0 24px 68px rgba(92, 55, 30, 0.1);
+}
+
+.lux-site:not(.lux-product-page) .lux-about-pills span,
+.lux-site:not(.lux-product-page) .lux-tags span,
+.lux-site:not(.lux-product-page) .lux-showcase-points span {
+  color: #2b622a;
+  border-color: rgba(92, 55, 30, 0.16);
+  background: #fffaf0;
+}
+
+.lux-site:not(.lux-product-page) .lux-side-rail .rail-mark {
+  color: #fffaf0;
+  background: linear-gradient(145deg, #97ca4e, #5c371e);
+}
+
+.lux-site:not(.lux-product-page) .lux-side-rail a {
+  color: #5c371e;
+  background: rgba(255, 250, 239, 0.86);
+}
+
+.lux-site:not(.lux-product-page) .lux-side-rail a:hover {
+  color: #fffaf0;
+  background: #6fae2d;
+}

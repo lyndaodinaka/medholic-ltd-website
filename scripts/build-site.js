@@ -48,6 +48,9 @@ function prepareMarketingHtml(fileName) {
     .replaceAll('/assets/apple-touch-icon.png', dataUri(path.join("assets", "apple-touch-icon.png"), "image/png"))
     .replaceAll('/assets/medholic-favicon-32.png', dataUri(path.join("assets", "medholic-favicon-32.png"), "image/png"))
     .replaceAll('/assets/medholic-apple-touch-icon.png', dataUri(path.join("assets", "medholic-apple-touch-icon.png"), "image/png"))
+    .replaceAll('/assets/medholic-diamix-favicon-32.png', dataUri(path.join("assets", "medholic-diamix-favicon-32.png"), "image/png"))
+    .replaceAll('/assets/medholic-diamix-apple-touch-icon.png', dataUri(path.join("assets", "medholic-diamix-apple-touch-icon.png"), "image/png"))
+    .replaceAll('src="/marketing/medholic-diamix-style-logo.png"', `src="${dataUri(path.join("marketing", "medholic-diamix-style-logo.png"), "image/png")}"`)
     .replaceAll('src="/marketing/medholic-signature-logo.png"', `src="${dataUri(path.join("marketing", "medholic-signature-logo.png"), "image/png")}"`)
     .replaceAll('src="/marketing/medholic-wordmark-logo-warm.png"', `src="${dataUri(path.join("marketing", "medholic-wordmark-logo-warm.png"), "image/png")}"`)
     .replaceAll('src="/marketing/medholic-wordmark-logo-no-line.png"', `src="${dataUri(path.join("marketing", "medholic-wordmark-logo-no-line.png"), "image/png")}"`)
@@ -83,9 +86,15 @@ copyDir(path.join(root, "assets"), path.join(dist, "assets"), new Set([
   "medholic-favicon-32.png",
   "medholic-apple-touch-icon.png",
   "medholic-icon-192.png",
-  "medholic-icon-512.png"
+  "medholic-icon-512.png",
+  "medholic-diamix-favicon.ico",
+  "medholic-diamix-favicon-32.png",
+  "medholic-diamix-apple-touch-icon.png",
+  "medholic-diamix-icon-192.png",
+  "medholic-diamix-icon-512.png"
 ]));
 copyDir(path.join(root, "marketing"), path.join(dist, "marketing"), new Set([
+  "medholic-diamix-style-logo.png",
   "medholic-signature-logo.png",
   "medholic-wordmark-logo.png",
   "medholic-wordmark-logo-warm.png",
@@ -108,7 +117,7 @@ copyFile(
 copyFile(path.join(root, "site.webmanifest"), path.join(dist, "site.webmanifest"));
 copyFile(path.join(root, "robots.txt"), path.join(dist, "robots.txt"));
 copyFile(path.join(root, "sitemap.xml"), path.join(dist, "sitemap.xml"));
-copyFile(path.join(root, "assets", "medholic-favicon.ico"), path.join(dist, "favicon.ico"));
+copyFile(path.join(root, "assets", "medholic-diamix-favicon.ico"), path.join(dist, "favicon.ico"));
 copyFile(path.join(root, ".openai", "hosting.json"), path.join(dist, ".openai", "hosting.json"));
 
 fs.mkdirSync(serverDir, { recursive: true });
@@ -116,7 +125,7 @@ const brandedPreviewBase64 = fileBase64(path.join("marketing", "medholic-branded
 const spotitLogoBase64 = fileBase64(path.join("marketing", "spotit-logo.png"));
 const spotitLogoWarmBase64 = fileBase64(path.join("marketing", "spotit-logo-warm.png"));
 const medholicLogoWarmBase64 = fileBase64(path.join("marketing", "medholic-wordmark-logo-warm.png"));
-const faviconBase64 = fileBase64(path.join("assets", "medholic-favicon.ico"));
+const faviconBase64 = fileBase64(path.join("assets", "medholic-diamix-favicon.ico"));
 const robotsTxt = fs.readFileSync(path.join(root, "robots.txt"), "utf8");
 const sitemapXml = fs.readFileSync(path.join(root, "sitemap.xml"), "utf8");
 fs.writeFileSync(path.join(serverDir, "index.js"), `const html = ${JSON.stringify(html)};
