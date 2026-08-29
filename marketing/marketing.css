@@ -5797,3 +5797,328 @@ h1 {
     grid-template-columns: 1fr;
   }
 }
+
+/* Refined Medholic homepage: simpler, lighter and led by a left menu. */
+.medholic-home {
+  min-height: 100vh;
+  padding-left: 252px;
+  color: #2d251c;
+  background:
+    radial-gradient(circle at 12% 0%, rgba(147, 187, 112, 0.22), transparent 30rem),
+    radial-gradient(circle at 92% 10%, rgba(179, 126, 67, 0.18), transparent 30rem),
+    linear-gradient(180deg, #fffaf2 0%, #f5ecdd 46%, #edf6ea 100%);
+}
+
+.medholic-home .lux-nav,
+.medholic-home .lux-side-rail {
+  display: none;
+}
+
+.lux-left-menu {
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: 30;
+  width: 252px;
+  display: flex;
+  flex-direction: column;
+  gap: 34px;
+  padding: 28px 20px;
+  border-right: 1px solid rgba(98, 68, 39, 0.15);
+  background: rgba(255, 250, 242, 0.9);
+  box-shadow: 20px 0 70px rgba(70, 49, 28, 0.08);
+  backdrop-filter: blur(18px);
+}
+
+.left-menu-brand {
+  display: block;
+  text-decoration: none;
+}
+
+.left-menu-brand img {
+  width: 204px;
+  height: auto;
+  display: block;
+}
+
+.left-menu-links {
+  display: grid;
+  gap: 10px;
+}
+
+.left-menu-links a {
+  min-height: 46px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  border: 1px solid rgba(98, 68, 39, 0.1);
+  border-radius: 18px;
+  color: #4e3928;
+  background: rgba(255, 255, 255, 0.52);
+  font-size: 0.95rem;
+  font-weight: 900;
+  text-decoration: none;
+  transition: transform 180ms ease, background 180ms ease, color 180ms ease;
+}
+
+.left-menu-links a:hover {
+  color: #fffaf2;
+  background: #2d6040;
+  transform: translateX(3px);
+}
+
+.med-hero,
+.med-section,
+.medholic-home .lux-footer {
+  width: min(1120px, calc(100% - 44px));
+  margin-inline: auto;
+}
+
+.med-hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(420px, 1.08fr);
+  gap: clamp(24px, 5vw, 58px);
+  align-items: center;
+  padding: 48px 0 40px;
+}
+
+.med-hero-copy {
+  display: grid;
+  gap: 18px;
+}
+
+.med-hero-logo {
+  width: min(520px, 100%);
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 18px 30px rgba(73, 49, 25, 0.13));
+}
+
+.medholic-home .lux-kicker {
+  margin: 0;
+  color: #6f4b28;
+  font-size: 0.78rem;
+  font-weight: 950;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.med-hero h1,
+.med-section h2 {
+  margin: 0;
+  color: #2d6040;
+  font-weight: 950;
+  letter-spacing: 0;
+}
+
+.med-hero h1 {
+  max-width: 720px;
+  font-size: clamp(2.8rem, 6vw, 5.8rem);
+  line-height: 0.98;
+}
+
+.med-hero p:not(.lux-kicker),
+.med-section p {
+  margin: 0;
+  color: #5b5147;
+  font-size: 1.04rem;
+  line-height: 1.68;
+}
+
+.med-hero p:not(.lux-kicker) {
+  max-width: 650px;
+  font-size: 1.16rem;
+}
+
+.med-hero-image {
+  min-height: 520px;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid rgba(98, 68, 39, 0.14);
+  border-radius: 34px;
+  background: #fffaf2;
+  box-shadow: 0 28px 80px rgba(70, 49, 28, 0.15);
+}
+
+.med-hero-image img {
+  width: 100%;
+  height: 100%;
+  min-height: 520px;
+  display: block;
+  object-fit: cover;
+}
+
+.med-section {
+  margin-top: 24px;
+  border: 1px solid rgba(98, 68, 39, 0.12);
+  border-radius: 30px;
+  padding: clamp(24px, 4vw, 42px);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(147, 187, 112, 0.16), transparent 28%),
+    linear-gradient(135deg, rgba(255, 250, 242, 0.98), rgba(245, 236, 221, 0.9));
+  box-shadow: 0 22px 60px rgba(70, 49, 28, 0.08);
+}
+
+.med-about {
+  display: grid;
+  gap: 14px;
+}
+
+.med-section h2 {
+  font-size: clamp(2rem, 4vw, 4rem);
+  line-height: 1.04;
+}
+
+.med-section-heading {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.med-card-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.med-card-grid article {
+  min-height: 190px;
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  padding: 22px;
+  border: 1px solid rgba(98, 68, 39, 0.12);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.58);
+}
+
+.med-card-grid span {
+  color: #a36b2f;
+  font-size: 0.82rem;
+  font-weight: 950;
+}
+
+.med-card-grid h3 {
+  margin: 0;
+  color: #2d6040;
+  font-size: 1.1rem;
+  line-height: 1.2;
+}
+
+.med-card-grid p {
+  font-size: 0.94rem;
+}
+
+.med-projects {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 0.52fr);
+  gap: 28px;
+  align-items: center;
+}
+
+.med-projects > div {
+  display: grid;
+  gap: 14px;
+}
+
+.med-projects img {
+  width: 100%;
+  max-height: 220px;
+  object-fit: contain;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.65);
+  padding: 18px;
+}
+
+.med-contact {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 24px;
+  align-items: center;
+}
+
+.medholic-home .lux-footer {
+  margin-top: 24px;
+  margin-bottom: 28px;
+  border-radius: 26px;
+}
+
+@media (max-width: 1080px) {
+  .medholic-home {
+    padding-left: 0;
+  }
+
+  .lux-left-menu {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 12px 16px;
+  }
+
+  .left-menu-brand img {
+    width: 166px;
+  }
+
+  .left-menu-links {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 2px;
+  }
+
+  .left-menu-links a {
+    min-height: 40px;
+    white-space: nowrap;
+  }
+
+  .med-hero {
+    min-height: auto;
+    grid-template-columns: 1fr;
+    padding-top: 28px;
+  }
+
+  .med-hero-image,
+  .med-hero-image img {
+    min-height: 360px;
+  }
+
+  .med-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .lux-left-menu {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .left-menu-links {
+    width: 100%;
+  }
+
+  .med-hero,
+  .med-section,
+  .medholic-home .lux-footer {
+    width: min(100% - 24px, 1120px);
+  }
+
+  .med-hero h1 {
+    font-size: clamp(2.4rem, 13vw, 3.8rem);
+  }
+
+  .med-card-grid,
+  .med-projects,
+  .med-contact {
+    grid-template-columns: 1fr;
+  }
+
+  .med-hero-image,
+  .med-hero-image img {
+    min-height: 300px;
+  }
+}

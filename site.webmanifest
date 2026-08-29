@@ -1,24 +1,24 @@
 {
   "name": "Medholic Ltd",
   "short_name": "Medholic",
-  "description": "Healthcare technology, careflow systems, digital health tools, and project support from Medholic Ltd.",
+  "description": "Healthcare innovation and clinical improvement from Medholic Ltd.",
   "id": "/",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "background_color": "#fbf7ef",
-  "theme_color": "#48704f",
+  "background_color": "#fffaf2",
+  "theme_color": "#2d6040",
   "categories": ["business", "medical", "productivity"],
   "icons": [
     {
-      "src": "assets/medholic-diamix-icon-192.png",
+      "src": "assets/medholic-innovation-icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "assets/medholic-diamix-icon-512.png",
+      "src": "assets/medholic-innovation-icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
