@@ -64,6 +64,8 @@ function prepareMarketingHtml(fileName) {
     .replaceAll('src="/marketing/medholic-simulation-consulting.png"', `src="${dataUri(path.join("marketing", "medholic-simulation-consulting.png"), "image/png")}"`)
     .replaceAll('src="/marketing/spotit-clinical-review-building.png"', `src="${dataUri(path.join("marketing", "spotit-clinical-review-building.png"), "image/png")}"`)
     .replaceAll('src="/marketing/spotit-logo-warm.png"', `src="${dataUri(path.join("marketing", "spotit-logo-warm.png"), "image/png")}"`)
+    .replaceAll('src="/marketing/spotit-nurse-child-bandage.png"', `src="${dataUri(path.join("marketing", "spotit-nurse-child-bandage.png"), "image/png")}"`)
+    .replaceAll('src="/marketing/spotit-team-analysis.png"', `src="${dataUri(path.join("marketing", "spotit-team-analysis.png"), "image/png")}"`)
     .replaceAll('src="/marketing/spotit-flyer-man-private.jpg"', `src="${dataUri(path.join("marketing", "spotit-flyer-man-private.jpg"), "image/jpeg")}"`)
     .replaceAll('src="/marketing/spotit-flyer-female-private.jpg"', `src="${dataUri(path.join("marketing", "spotit-flyer-female-private.jpg"), "image/jpeg")}"`)
     .replaceAll('src="/marketing/spotit-wound-changed-flyer.png"', `src="${dataUri(path.join("marketing", "spotit-wound-changed-flyer.png"), "image/png")}"`)
@@ -117,6 +119,8 @@ copyDir(path.join(root, "marketing"), path.join(dist, "marketing"), new Set([
   "spotit-clinical-review-building.png",
   "spotit-logo.png",
   "spotit-logo-warm.png",
+  "spotit-nurse-child-bandage.png",
+  "spotit-team-analysis.png",
   "spotit-flyer-man-private.jpg",
   "spotit-flyer-female-private.jpg",
   "spotit-wound-changed-flyer.png"
