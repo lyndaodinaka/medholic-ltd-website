@@ -60,6 +60,7 @@ function prepareMarketingHtml(fileName) {
     .replaceAll('src="/marketing/medholic-branded-preview.jpg"', `src="${dataUri(path.join("marketing", "medholic-branded-preview.jpg"), "image/jpeg")}"`)
     .replaceAll('src="/marketing/medholic-luxury-boardroom.jpg"', `src="${dataUri(path.join("marketing", "medholic-luxury-boardroom.jpg"), "image/jpeg")}"`)
     .replaceAll('src="/marketing/medholic-corporate-hero.png"', `src="${dataUri(path.join("marketing", "medholic-corporate-hero.png"), "image/png")}"`)
+    .replaceAll('src="/marketing/medholic-clinical-improvement-scene.png"', `src="${dataUri(path.join("marketing", "medholic-clinical-improvement-scene.png"), "image/png")}"`)
     .replaceAll('src="/marketing/medholic-simulation-consulting.png"', `src="${dataUri(path.join("marketing", "medholic-simulation-consulting.png"), "image/png")}"`)
     .replaceAll('src="/marketing/spotit-clinical-review-building.png"', `src="${dataUri(path.join("marketing", "spotit-clinical-review-building.png"), "image/png")}"`)
     .replaceAll('src="/marketing/spotit-logo-warm.png"', `src="${dataUri(path.join("marketing", "spotit-logo-warm.png"), "image/png")}"`)
@@ -111,6 +112,7 @@ copyDir(path.join(root, "marketing"), path.join(dist, "marketing"), new Set([
   "medholic-branded-preview.jpg",
   "medholic-luxury-boardroom.jpg",
   "medholic-corporate-hero.png",
+  "medholic-clinical-improvement-scene.png",
   "medholic-simulation-consulting.png",
   "spotit-clinical-review-building.png",
   "spotit-logo.png",

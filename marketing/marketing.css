@@ -6026,6 +6026,28 @@ h1 {
   align-items: center;
 }
 
+.med-visual-story {
+  display: grid;
+  grid-template-columns: minmax(420px, 1.08fr) minmax(0, 0.92fr);
+  gap: 30px;
+  align-items: center;
+  overflow: hidden;
+}
+
+.med-visual-story img {
+  width: 100%;
+  min-height: 360px;
+  display: block;
+  object-fit: cover;
+  border-radius: 24px;
+  box-shadow: 0 20px 54px rgba(70, 49, 28, 0.12);
+}
+
+.med-visual-story > div {
+  display: grid;
+  gap: 14px;
+}
+
 .med-projects > div {
   display: grid;
   gap: 14px;
@@ -6108,7 +6130,8 @@ h1 {
     min-height: 360px;
   }
 
-  .med-card-grid {
+  .med-card-grid,
+  .med-visual-story {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -6134,13 +6157,15 @@ h1 {
   }
 
   .med-card-grid,
+  .med-visual-story,
   .med-projects,
   .med-contact {
     grid-template-columns: 1fr;
   }
 
   .med-hero-image,
-  .med-hero-image img {
+  .med-hero-image img,
+  .med-visual-story img {
     min-height: 300px;
   }
 }
