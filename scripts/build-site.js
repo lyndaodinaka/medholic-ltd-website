@@ -77,6 +77,9 @@ function prepareMarketingHtml(fileName) {
 
 const html = prepareMarketingHtml("index.html");
 const spotitHtml = prepareMarketingHtml("spotit.html");
+const solutionsHtml = fs.readFileSync(path.join(root,"marketing","medholic-solutions.html"),"utf8");
+fs.mkdirSync(path.join(dist,"medholic-solutions"),{recursive:true});
+fs.writeFileSync(path.join(dist,"medholic-solutions","index.html"),solutionsHtml);
 
 fs.writeFileSync(path.join(dist, "index.html"), html);
 fs.mkdirSync(path.join(dist, "spotit"), { recursive: true });
@@ -145,6 +148,7 @@ const robotsTxt = fs.readFileSync(path.join(root, "robots.txt"), "utf8");
 const sitemapXml = fs.readFileSync(path.join(root, "sitemap.xml"), "utf8");
 fs.writeFileSync(path.join(serverDir, "index.js"), `const html = ${JSON.stringify(html)};
 const spotitHtml = ${JSON.stringify(spotitHtml)};
+const solutionsHtml = ${JSON.stringify(solutionsHtml)};
 const brandedPreviewBase64 = ${JSON.stringify(brandedPreviewBase64)};
 const spotitLogoBase64 = ${JSON.stringify(spotitLogoBase64)};
 const spotitLogoWarmBase64 = ${JSON.stringify(spotitLogoWarmBase64)};
@@ -169,6 +173,10 @@ export default {
       return new Response(html, {
         headers: { "Content-Type": "text/html; charset=utf-8" }
       });
+    }
+
+    if (url.pathname === "/medholic-solutions" || url.pathname === "/medholic-solutions/") {
+      return new Response(solutionsHtml, {headers:{"Content-Type":"text/html; charset=utf-8"}});
     }
 
     if (url.pathname === "/spotit" || url.pathname === "/spotit/" || url.pathname === "/spotit/index.html") {

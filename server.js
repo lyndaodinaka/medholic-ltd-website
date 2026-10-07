@@ -495,6 +495,7 @@ const server = http.createServer(async (request, response) => {
   let requestedPath = pathname;
   if (pathname === "/") requestedPath = "/marketing/index.html";
   if (pathname === "/spotit" || pathname === "/spotit/") requestedPath = "/marketing/spotit.html";
+  if (pathname === "/medholic-solutions" || pathname === "/medholic-solutions/") requestedPath = "/marketing/medholic-solutions.html";
   if (pathname === "/app" || pathname === "/app/") requestedPath = "/index.html";
   if (pathname === "/staff" || pathname === "/staff/") requestedPath = "/staff.html";
   let filePath = path.resolve(root, `.${requestedPath}`);
