@@ -43,6 +43,7 @@ const css = fs.readFileSync(path.join(root, "marketing", "marketing.css"), "utf8
 function prepareMarketingHtml(fileName) {
   return fs.readFileSync(path.join(root, "marketing", fileName), "utf8")
     .replace('<base href="/marketing/">', "")
+    .replaceAll("?v=20261009", "")
     .replace('<link rel="stylesheet" href="marketing.css">', `<style>\n${css}\n</style>`)
     .replaceAll('/assets/favicon-32.png', dataUri(path.join("assets", "favicon-32.png"), "image/png"))
     .replaceAll('/assets/apple-touch-icon.png', dataUri(path.join("assets", "apple-touch-icon.png"), "image/png"))
@@ -188,7 +189,7 @@ export default {
     if (url.pathname === "/marketing/medholic-branded-preview.jpg") {
       return new Response(base64ToBytes(brandedPreviewBase64), {
         headers: {
-          "Content-Type": "image/png",
+          "Content-Type": "image/jpeg",
           "Cache-Control": "public, max-age=3600"
         }
       });
