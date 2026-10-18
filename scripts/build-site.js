@@ -39,11 +39,17 @@ function fileBase64(relativePath) {
 fs.rmSync(dist, { recursive: true, force: true });
 fs.mkdirSync(dist, { recursive: true });
 
+copyFile(path.join(root, "carousel.js"), path.join(dist, "carousel.js"));
+copyFile(path.join(root, "assets", "spotit-logo.png"), path.join(dist, "assets", "spotit-logo.png"));
+copyFile(path.join(root, "assets", "medholic-symbol.svg"), path.join(dist, "assets", "medholic-symbol.svg"));
+copyDir(path.join(root, "assets", "stock"), path.join(dist, "assets", "stock"));
+
 const css = fs.readFileSync(path.join(root, "marketing", "marketing.css"), "utf8");
 function prepareMarketingHtml(fileName) {
   return fs.readFileSync(path.join(root, "marketing", fileName), "utf8")
     .replace('<base href="/marketing/">', "")
     .replaceAll("?v=20261009", "")
+    .replaceAll("?v=20261018rose", "")
     .replace('<link rel="stylesheet" href="marketing.css">', `<style>\n${css}\n</style>`)
     .replaceAll('/assets/favicon-32.png', dataUri(path.join("assets", "favicon-32.png"), "image/png"))
     .replaceAll('/assets/apple-touch-icon.png', dataUri(path.join("assets", "apple-touch-icon.png"), "image/png"))
